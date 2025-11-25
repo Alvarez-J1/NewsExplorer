@@ -1,0 +1,129 @@
+.search-form {
+  margin-top: 88px;
+  display: flex;
+  align-items: stretch;
+  width: 608px;
+  height: 64px;
+  border: none;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #fff;
+  box-sizing: border-box;
+  margin-left: 416px;
+}
+
+.search-form__input {
+  flex: 1 1 auto;
+  border: 0;
+  padding: 0 0 0 24px;
+  height: 100%;
+  border-radius: 100px;
+  color: #1a1b22;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-form__input::placeholder {
+  color: #b6bcbf;
+  opacity: 1; /* some browsers dim placeholders */
+  border: none;
+}
+
+.search-form__submit-btn {
+  flex: 0 0 168px;
+  padding: 0;
+  height: 100%;
+  border-radius: 100px;
+  color: #ffffff;
+  background-color: #2f71e5;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form__submit-btn:hover {
+  background-color: #347eff;
+}
+
+.search-form__submit-btn:active {
+  background-color: #2a65cc;
+  transform: translateY(1px); /* optional: slight "pressed" effect */
+}
+
+.search-form__show-more-btn {
+  margin-left: 729px;
+  position: absolute;
+  top: 419px;
+  border-radius: 80px;
+  width: 288px;
+  height: 64px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 18px;
+  color: #1a1b22;
+  background-color: #ffffff;
+  padding: 0;
+  cursor: pointer;
+}
+
+.search-form__show-more-btn:hover {
+  background-color: #e8e8e8;
+}
+
+.search__error {
+  display: flex;
+  justify-content: center;
+  color: rgba(255, 0, 0, 1);
+
+  margin-top: 3px;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: Inter;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .search-form {
+    margin-top: 48px;
+    width: 448px;
+    height: 56px;
+    margin-left: 160px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  .search-form {
+    margin-top: 0;
+    width: 288px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    background: transparent;
+  }
+
+  .search-form__input {
+    max-width: 288px;
+    height: 56px;
+    margin: 0 0 16px 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 100px;
+  }
+
+  .search-form__submit-btn {
+    width: 288px;
+    height: 56px;
+    border-radius: 100px;
+    margin: 0;
+    padding: 0;
+    flex: none;
+  }
+}

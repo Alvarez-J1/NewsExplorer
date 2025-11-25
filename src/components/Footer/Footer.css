@@ -1,0 +1,141 @@
+.footer {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.footer__text {
+  display: flex;
+  flex-direction: row;
+}
+
+.footer__top-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.footer__supersite {
+  margin-left: 104px;
+  margin-right: 524px;
+  width: 433px;
+  height: 22px;
+  color: rgba(182, 188, 191, 1);
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.footer__home {
+  color: rgba(26, 27, 34, 1);
+  font-weight: 400;
+  font-size: 18px;
+  font-family: Roboto;
+  margin: 0;
+  margin-right: 40px;
+}
+
+.footer__tripleten {
+  margin: 0;
+  color: rgba(26, 27, 34, 1);
+  font-weight: 400;
+  font-size: 18px;
+  font-family: Roboto;
+  margin-right: 40px;
+}
+
+.github__image {
+  margin: 0;
+  margin-right: 24px;
+}
+
+.linkedin__image {
+  margin: 0;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .footer {
+    width: 768px;
+    height: 64px;
+    padding-top: 0;
+  }
+
+  .footer__supersite {
+    margin-top: 24px;
+    margin-bottom: 18px;
+    margin-left: 40px;
+    margin-right: 113px;
+    width: 300px;
+    height: 22px;
+    color: rgba(182, 188, 191, 1);
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  .footer {
+    height: 154px;
+    padding-top: 0;
+    max-width: 320px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer__top-row {
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    gap: 144px;
+    width: 100%;
+  }
+
+  .footer__supersite {
+    order: 2;
+    margin-top: 38px;
+    margin-bottom: 0;
+    margin-left: -24px;
+    margin-right: 0;
+    width: 288px;
+    text-align: center;
+    height: 22px;
+  }
+
+  .footer__home {
+    margin-right: 0;
+  }
+
+  .footer__icons {
+    display: flex;
+    margin-top: -50px;
+  }
+
+  .footer__tripleten {
+    margin: 0;
+    margin-left: 16px;
+    margin-right: 0;
+  }
+
+  .github__image,
+  .linkedin__image {
+    margin: 0;
+    margin-right: 24px;
+    width: 24px;
+  }
+
+  .linkedin__image {
+    margin: 0;
+  }
+}

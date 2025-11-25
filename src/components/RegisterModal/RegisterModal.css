@@ -1,0 +1,111 @@
+.modal__content--sp {
+  height: 458px;
+  width: 430px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+}
+
+.modal__title--sp {
+  width: 358px;
+  margin-left: 36px;
+  margin-top: 34px;
+  font-family: Roboto;
+  font-weight: 900;
+  font-size: 24px;
+  color: rgba(26, 27, 34, 1);
+}
+
+.registermodal__email {
+  margin-bottom: 31px;
+  margin-top: 22px;
+}
+
+.registermodal__password {
+  margin-bottom: 31px;
+}
+
+.modal__submit--sp {
+  margin: 0;
+  width: 360px;
+  height: 64px;
+  background-color: rgba(47, 113, 229, 1);
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  margin-top: 39px;
+}
+
+.modal__submit--sp:disabled {
+  background-color: rgba(230, 232, 235, 1);
+  color: rgba(182, 188, 191, 1);
+}
+
+.modal__auth-note--sp {
+  margin-top: 16px;
+  text-align: center;
+  font: 400 14px/1 Inter, system-ui, sans-serif;
+  margin-left: -28px;
+}
+
+.modal__auth-or--sp {
+  color: #000;
+}
+
+.registermodal__switch {
+  border: 0;
+  padding: 0;
+  color: #00000080;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: #2f71e5; /* blue from the NewsExplorer spec */
+  font: inherit;
+  text-decoration: none;
+}
+
+.modal__error {
+  color: rgba(255, 0, 0, 1);
+  display: block;
+  margin-top: 17px;
+  margin-bottom: 0;
+  margin-left: 115px;
+  margin-right: 115px;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: Inter;
+}
+
+.modal__error + .modal__submit--sp {
+  margin-top: 8px;
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  .modal__content--sp {
+    height: 464px;
+
+    max-width: 320px;
+  }
+
+  .modal__submit--sp {
+    width: 288px;
+    font-size: 18px;
+    margin-top: 23px;
+  }
+
+  .modal__title--sp {
+    width: 358px;
+    margin-left: 17px;
+    margin-top: 34px;
+  }
+
+  .registermodal__email {
+    margin-bottom: 31px;
+    margin-top: 16px;
+  }
+}

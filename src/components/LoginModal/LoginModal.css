@@ -1,0 +1,121 @@
+.modal__content--si {
+  height: 383px;
+  background-color: rgba(255, 255, 255, 1);
+  width: 430px;
+  border-radius: 16px;
+}
+
+.modal__submit.modal__submit--si {
+  margin-top: 39px;
+  background-color: rgba(47, 113, 229, 1);
+  width: 360px;
+  height: 64px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.modal__submit--si:disabled {
+  background-color: rgba(230, 232, 235, 1);
+  color: rgba(182, 188, 191, 1);
+}
+
+.modal__error {
+  color: rgba(255, 0, 0, 1);
+  display: block;
+  margin-top: 3px;
+  margin-bottom: 13px;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: Inter;
+}
+
+.modal__label--error {
+  color: black;
+  font-weight: 600;
+}
+
+.loginmodal__email {
+  margin: 0;
+}
+
+.loginmodal__password {
+  margin-top: 31px;
+  color: rgba(47, 113, 229, 1);
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.modal__error + .loginmodal__password {
+  margin-top: 0;
+}
+
+.input-error {
+  border-bottom: 2px solid #ff3b00;
+}
+
+.modal__submit--si {
+  margin: 0;
+  width: 360px;
+  height: 64px;
+  background-color: rgba(47, 113, 229, 1);
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  margin-top: 39px;
+}
+
+.modal__auth-note {
+  margin-top: 16px;
+  text-align: center;
+  font: 400 14px/1 Inter, system-ui, sans-serif;
+  margin-left: -28px;
+}
+
+.modal__auth-or {
+  color: #000;
+}
+
+.loginmodal__switch {
+  border: 0;
+  padding: 0;
+  color: #00000080;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: #2f71e5; /* blue from the NewsExplorer spec */
+  font: inherit;
+  text-decoration: none;
+}
+
+.modal__close--si {
+  position: absolute;
+  top: 134px;
+  right: 495px;
+  cursor: pointer;
+  background: url(/src/assets/close-btn.png);
+  width: 40px;
+  height: 40px;
+  border: none;
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  .modal__content--si {
+    height: 464px;
+
+    max-width: 320px;
+  }
+
+  .modal__submit--si {
+    width: 288px;
+    font-size: 18px;
+    margin-top: 23px;
+  }
+}

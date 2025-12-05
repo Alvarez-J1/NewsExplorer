@@ -1,5 +1,6 @@
 .card {
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   height: 576px;
   border-radius: 16px;
   background-color: rgba(255, 255, 255, 1);
@@ -8,9 +9,10 @@
 }
 
 .card__image {
-  width: 400px;
+  width: 100%;
   height: 272px;
   border-radius: 16px;
+  object-fit: cover;
   overflow: hidden;
 }
 
@@ -159,7 +161,7 @@
 
 .card__media {
   position: relative;
-  width: 400px;
+  width: 100%;
   height: 272px;
   border-radius: 16px;
   overflow: hidden;
@@ -315,12 +317,14 @@
 /* Mobile */
 @media screen and (max-width: 767px) {
   .card {
-    width: 288px;
+    max-width: 288px;
+    width: 100%;
     height: 440px;
   }
 
   .card__media {
     height: 196px;
+    width: 100%;
   }
 
   .card__image {
@@ -359,6 +363,14 @@
     position: absolute;
     top: 4px;
     right: 133px;
+  }
+
+  .card__save-btn {
+    right: -139px;
+  }
+
+  .card__tooltip {
+    right: -50px;
   }
 
   .card__chip {

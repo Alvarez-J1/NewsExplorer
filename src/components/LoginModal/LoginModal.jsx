@@ -20,11 +20,11 @@ export default function LoginModal({
 
   useEffect(() => {
     if (isOpen) {
-      setValues({ email: "", password: "" });
+      setValues(() => ({ email: "", password: "" }));
       setLoginError("");
       setWrongField("");
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

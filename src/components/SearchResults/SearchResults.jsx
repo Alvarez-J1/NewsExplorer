@@ -12,8 +12,12 @@ export default function SearchResults({
   onUnsaveArticle,
   savedArticles = [],
   searchQuery,
+  isLoadingMore,
 }) {
   const visible = items.slice(0, visibleCards);
+
+  const allShown = visibleCards >= items.length;
+
   return (
     <section className="results">
       <h2 className="results__title">Search results</h2>
@@ -32,9 +36,14 @@ export default function SearchResults({
           />
         ))}
       </ul>
-      {items.length > visibleCards && (
-        <button className="results__more" type="button" onClick={onShowMore}>
-          Show more
+      {items.length > 0 && (
+        <button
+          className="results__more"
+          type="button"
+          onClick={onShowMore}
+          disabled={allShown}
+        >
+          {allShown ? "Disabled" : "Show more"}
         </button>
       )}
     </section>

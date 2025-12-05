@@ -25,6 +25,7 @@ export default function Main({
   onSaveArticle,
   onUnsaveArticle,
   isAnyModalOpen,
+  isLoadingMore,
 }) {
   const [params] = useSearchParams();
   const q = params.get("q")?.trim() || "";
@@ -36,60 +37,65 @@ export default function Main({
 
   return (
     <>
-      <div className="hero-wrap">
-        <Header
-          onLoginClick={onLoginClick}
-          onLogout={onLogout}
-          isLoggedIn={isLoggedIn}
-          currentUser={currentUser}
-          isAnyModalOpen={isAnyModalOpen}
-        />
-        <main className="main">
-          <section className="main__hero">
-            <h1 className="main__hero-title">What's going on in the world?</h1>
-            <p className="main__hero-subtitle">
-              Find the latest news on any topic and save them in your personal
-              account.
+      <div className="page-wrapper">
+        <div className="hero-wrap">
+          <Header
+            onLoginClick={onLoginClick}
+            onLogout={onLogout}
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
+            isAnyModalOpen={isAnyModalOpen}
+          />
+          <main className="main">
+            <section className="main__hero">
+              <h1 className="main__hero-title">
+                What&apos;s going on in the world?
+              </h1>
+              <p className="main__hero-subtitle">
+                Find the latest news on any topic and save them in your personal
+                account.
+              </p>
+              <SearchForm onSearch={onSearch} />
+            </section>
+          </main>
+        </div>
+        {isLoading && <Preloader />}
+        {!isLoading && hasSearched && results.length > 0 && (
+          <SearchResults
+            items={results}
+            visibleCards={visibleCards}
+            onShowMore={onShowMore}
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
+            openLoginModal={onLoginClick}
+            savedArticles={savedArticles}
+            onSaveArticle={onSaveArticle}
+            onUnsaveArticle={onUnsaveArticle}
+            searchQuery={q}
+            isLoadingMore={isLoadingMore}
+          />
+        )}
+        {!isLoading && hasSearched && results.length === 0 && (
+          <section className="results-empty">
+            <img src={notFound} className="results-empty__img" />
+            <h2 className="results-empty__title">Nothing found</h2>
+            <p className="resutls-empty__text">
+              Sorry, but nothing matched your search terms.
             </p>
-            <SearchForm onSearch={onSearch} />
           </section>
-        </main>
-      </div>
-      {isLoading && <Preloader />}
-      {!isLoading && hasSearched && results.length > 0 && (
-        <SearchResults
-          items={results}
-          visibleCards={visibleCards}
-          onShowMore={onShowMore}
-          isLoggedIn={isLoggedIn}
-          currentUser={currentUser}
-          openLoginModal={onLoginClick}
-          savedArticles={savedArticles}
-          onSaveArticle={onSaveArticle}
-          onUnsaveArticle={onUnsaveArticle}
-          searchQuery={q}
-        />
-      )}
-      {!isLoading && hasSearched && results.length === 0 && (
-        <section className="results-empty">
-          <img src={notFound} className="results-empty__img" />
-          <h2 className="results-empty__title">Nothing found</h2>
-          <p className="resutls-empty__text">
-            Sorry, but nothing matched your search terms.
-          </p>
-        </section>
-      )}
-      {!isLoading && hasSearched && error && (
-        <section className="results-error">
-          <h2 className="results-error__title">Error</h2>
-          <p className="results-error__text">{error}</p>
-        </section>
-      )}
+        )}
+        {!isLoading && hasSearched && error && (
+          <section className="results-error">
+            <h2 className="results-error__title">Error</h2>
+            <p className="results-error__text">{error}</p>
+          </section>
+        )}
 
-      <section className="about__separator">
-        <About />
-        <Footer />
-      </section>
+        <section className="about__separator">
+          <About />
+          <Footer />
+        </section>
+      </div>
     </>
   );
 }

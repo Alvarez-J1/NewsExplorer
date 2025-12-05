@@ -1,5 +1,12 @@
-.body {
+body {
   margin: 0;
+  box-sizing: border-box;
+}
+
+.page-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .hero-wrap {
@@ -9,8 +16,8 @@
   background-position: center;
   width: 100%;
   height: 603px;
-  box-sizing: border-box;
   justify-content: center;
+  display: flex;
   align-items: center;
   flex-direction: column;
 }
@@ -26,11 +33,9 @@
   font-size: 60px;
   color: #ffffff;
   padding: 0;
-  margin-left: 416px;
-  margin-right: 416px;
-  margin-top: 80px;
-  margin-bottom: 32px;
-  height: 128px;
+  margin: 80px auto 32px auto;
+  text-align: center;
+  line-height: 64px;
 }
 
 .main__hero-subtitle {
@@ -39,7 +44,8 @@
   font-size: 18px;
   color: #ffffff;
   max-width: 608px;
-  margin-left: 416px;
+  margin: 0 auto;
+  text-align: center;
   padding: 0;
 }
 
@@ -97,26 +103,33 @@
 /* Tablet */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .main__hero-title {
-    margin-left: 163px;
-    margin-right: 220px;
-    margin-bottom: 16px;
+    margin: 0 auto;
+    line-height: 40px;
     margin-top: 38px;
+    margin-bottom: 16px;
     width: 385px;
     height: 80px;
     font-size: 36px;
   }
 
+  .main {
+    padding-bottom: 0;
+  }
+
+  .main__hero {
+    margin-bottom: 48px;
+  }
+
   .main__hero-subtitle {
-    margin-left: 163px;
-    margin-right: 220px;
     margin-top: 0;
     margin-bottom: 0;
     width: 452px;
   }
 
   .hero-wrap {
-    width: 768px;
-    height: 400px;
+    height: 397px;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -124,12 +137,16 @@
 @media screen and (max-width: 767px) {
   .hero-wrap {
     width: 100%;
-    height: 512px;
+    height: 536px;
     max-width: 320px;
   }
 
   .main {
     padding-bottom: 0;
+  }
+
+  .main__hero {
+    margin-bottom: 32px;
   }
 
   .main__hero-title {
@@ -140,7 +157,7 @@
     margin-right: 16px;
     margin-top: 30px;
     margin-bottom: 16px;
-    height: 80px;
+    line-height: 40px;
   }
 
   .main__hero-subtitle {
@@ -150,5 +167,13 @@
     margin-left: 16px;
     margin-right: 16px;
     margin-bottom: 122px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .page-wrapper {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 }

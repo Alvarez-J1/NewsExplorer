@@ -1,6 +1,6 @@
 // Simulate getting saved articles from database
 export function getItems() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve([
         {
@@ -29,8 +29,8 @@ export function getItems() {
 }
 
 // Simulate saving an article to database
-export function saveArticle(article) {
-  return new Promise((resolve, reject) => {
+export function saveArticle(article, keyword) {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
         _id: "65f7371e7bce9e7d331b11a0", // fake MongoDB ID
@@ -47,8 +47,8 @@ export function saveArticle(article) {
 }
 
 // Simulate removing an article from database
-export function deleteArticle(articleId) {
-  return new Promise((resolve, reject) => {
+export function deleteArticle() {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve({ message: "Article deleted successfully" });
     }, 500);

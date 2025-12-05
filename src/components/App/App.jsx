@@ -24,10 +24,11 @@ export default function App() {
   const [results, setResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
   const [isLoading, setIsloading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState("");
   const [visibleCards, setVisibleCards] = useState(3);
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const [token, setToken] = useState("");
+  const [, setSearchKeyword] = useState("");
+  const [, setToken] = useState("");
   const [currentUser, setCurrentUser] = useState({
     email: "",
     username: "",
@@ -52,7 +53,7 @@ export default function App() {
   const searchNews = async (query) => {
     const apiKey = import.meta.env.VITE_NEWS_API_KEY;
     const newsApiBaseUrl =
-      process.env.NODE_ENV === "production"
+      import.meta.env.MODE === "production"
         ? "https://nomoreparties.co/news/v2/everything"
         : "https://newsapi.org/v2/everything";
 
@@ -157,7 +158,13 @@ export default function App() {
   };
 
   const handleShowMore = () => {
+    setIsLoadingMore(true);
+
     setVisibleCards((prev) => Math.min(prev + 3, results.length));
+
+    setTimeout(() => {
+      setIsLoadingMore(false);
+    }, 300); // small delay to show state change
   };
 
   //SAVE/UNSAVE ARTICLES
@@ -326,6 +333,7 @@ export default function App() {
                   onSaveArticle={handleSaveArticle}
                   onUnsaveArticle={handleUnsaveArticle}
                   savedArticles={savedArticles}
+                  isLoadingMore={isLoadingMore}
                 />
               }
             />

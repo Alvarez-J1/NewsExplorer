@@ -24,7 +24,7 @@
   top: 159px;
   right: 450px;
   cursor: pointer;
-  background: url(/src/assets/close-btn.png);
+  background: url(/src/assets/close-btn.svg);
   width: 40px;
   height: 40px;
   border: none;
@@ -35,7 +35,7 @@
   top: 160px;
   right: 458px;
   cursor: pointer;
-  background: url(/src/assets/close-btn.png);
+  background: url(/src/assets/close-btn.svg);
   width: 40px;
   height: 40px;
   border: none;
@@ -118,13 +118,12 @@
 /* Mobile */
 @media screen and (max-width: 767px) {
   .modal {
-    display: block;
     overflow-y: auto;
-    padding-top: 23px;
+    padding-top: 56px;
   }
   .modal__close--si {
-    top: 16px;
-    right: 845px;
+    top: 14px;
+    right: 6px;
     width: 24px;
     height: 24px;
     padding: 0;
@@ -158,8 +157,8 @@
   }
 
   .modal__close--sp {
-    top: 16px;
-    right: 845px;
+    top: 14px;
+    right: 6px;
     width: 24px;
     height: 24px;
     padding: 0;

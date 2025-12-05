@@ -1,5 +1,5 @@
-export const authorize = (email, password) => {
-  return new Promise((resolve, reject) => {
+export const authorize = () => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve({ token: "fake-jwt-token-12345" });
     }, 1000);
@@ -7,7 +7,7 @@ export const authorize = (email, password) => {
 };
 
 export const register = (email, password, username) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
         data: {
@@ -21,8 +21,8 @@ export const register = (email, password, username) => {
   });
 };
 
-export const checkToken = (token) => {
-  return new Promise((resolve, reject) => {
+export const checkToken = () => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
         data: {

@@ -109,7 +109,7 @@
 @media screen and (max-width: 767px) {
   .modal__content--si {
     height: 464px;
-
+    width: 100%;
     max-width: 320px;
   }
 

@@ -9,7 +9,6 @@ export default function RegisterModal({
   onRegister,
   onOpenLogin,
   buttonText,
-  handleRegistration,
 }) {
   const { values, handleChange, setValues } = useForm({
     email: "",
@@ -26,7 +25,7 @@ export default function RegisterModal({
       setSignupError("");
       setWrongField("");
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

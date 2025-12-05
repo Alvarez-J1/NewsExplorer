@@ -9,7 +9,7 @@
   overflow: hidden;
   background: #fff;
   box-sizing: border-box;
-  margin-left: 416px;
+  margin-left: 0;
 }
 
 .search-form__input {
@@ -37,7 +37,7 @@
   height: 100%;
   border-radius: 100px;
   color: #ffffff;
-  background-color: #2f71e5;
+  background-color: rgba(47, 113, 229, 1);
   font-family: Roboto;
   font-weight: 500;
   font-size: 18px;
@@ -46,11 +46,11 @@
 }
 
 .search-form__submit-btn:hover {
-  background-color: #347eff;
+  background-color: rgba(52, 126, 255, 1);
 }
 
 .search-form__submit-btn:active {
-  background-color: #2a65cc;
+  background-color: rgba(42, 101, 204, 1);
   transform: translateY(1px); /* optional: slight "pressed" effect */
 }
 
@@ -91,7 +91,6 @@
     margin-top: 48px;
     width: 448px;
     height: 56px;
-    margin-left: 160px;
   }
 }
 
@@ -100,8 +99,7 @@
   .search-form {
     margin-top: 0;
     width: 288px;
-    margin-left: 16px;
-    margin-right: 16px;
+    margin: 0 auto;
     margin-bottom: 16px;
     display: flex;
     flex-direction: column;

@@ -1,5 +1,6 @@
 .results {
-  padding: 40px 0;
+  padding-bottom: 80px;
+  padding-top: 80px;
   background: #f5f6f7;
 }
 
@@ -10,26 +11,28 @@
   font-size: 40px;
   color: rgba(26, 27, 34, 1);
   margin-left: 104px;
-  margin-top: 40px;
   margin-bottom: 64px;
 }
 
 .results__grid {
   list-style: none;
-  margin-left: 120px;
-  margin-right: 104px;
+  margin: 0 auto;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 0fr);
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1216px;
   gap: 16px;
 }
 
 .results__item {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 .results__more {
-  margin: 64px auto 0;
+  margin-left: auto;
+  margin-right: auto;
   display: block;
+  margin-top: 64px;
   cursor: pointer;
   border-radius: 80px;
   width: 288px;
@@ -40,17 +43,26 @@
   font-weight: 500;
   font-size: 18px;
   border: none;
-  margin-bottom: 60px;
+  margin-bottom: 0;
 }
 
 .results__more:hover {
   background-color: rgba(232, 232, 232, 1);
 }
 
+.results__more:disabled {
+  background-color: rgba(230, 232, 235, 1);
+  width: 360px;
+
+  color: rgba(182, 188, 191, 1);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 /* Tablet */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .results {
-    width: 768px;
+    width: 100%;
   }
 
   .results__title {
@@ -61,8 +73,11 @@
   }
 
   .results__grid {
-    margin-left: 36px;
     margin-top: 0;
+    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 692px;
+    margin: 0 auto;
     gap: 8px;
   }
 
@@ -74,6 +89,15 @@
   }
 }
 
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .results__grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 900px; /* or 1000–1100 depending on spacing */
+    margin: 0 auto;
+    gap: 16px;
+  }
+}
+
 /* Mobile */
 @media screen and (max-width: 767px) {
   .results {
@@ -82,10 +106,16 @@
   }
 
   .results__grid {
-    margin-left: 15px;
+    max-width: 288px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .results__item {
+    width: 100%;
+    max-width: 100%;
   }
 
   .results__title {

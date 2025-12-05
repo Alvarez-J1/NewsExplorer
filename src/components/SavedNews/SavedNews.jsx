@@ -38,43 +38,51 @@ export default function SavedNews({
   return (
     <>
       <header className="savednews__header">
-        <p className="savednews__header-title">NewsExplorer</p>
-        <nav className="savednews__header-nav">
-          <NavLink
-            to="/"
-            className="savednews__header-link savednews__header-link--under"
-          >
-            Home
-          </NavLink>
-        </nav>
-        <NavLink
-          to="/saved-news"
-          className={({ isActive }) =>
-            `savednews__header-saved-articles savednews__header-saved-articles--under ${
-              isActive ? "savednews__header-saved-articles--active" : ""
-            }`
-          }
-          style={{ textDecoration: "none" }}
-        >
-          Saved articles
-        </NavLink>
-        <button className="savednews__header-signout-btn" onClick={onLogout}>
-          <span className="savednews__header-username">{firstname}</span>
-          <img
-            className="savednews__header-logout-icon"
-            src={blackLogoutImg}
-            alt="logout-icon"
-          />
-        </button>
-        {/* MOBILE HAMBURGER BUTTON */}
-        {!isAnyModalOpen && (
-          <button
-            className="savednews__header-menu-btn"
-            onClick={handleOpenMenu}
-          >
-            <img src={savedmenuIcon} alt="Open menu" />
-          </button>
-        )}
+        <div className="savednews__header-left">
+          <p className="savednews__header-title">NewsExplorer</p>
+        </div>
+        <div className="savednews__header-right">
+          <nav className="savednews__header-nav">
+            <NavLink
+              to="/"
+              className="savednews__header-link savednews__header-link--under"
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/saved-news"
+              className={({ isActive }) =>
+                `savednews__header-saved-articles savednews__header-saved-articles--under ${
+                  isActive ? "savednews__header-saved-articles--active" : ""
+                }`
+              }
+              style={{ textDecoration: "none" }}
+            >
+              Saved articles
+            </NavLink>
+            <button
+              className="savednews__header-signout-btn"
+              onClick={onLogout}
+            >
+              <span className="savednews__header-username">{firstname}</span>
+              <img
+                className="savednews__header-logout-icon"
+                src={blackLogoutImg}
+                alt="logout-icon"
+              />
+            </button>
+          </nav>
+          {/* MOBILE HAMBURGER BUTTON */}
+          {!isAnyModalOpen && (
+            <button
+              className="savednews__header-menu-btn"
+              onClick={handleOpenMenu}
+            >
+              <img src={savedmenuIcon} alt="Open menu" />
+            </button>
+          )}
+        </div>
       </header>
       {/* MOBILE MENU MODAL */}
       {isMobileMenuOpen && (
@@ -164,21 +172,44 @@ export default function SavedNews({
           © 2025 Supersite, Powered by News API
         </p>
         <div className="savednews__footer-top-row">
-          <div className="savednews__footer-text">
-            <p className="savednews__footer-home">Home</p>
-            <p className="savednews__footer-tripleten">TripleTen</p>
-          </div>
-          <div className="footer__icons">
-            <img
-              src={github}
-              className="savednews__footer-github"
-              alt="github"
-            ></img>
-            <img
-              src={linkedin}
-              className="savednews__footer-linkedin"
-              alt="linkedIn"
-            ></img>
+          <nav className="savednews__footer-nav">
+            <NavLink to="/" className="savednews__footer-home">
+              Home
+            </NavLink>
+
+            <a
+              href="https://tripleten.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="savednews__footer-tripleten"
+            >
+              TripleTen
+            </a>
+          </nav>
+
+          <div className="savednews__footer-icons">
+            <a
+              href="https://github.com/Alvarez-J1/news-explorer-frontend/tree/stage-1-frontend-and-api"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={github}
+                className="savednews__footer-github"
+                alt="github"
+              ></img>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/joel-alvarez-80000732a/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={linkedin}
+                className="savednews__footer-linkedin"
+                alt="linkedIn"
+              ></img>
+            </a>
           </div>
         </div>
       </section>

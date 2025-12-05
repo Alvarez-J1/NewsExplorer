@@ -29,45 +29,47 @@ export default function Header({
           {isLoggedIn ? (
             // Logged IN state
             <>
-              <nav className="header__nav-logged-in">
+              <nav className="header__nav header__nav--logged-in">
                 <NavLink to="/" className="header__link header__link--under">
                   Home
                 </NavLink>
-              </nav>
-              <NavLink
-                to="/saved-news"
-                className={({ isActive }) =>
-                  `header__saved-articles ${
-                    isActive ? "header__saved-articles--active" : ""
-                  }`
-                }
-                style={{ textDecoration: "none" }}
-              >
-                Saved articles
-              </NavLink>
 
-              <button className="header__signout-btn" onClick={onLogout}>
-                <span className="header__username">
-                  {currentUser?.name?.split(" ")[0]}
-                </span>
-                <img
-                  className="header__logout-icon"
-                  src={logoutImg}
-                  alt="logout-icon"
-                />
-              </button>
+                <NavLink
+                  to="/saved-news"
+                  className={({ isActive }) =>
+                    `header__saved-articles ${
+                      isActive ? "header__saved-articles--active" : ""
+                    }`
+                  }
+                  style={{ textDecoration: "none" }}
+                >
+                  Saved articles
+                </NavLink>
+
+                <button className="header__signout-btn" onClick={onLogout}>
+                  <span className="header__username">
+                    {currentUser?.name?.split(" ")[0]}
+                  </span>
+                  <img
+                    className="header__logout-icon"
+                    src={logoutImg}
+                    alt="logout-icon"
+                  />
+                </button>
+              </nav>
             </>
           ) : (
             // Logged OUT state
             <>
-              <nav className="header__nav-logged-in">
+              <nav className="header__nav header__nav--logged-out">
                 <NavLink to="/" className="header__link header__link--under">
                   Home
                 </NavLink>
+
+                <button className="header__signin-btn" onClick={onLoginClick}>
+                  Sign in
+                </button>
               </nav>
-              <button className="header__signin-btn" onClick={onLoginClick}>
-                Sign in
-              </button>
             </>
           )}
           {/* MOBILE HAMBURGER BUTTON */}
@@ -122,6 +124,7 @@ export default function Header({
               {isLoggedIn && (
                 <>
                   <NavLink
+                    className="mobile-menu__saved-articles"
                     to="/saved-news"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

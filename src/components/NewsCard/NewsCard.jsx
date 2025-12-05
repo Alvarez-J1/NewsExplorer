@@ -18,7 +18,13 @@ export default function NewsCard({
   }, [saved]);
 
   const handleCardClick = () => {
-    onCardClick?.(item);
+    //If we have a url from the API, open it in a new tab
+    if (item.url) {
+      window.open(item.url, "_blank", "noopener,noreferrer");
+    } else {
+      //Fallback: if a parent passed a handler, still support it
+      onCardClick?.(item);
+    }
   };
 
   const handleSaveToggle = () => {
@@ -131,7 +137,7 @@ export default function NewsCard({
         </div>
       </div>
 
-      <div className="card__header">
+      <div className="card__header" onClick={handleCardClick}>
         <p className="card__date">{item.date}</p>
         <h2 className="card__title"> {item.title}</h2>
         <p className="card__text">{item.text}</p>

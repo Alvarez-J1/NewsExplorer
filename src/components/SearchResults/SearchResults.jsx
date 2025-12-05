@@ -12,7 +12,6 @@ export default function SearchResults({
   onUnsaveArticle,
   savedArticles = [],
   searchQuery,
-  isLoadingMore,
 }) {
   const visible = items.slice(0, visibleCards);
 

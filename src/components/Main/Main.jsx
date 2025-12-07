@@ -26,6 +26,7 @@ export default function Main({
   onUnsaveArticle,
   isAnyModalOpen,
   isLoadingMore,
+  searchQuery,
 }) {
   const [params] = useSearchParams();
   const q = params.get("q")?.trim() || "";
@@ -71,7 +72,7 @@ export default function Main({
             savedArticles={savedArticles}
             onSaveArticle={onSaveArticle}
             onUnsaveArticle={onUnsaveArticle}
-            searchQuery={q}
+            searchQuery={searchQuery}
             isLoadingMore={isLoadingMore}
           />
         )}

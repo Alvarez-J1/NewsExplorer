@@ -61,17 +61,19 @@ export default function SavedNews({
             >
               Saved articles
             </NavLink>
-            <button
-              className="savednews__header-signout-btn"
-              onClick={onLogout}
-            >
-              <span className="savednews__header-username">{firstname}</span>
-              <img
-                className="savednews__header-logout-icon"
-                src={blackLogoutImg}
-                alt="logout-icon"
-              />
-            </button>
+            <NavLink className="savednews__header-username-nav" to="/">
+              <button
+                className="savednews__header-signout-btn"
+                onClick={onLogout}
+              >
+                <span className="savednews__header-username">{firstname}</span>
+                <img
+                  className="savednews__header-logout-icon"
+                  src={blackLogoutImg}
+                  alt="logout-icon"
+                />
+              </button>
+            </NavLink>
           </nav>
           {/* MOBILE HAMBURGER BUTTON */}
           {!isAnyModalOpen && (

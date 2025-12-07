@@ -36,6 +36,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [savedArticles, setSavedArticles] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   //helpers for NewsAPI dates
   const getCurrentDate = () => {
@@ -113,6 +114,7 @@ export default function App() {
   //SEARCH
   const handleSearch = async (query) => {
     setSearchKeyword(query);
+    setSearchQuery(query);
     setIsloading(true);
     setHasSearched(true);
     setError("");
@@ -311,6 +313,9 @@ export default function App() {
                   currentUser={currentUser}
                   onLogout={handleLogout}
                   isAnyModalOpen={isAnyModalOpen}
+                  searchQuery={searchQuery}
+                  onSaveArticle={handleSaveArticle}
+                  onUnsaveArticle={handleUnsaveArticle}
                 />
               }
             />

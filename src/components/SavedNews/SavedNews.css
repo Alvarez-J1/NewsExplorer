@@ -119,8 +119,17 @@
   border: 1px solid rgba(26, 27, 34, 1);
 }
 
-.savednews__header-username {
+.savednews__header-username-nav {
+  text-decoration: none;
+}
+
+.savednews__header-username,
+.savednews__header-username:link,
+.savednews__header-username:visited,
+.savednews__header-username:hover,
+.savednews__header-username:active {
   margin-left: 12px;
+  text-decoration: none;
 }
 
 .savednews__header-logout-icon {

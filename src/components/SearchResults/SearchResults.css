@@ -1,0 +1,133 @@
+.results {
+  padding-bottom: 80px;
+  padding-top: 80px;
+  background: #f5f6f7;
+}
+
+.results__title {
+  margin: 0 0 24px;
+  font-family: Roboto Slab;
+  font-weight: 400;
+  font-size: 40px;
+  color: rgba(26, 27, 34, 1);
+  margin-left: 104px;
+  margin-bottom: 64px;
+}
+
+.results__grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1216px;
+  gap: 16px;
+}
+
+.results__item {
+  width: 100%;
+  max-width: 400px;
+}
+.results__more {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 64px;
+  cursor: pointer;
+  border-radius: 80px;
+  width: 288px;
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(26, 27, 34, 1);
+  height: 64px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 18px;
+  border: none;
+  margin-bottom: 0;
+}
+
+.results__more:hover {
+  background-color: rgba(232, 232, 232, 1);
+}
+
+.results__more:disabled {
+  background-color: rgba(230, 232, 235, 1);
+  width: 360px;
+
+  color: rgba(182, 188, 191, 1);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .results {
+    width: 100%;
+  }
+
+  .results__title {
+    font-size: 30px;
+    margin-left: 40px;
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+
+  .results__grid {
+    margin-top: 0;
+    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 692px;
+    margin: 0 auto;
+    gap: 8px;
+  }
+
+  .results__more {
+    width: 240px;
+    height: 56px;
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .results__grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 900px; /* or 1000–1100 depending on spacing */
+    margin: 0 auto;
+    gap: 16px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  .results {
+    padding-top: 32px;
+    padding-bottom: 24px;
+  }
+
+  .results__grid {
+    max-width: 288px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .results__item {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .results__title {
+    font-size: 30px;
+    margin-left: 16px;
+    margin-top: 0;
+    margin-bottom: 58px;
+  }
+
+  .results__more {
+    margin-top: 16px;
+    height: 56px;
+    margin-bottom: 0;
+  }
+}

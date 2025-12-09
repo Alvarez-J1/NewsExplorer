@@ -38,7 +38,7 @@ export default function Footer() {
             ></img>
           </a>
           <a
-            href="https://www.linkedin.com/in/joel-alvarez-80000732a/"
+            href="https://www.linkedin.com/in/joel-alvarez-software-engineer/"
             target="_blank"
             rel="noopener noreferrer"
           >

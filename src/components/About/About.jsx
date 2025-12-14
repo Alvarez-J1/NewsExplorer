@@ -10,11 +10,11 @@ export default function About() {
         <div className="about__content">
           <h1 className="about__title">About the author</h1>
           <p className="about__paragraph">
-            My name is Joel Alvarez. I&apos;m a front-end developer with a
-            strong focus on building clean, responsive, and user-focused web
-            applications. I&apos;m currently studying software engineering at
-            TripleTen, where I&apos;ve built multiple full-stack projects using
-            React, JavaScript, Node.js, Express, MongoDB, and REST APIs.
+            My name is Joel Alvarez. I&apos;m a full-stack software engineer
+            with a strong focus on building clean, responsive, and user-focused
+            web applications. I&apos;m currently studying software engineering
+            at TripleTen, where I&apos;ve built multiple full-stack projects
+            using React, JavaScript, Node.js, Express, MongoDB, and REST APIs.
             I&apos;m passionate about writing clean code, improving UI/UX, and
             continuously learning new development tools and technologies. The
             News Explorer project demonstrates my ability to work with APIs,

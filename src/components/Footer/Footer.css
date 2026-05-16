@@ -1,8 +1,12 @@
 .footer {
-  margin: 0;
+  width: min(1232px, calc(100% - 64px));
+  margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-top: 80px;
+  padding-bottom: 24px;
+  box-sizing: border-box;
 }
 
 .footer__nav {
@@ -13,13 +17,12 @@
 .footer__top-row {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .footer__supersite {
-  margin-left: 104px;
-  margin-right: 524px;
+  margin: 0;
   width: 433px;
-  height: 22px;
   color: rgba(182, 188, 191, 1);
   font-family: Roboto;
   font-size: 16px;
@@ -58,20 +61,16 @@
 /* Tablet */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .footer {
-    max-width: 768px;
-    width: 100%;
-    height: 64px;
-    padding-top: 0;
+    width: calc(100% - 80px);
+    max-width: 688px;
+    height: auto;
     padding-top: 96px;
+    padding-bottom: 24px;
   }
 
   .footer__supersite {
-    margin-top: 24px;
-    margin-bottom: 18px;
-    margin-left: 40px;
-    margin-right: 113px;
+    margin: 0;
     width: 300px;
-    height: 22px;
     color: rgba(182, 188, 191, 1);
     font-family: Roboto;
     font-size: 16px;
@@ -82,42 +81,33 @@
 /* Mobile */
 @media screen and (max-width: 767px) {
   .footer {
-    height: 154px;
-    padding-top: 128px;
-    max-width: 320px;
-    width: 100%;
-    display: flex;
+    width: calc(100% - 32px);
+    max-width: 420px;
+    height: auto;
     flex-direction: column;
+    align-items: stretch;
+    padding-top: 48px;
+    padding-bottom: 24px;
   }
 
   .footer__nav {
-    display: flex;
     flex-direction: column;
-
     gap: 30px;
-    margin-left: 16px;
   }
 
   .footer__top-row {
     order: 1;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    align-self: flex-start;
+    align-items: flex-start;
     width: 100%;
   }
 
   .footer__supersite {
     order: 2;
-    margin-top: 38px;
+    margin-top: 40px;
     margin-bottom: 0;
-    margin-left: 16px;
-    margin-right: 0;
-    width: 288px;
+    width: 100%;
     text-align: center;
-    height: 22px;
-    display: flex;
-    align-self: flex-start;
   }
 
   .footer__nav-home {
@@ -126,7 +116,6 @@
   .footer__icons {
     display: flex;
     height: 24px;
-    margin-right: 16px;
   }
 
   .footer__nav-tripleten {
@@ -137,8 +126,8 @@
     color: rgba(26, 27, 34, 1);
   }
 
-  .github__image,
-  .linkedin__image {
+  .footer__github-image,
+  .footer__linkedin-image {
     margin: 0;
     margin-right: 24px;
     width: 24px;

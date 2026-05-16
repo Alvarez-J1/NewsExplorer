@@ -1,5 +1,8 @@
+.page {
+  overflow-x: hidden;
+}
+
 .page__frame {
-  max-width: 1440px;
   width: 100%;
-  margin: 0 auto; /* centers EVERYTHING inside */
+  margin: 0;
 }

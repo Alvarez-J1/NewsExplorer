@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="NewsExplorer">
+  <rect width="512" height="512" rx="112" fill="#2F71E5" />
+  <text
+    x="256"
+    y="304"
+    fill="#FFFFFF"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="178"
+    font-weight="800"
+    text-anchor="middle"
+  >NE</text>
+</svg>

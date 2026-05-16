@@ -1,12 +1,12 @@
 // import SearchForm from "../SearchForm/SearchForm";
-import authorPhoto from "../../assets/Me.jpg";
+import park from "../../assets/park.png";
 import "./About.css";
 
 export default function About() {
   return (
     <section className="about">
       <div className="about__container">
-        <img src={authorPhoto} className="about__image" alt="Your Name"></img>
+        <img src={park} className="about__image" alt="Your Name"></img>
         <div className="about__content">
           <h1 className="about__title">About the author</h1>
           <p className="about__paragraph">

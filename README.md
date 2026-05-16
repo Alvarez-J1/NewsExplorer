@@ -1,12 +1,23 @@
-# NewsExplorer – Frontend
+# NewsExplorer 
 
-## Description:
-
-NewsExplorer is a React application that lets users search for news articles by keyword and save them to their personal account. This repo contains the frontend part of the final TripleTen project.
+NewsExplorer is a React application that lets users search for news articles by keyword and save them to their personal account.
 
 ## Live Demo
 
-Deployed app: **https://alvarez-j1.github.io/NewsExplorer/**
+Deployed app: https://alvarez-j1.github.io/NewsExplorer/
+
+## Features
+
+- Search news articles by keyword
+- View search results and load more with **“Show more”** button
+- User authentication (sign up / sign in modals)
+- Save / unsave articles (bookmark icon)
+- Saved articles page:
+- Shows total number of saved articles
+- Displays keyword summary
+- Allows removing saved articles
+- Fully responsive layout for mobile, tablet, and desktop
+
 
 ## Tech Stack
 
@@ -18,25 +29,23 @@ Deployed app: **https://alvarez-j1.github.io/NewsExplorer/**
 - **ESLint** (code style & linting)
 - Deployment: **GitHub Pages**
 
-## Features
+## Screenshots
+## Desktop View
+<img width="1895" height="914" alt="image" src="https://github.com/user-attachments/assets/f602deb7-b0b8-423d-a122-8f60926306f1" />
 
-- Search news articles by keyword
-- View search results and load more with **“Show more”** button
-- User authentication (sign up / sign in modals)
-- Save / unsave articles (bookmark icon)
-- Saved articles page:
-  - Shows total number of saved articles
-  - Displays keyword summary
-  - Allows removing saved articles
-- Fully responsive layout for mobile, tablet, and desktop
+## Mobile View
+## <img width="396" height="778" alt="image" src="https://github.com/user-attachments/assets/0904739b-8e9f-4eb4-80c4-34c718c39598" />
+## <img width="392" height="766" alt="image" src="https://github.com/user-attachments/assets/69d6e2ed-bfd3-4800-846b-d25f23a6f306" />
+
+
 
 ## How to Download the Project
 
 Clone the repository to your computer:
 
 ```bash
-git clone https://github.com/Alvarez-J1/news-explorer-frontend.git
-cd news-explorer-frontend
+git clone https://github.com/Alvarez-J1/NewsExplorer
+cd NewsExplorer
 ```
 
 ## How to Install Dependencies
@@ -50,26 +59,52 @@ npm run dev
 After running the command, open the URL shown in your terminal
 (usually something like http://localhost:5173/).
 
-## How to Build the App
+## Project Structure
+```text
+news-explorer-frontend/
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── assets/
+│   │   ├── icons and SVG assets
+│   │   └── image assets
+│   ├── components/
+│   │   ├── About/
+│   │   ├── App/
+│   │   ├── Footer/
+│   │   ├── Header/
+│   │   ├── LoginModal/
+│   │   ├── Main/
+│   │   ├── ModalWithForm/
+│   │   ├── Navigation/
+│   │   ├── NewsCard/
+│   │   ├── Preloader/
+│   │   ├── RegisterModal/
+│   │   ├── SavedNews/
+│   │   ├── SearchForm/
+│   │   ├── SearchResults/
+│   │   └── SuccessModal/
+│   ├── hooks/
+│   │   └── useForm.js
+│   ├── utils/
+│   │   ├── adapter.js
+│   │   ├── api.js
+│   │   ├── auth.js
+│   │   ├── constants.js
+│   │   └── newsApi.js
+│   ├── vendor/
+│   │   ├── fonts/
+│   │   └── fonts.css
+│   ├── index.css
+│   └── main.jsx
+├── .eslintrc.cjs
+├── .gitignore
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
+```
 
-npm run build
-
-This creates a production-ready version in the dist folder.
-
-## How to Deploy the App (GitHub Pages)
-
-This project uses Vite and gh-pages for deployment.
-
-Make sure all changes are committed:
-
-git add -A
-git commit -m "final changes"
-git push
-
-Deploy the website:
-
-npm run deploy
-
-This will publish your dist folder to the gh-pages branch and update the live app at:
-
-👉 https://alvarez-j1.github.io/NewsExplorer/
+## Author
+Joel Alvarez

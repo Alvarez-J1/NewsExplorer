@@ -35,7 +35,7 @@
   top: 166px;
   right: 456px;
   cursor: pointer;
-  background: url(/src/assets/close-btn.png);
+  background: url("../../assets/close-btn.svg");
   width: 40px;
   height: 40px;
   border: none;
@@ -70,6 +70,6 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    background: url(/src/assets/close-mobile-modal.svg);
+    background: url("../../assets/close-mobile-modal.svg");
   }
 }

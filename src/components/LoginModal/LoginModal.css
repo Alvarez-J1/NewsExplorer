@@ -99,7 +99,7 @@
   top: 134px;
   right: 495px;
   cursor: pointer;
-  background: url(/src/assets/close-btn.png);
+  background: url("../../assets/close-btn.svg");
   width: 40px;
   height: 40px;
   border: none;

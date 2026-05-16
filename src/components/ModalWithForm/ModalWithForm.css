@@ -24,7 +24,7 @@
   top: 159px;
   right: 450px;
   cursor: pointer;
-  background: url(/src/assets/close-btn.svg);
+  background: url("../../assets/close-btn.svg");
   width: 40px;
   height: 40px;
   border: none;
@@ -35,7 +35,7 @@
   top: 160px;
   right: 458px;
   cursor: pointer;
-  background: url(/src/assets/close-btn.svg);
+  background: url("../../assets/close-btn.svg");
   width: 40px;
   height: 40px;
   border: none;
@@ -127,7 +127,7 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    background: url(/src/assets/close-mobile-modal.svg);
+    background: url("../../assets/close-mobile-modal.svg");
   }
 
   .modal__title--si {
@@ -162,6 +162,6 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    background: url(/src/assets/close-mobile-modal.svg);
+    background: url("../../assets/close-mobile-modal.svg");
   }
 }

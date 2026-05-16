@@ -6,7 +6,7 @@ NewsExplorer is a React application that lets users search for news articles by 
 
 ## Live Demo
 
-Deployed app: **https://alvarez-j1.github.io/news-explorer-frontend/**
+Deployed app: **https://alvarez-j1.github.io/NewsExplorer/**
 
 ## Tech Stack
 
@@ -72,4 +72,4 @@ npm run deploy
 
 This will publish your dist folder to the gh-pages branch and update the live app at:
 
-👉 https://alvarez-j1.github.io/news-explorer-frontend/
+👉 https://alvarez-j1.github.io/NewsExplorer/

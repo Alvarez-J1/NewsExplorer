@@ -27,7 +27,7 @@ export default function Footer() {
 
         <div className="footer__icons">
           <a
-            href="https://github.com/Alvarez-J1/news-explorer-frontend/tree/stage-1-frontend-and-api"
+            href="https://github.com/Alvarez-J1"
             target="_blank"
             rel="noopener noreferrer"
           >

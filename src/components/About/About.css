@@ -80,6 +80,7 @@
     max-width: 688px;
     grid-template-columns: 232px minmax(0, 1fr);
     column-gap: 32px;
+    padding-top: 20px;
   }
 
   .about__paragraph {

@@ -30,24 +30,6 @@
   justify-self: flex-start;
 }
 
-.modal__close--success {
-  position: absolute;
-  top: 166px;
-  right: 456px;
-  cursor: pointer;
-  background: url("../../assets/close-btn.svg");
-  width: 40px;
-  height: 40px;
-  border: none;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .modal__close--success {
-    top: 160px;
-    right: 204px;
-  }
-}
-
 /* Mobile */
 @media screen and (max-width: 767px) {
   .modal__content--success {
@@ -62,14 +44,5 @@
     font-weight: 900;
     font-size: 24px;
     width: 315px;
-  }
-
-  .modal__close--success {
-    top: 2px;
-    right: 845px;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    background: url("../../assets/close-mobile-modal.svg");
   }
 }

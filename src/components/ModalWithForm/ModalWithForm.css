@@ -13,32 +13,33 @@
   visibility: visible;
 }
 
+.modal__content {
+  position: relative;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
   margin-left: 36px;
 }
 
-.modal__close--si {
+.modal__close {
   position: absolute;
-  top: 159px;
-  right: 450px;
+  top: -46px;
+  right: -46px;
   cursor: pointer;
   background: url("../../assets/close-btn.svg");
   width: 40px;
   height: 40px;
   border: none;
+  padding: 0;
 }
 
-.modal__close--sp {
-  position: absolute;
-  top: 160px;
-  right: 458px;
-  cursor: pointer;
-  background: url("../../assets/close-btn.svg");
-  width: 40px;
-  height: 40px;
-  border: none;
+.modal__close--si,
+.modal__close--sp,
+.modal__close--success {
+  top: -46px;
+  right: -46px;
 }
 
 .modal__title {
@@ -104,15 +105,6 @@
     align-items: flex-start;
     padding-top: 207px;
   }
-  .modal__close--si {
-    top: 160px;
-    right: 200px;
-  }
-
-  .modal__close--sp {
-    top: 160px;
-    right: 196px;
-  }
 }
 
 /* Mobile */
@@ -121,12 +113,11 @@
     overflow-y: auto;
     padding-top: 56px;
   }
-  .modal__close--si {
-    top: 14px;
-    right: 6px;
+  .modal__close {
+    top: -40px;
+    right: 16px;
     width: 24px;
     height: 24px;
-    padding: 0;
     background: url("../../assets/close-mobile-modal.svg");
   }
 
@@ -154,14 +145,5 @@
     width: 288px;
 
     padding-bottom: 4px;
-  }
-
-  .modal__close--sp {
-    top: 14px;
-    right: 6px;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    background: url("../../assets/close-mobile-modal.svg");
   }
 }

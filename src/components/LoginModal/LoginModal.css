@@ -94,17 +94,6 @@
   text-decoration: none;
 }
 
-.modal__close--si {
-  position: absolute;
-  top: 134px;
-  right: 495px;
-  cursor: pointer;
-  background: url("../../assets/close-btn.svg");
-  width: 40px;
-  height: 40px;
-  border: none;
-}
-
 /* Mobile */
 @media screen and (max-width: 767px) {
   .modal__content--si {

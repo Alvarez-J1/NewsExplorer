@@ -306,6 +306,7 @@ export default function App() {
                   onSearch={handleSearch}
                   results={results}
                   hasSearched={hasSearched}
+                  isLoading={isLoading}
                   error={error}
                   visibleCards={visibleCards}
                   onShowMore={handleShowMore}
@@ -316,6 +317,8 @@ export default function App() {
                   searchQuery={searchQuery}
                   onSaveArticle={handleSaveArticle}
                   onUnsaveArticle={handleUnsaveArticle}
+                  savedArticles={savedArticles}
+                  isLoadingMore={isLoadingMore}
                 />
               }
             />

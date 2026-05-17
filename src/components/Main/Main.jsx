@@ -76,7 +76,7 @@ export default function Main({
             isLoadingMore={isLoadingMore}
           />
         )}
-        {!isLoading && hasSearched && results.length === 0 && (
+        {!isLoading && hasSearched && !error && results.length === 0 && (
           <section className="results-empty">
             <img src={notFound} className="results-empty__img" />
             <h2 className="results-empty__title">Nothing found</h2>

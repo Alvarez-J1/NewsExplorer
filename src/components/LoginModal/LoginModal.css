@@ -1,110 +1,93 @@
 .modal__content--si {
-  height: 383px;
-  background-color: rgba(255, 255, 255, 1);
-  width: 430px;
-  border-radius: 16px;
+  width: min(520px, 100%);
 }
 
-.modal__submit.modal__submit--si {
-  margin-top: 39px;
-  background-color: rgba(47, 113, 229, 1);
-  width: 360px;
-  height: 64px;
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.modal__submit--si:disabled {
-  background-color: rgba(230, 232, 235, 1);
-  color: rgba(182, 188, 191, 1);
-}
-
-.modal__error {
-  color: rgba(255, 0, 0, 1);
-  display: block;
-  margin-top: 3px;
-  margin-bottom: 13px;
-  font-size: 12px;
-  font-weight: 400;
-  font-family: Inter;
-}
-
-.modal__label--error {
-  color: black;
-  font-weight: 600;
-}
-
-.loginmodal__email {
-  margin: 0;
-}
-
-.loginmodal__password {
-  margin-top: 31px;
-  color: rgba(47, 113, 229, 1);
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 12px;
-}
-
-.modal__error + .loginmodal__password {
+.modal__label.loginmodal__email {
   margin-top: 0;
 }
 
-.input-error {
-  border-bottom: 2px solid #ff3b00;
+.modal__label.loginmodal__password {
+  margin-top: 32px;
+}
+
+.modal__error + .loginmodal__password {
+  margin-top: 18px;
 }
 
 .modal__submit--si {
-  margin: 0;
-  width: 360px;
-  height: 64px;
-  background-color: rgba(47, 113, 229, 1);
-  color: rgba(255, 255, 255, 1);
+  width: 100%;
+  min-height: 58px;
+  margin-top: 32px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
+  color: #ffffff;
+  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.28);
   cursor: pointer;
+  font-family: Inter, Roboto, sans-serif;
   font-size: 16px;
-  line-height: 20px;
-  border-radius: 100px;
-  border: 2px solid transparent;
-  box-sizing: border-box;
-  margin-top: 39px;
+  font-weight: 900;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.modal__submit--si:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 54px rgba(37, 99, 235, 0.36);
+  filter: saturate(1.06);
+}
+
+.modal__submit--si:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.modal__submit--si:disabled {
+  background: #e6eaf0;
+  color: #9aa4b2;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 .modal__auth-note {
-  margin-top: 16px;
+  margin: 20px 0 0;
+  padding: 14px 16px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
   text-align: center;
-  font: 400 14px/1 Inter, system-ui, sans-serif;
-  margin-left: -28px;
+  color: var(--color-muted);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .modal__auth-or {
-  color: #000;
+  color: var(--color-muted);
 }
 
 .loginmodal__switch {
   border: 0;
   padding: 0;
-  color: #00000080;
-  cursor: pointer;
   background: none;
-  border: 0;
-  padding: 0;
-  color: #2f71e5; /* blue from the NewsExplorer spec */
+  color: var(--color-accent);
+  cursor: pointer;
   font: inherit;
-  text-decoration: none;
+  font-weight: 900;
+  transition: color 0.18s ease;
 }
 
-/* Mobile */
+.loginmodal__switch:hover {
+  color: var(--color-accent-strong);
+}
+
 @media screen and (max-width: 767px) {
-  .modal__content--si {
-    height: 464px;
-    width: 100%;
-    max-width: 320px;
+  .modal__label.loginmodal__password {
+    margin-top: 28px;
   }
 
   .modal__submit--si {
-    width: 288px;
-    font-size: 18px;
-    margin-top: 23px;
+    min-height: 56px;
+    margin-top: 28px;
   }
 }

@@ -1,48 +1,44 @@
 .modal__content--success {
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 16px;
-  width: 430px;
-  height: 182px;
+  width: min(500px, 100%);
+}
+
+.modal__content--success .modal__form {
+  padding-top: 28px;
 }
 
 .modal__title--success {
-  margin-top: 43px;
-  margin-left: 36px;
-  font-family: Roboto;
-  font-weight: 900;
-  font-size: 24px;
-  width: 315px;
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: 28px;
+  line-height: 1.16;
 }
 
 .modal__button--success {
-  background-color: white;
-  border: none;
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
+  color: #ffffff;
+  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.28);
   cursor: pointer;
-  color: rgba(47, 113, 229, 1);
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 18px;
-  margin-top: 14px;
-  padding: 0;
-
-  width: 228px;
-  display: flex;
-  justify-self: flex-start;
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
 }
 
-/* Mobile */
-@media screen and (max-width: 767px) {
-  .modal__content--success {
-    max-width: 320px;
-  }
+.modal__button--success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 54px rgba(37, 99, 235, 0.36);
+  filter: saturate(1.06);
+}
 
+@media screen and (max-width: 767px) {
   .modal__title--success {
-    margin-left: 17px;
-    margin-top: 0;
-    padding-top: 16px;
-    font-family: Roboto;
-    font-weight: 900;
-    font-size: 24px;
-    width: 315px;
+    font-size: 25px;
   }
 }

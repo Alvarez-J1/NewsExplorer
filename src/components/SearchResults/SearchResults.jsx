@@ -12,6 +12,7 @@ export default function SearchResults({
   onUnsaveArticle,
   savedArticles = [],
   searchQuery,
+  isLoadingMore = false,
 }) {
   const visible = items.slice(0, visibleCards);
 
@@ -19,7 +20,14 @@ export default function SearchResults({
 
   return (
     <section className="results">
-      <h2 className="results__title">Search results</h2>
+      <div className="results__header">
+        <p className="results__eyebrow">Latest coverage</p>
+        <h2 className="results__title">Search results</h2>
+        <p className="results__summary">
+          {items.length} {items.length === 1 ? "article" : "articles"} matched
+          your search.
+        </p>
+      </div>
       <ul className="results__grid">
         {visible.map((a, i) => (
           <NewsCard
@@ -40,9 +48,13 @@ export default function SearchResults({
           className="results__more"
           type="button"
           onClick={onShowMore}
-          disabled={allShown}
+          disabled={allShown || isLoadingMore}
         >
-          {allShown ? "Disabled" : "Show more"}
+          {isLoadingMore
+            ? "Loading..."
+            : allShown
+            ? "All results shown"
+            : "Show more"}
         </button>
       )}
     </section>

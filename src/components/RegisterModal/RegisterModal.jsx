@@ -60,6 +60,7 @@ export default function RegisterModal({
   return (
     <ModalWithForm
       title="Sign up"
+      description="Create a reading profile to save stories and organize your coverage."
       buttonText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
@@ -69,11 +70,6 @@ export default function RegisterModal({
       submitClassName="modal__submit--signup"
       disabled={!values.email || !values.password || !values.username}
     >
-      <button
-        onClick={onClose}
-        type="button"
-        className="modal__close modal__close--sp "
-      />
       <label htmlFor="email" className="modal__label registermodal__email">
         Email
         <input
@@ -87,6 +83,8 @@ export default function RegisterModal({
           maxLength="999"
           onChange={handleChange}
           value={values.email}
+          aria-invalid={wrongField === "email"}
+          aria-describedby={wrongField === "email" ? "email-error" : undefined}
         />
       </label>
       <label
@@ -109,19 +107,17 @@ export default function RegisterModal({
       </label>
       <label
         htmlFor="registermodal__name"
-        className={`modal__label ${
+        className={`modal__label registermodal__username ${
           wrongField === "email" ? "modal__label-error" : ""
         }`}
       >
-        {" "}
-        {wrongField === "email" ? "" : ""}
-        Username
+        Name
         <input
           type="text"
           className="modal__input registermodal__name"
           id="registermodal__name"
           name="username"
-          placeholder="Enter your username"
+          placeholder="Your name"
           required
           minLength="1"
           maxLength="999"

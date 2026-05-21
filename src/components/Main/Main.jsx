@@ -50,11 +50,10 @@ export default function Main({
           <main className="main">
             <section className="main__hero">
               <h1 className="main__hero-title">
-                What&apos;s going on in the world?
+                Track the stories shaping the world.
               </h1>
               <p className="main__hero-subtitle">
-                Find the latest news on any topic and save them in your personal
-                account.
+              A cleaner way to search, read, and revisit trusted reporting.
               </p>
               <SearchForm onSearch={onSearch} />
             </section>
@@ -80,13 +79,14 @@ export default function Main({
           <section className="results-empty">
             <img src={notFound} className="results-empty__img" />
             <h2 className="results-empty__title">Nothing found</h2>
-            <p className="resutls-empty__text">
+            <p className="results-empty__text">
               Sorry, but nothing matched your search terms.
             </p>
           </section>
         )}
         {!isLoading && hasSearched && error && (
           <section className="results-error">
+            <p className="results-error__eyebrow">Request failed</p>
             <h2 className="results-error__title">Error</h2>
             <p className="results-error__text">{error}</p>
           </section>

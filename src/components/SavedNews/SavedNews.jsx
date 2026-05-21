@@ -7,8 +7,7 @@ import savedmenuIcon from "../../assets/savednews__menu-icon.svg";
 import blackLogoutImg from "../../assets/black_logout.svg";
 import whiteLogoutImg from "../../assets/white_logout.svg";
 import NewsCard from "../NewsCard/NewsCard";
-import linkedin from "../../assets/LinkedIn.svg";
-import github from "../../assets/github.svg";
+import Footer from "../Footer/Footer";
 import savednewscloseIcon from "../../assets/close-mobile.svg";
 
 export default function SavedNews({
@@ -19,17 +18,12 @@ export default function SavedNews({
   isAnyModalOpen,
 }) {
   const firstname = currentUser?.name?.split?.(" ")[0] ?? "User";
-
   const count = savedArticles.length;
-
   const articleWord = count === 1 ? "saved article" : "saved articles";
-
   const all = savedArticles.map((a) => a.keyword).filter(Boolean);
-
   const uniq = Array.from(new Set(all));
   const [k1, k2, ...rest] = uniq;
   const extra = rest.length;
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleOpenMenu = () => setIsMobileMenuOpen(true);
@@ -53,7 +47,7 @@ export default function SavedNews({
             <NavLink
               to="/saved-news"
               className={({ isActive }) =>
-                `savednews__header-saved-articles savednews__header-saved-articles--under ${
+                `savednews__header-saved-articles ${
                   isActive ? "savednews__header-saved-articles--active" : ""
                 }`
               }
@@ -63,6 +57,7 @@ export default function SavedNews({
             </NavLink>
             <NavLink className="savednews__header-username-nav" to="/">
               <button
+                type="button"
                 className="savednews__header-signout-btn"
                 onClick={onLogout}
               >
@@ -75,18 +70,19 @@ export default function SavedNews({
               </button>
             </NavLink>
           </nav>
-          {/* MOBILE HAMBURGER BUTTON */}
           {!isAnyModalOpen && (
             <button
+              type="button"
               className="savednews__header-menu-btn"
               onClick={handleOpenMenu}
+              aria-label="Open menu"
             >
-              <img src={savedmenuIcon} alt="Open menu" />
+              <img src={savedmenuIcon} alt="" />
             </button>
           )}
         </div>
       </header>
-      {/* MOBILE MENU MODAL */}
+
       {isMobileMenuOpen && (
         <div className="mobile-menu">
           <div className="mobile-menu__overlay" onClick={handleCloseMenu} />
@@ -95,14 +91,14 @@ export default function SavedNews({
               <div className="mobile-menu__section">
                 <p className="mobile-menu__title">NewsExplorer</p>
               </div>
-              {isMobileMenuOpen && (
-                <button
-                  className="mobile-menu__close-btn"
-                  onClick={handleCloseMenu}
-                >
-                  <img src={savednewscloseIcon} alt="Close" />
-                </button>
-              )}
+              <button
+                type="button"
+                className="mobile-menu__close-btn"
+                onClick={handleCloseMenu}
+                aria-label="Close menu"
+              >
+                <img src={savednewscloseIcon} alt="" />
+              </button>
             </div>
             <nav className="mobile-menu__nav">
               <NavLink
@@ -115,15 +111,17 @@ export default function SavedNews({
               <NavLink
                 to="/saved-news"
                 className={({ isActive }) =>
-                  `savednews__header-saved-articles-mobile savednews__header-saved-articles--under ${
+                  `savednews__header-saved-articles-mobile ${
                     isActive ? "savednews__header-saved-articles--active" : ""
                   }`
                 }
                 style={{ textDecoration: "none" }}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Saved articles
               </NavLink>
               <button
+                type="button"
                 className="savednews__mobileheader-signout-btn"
                 onClick={onLogout}
               >
@@ -138,8 +136,9 @@ export default function SavedNews({
           </div>
         </div>
       )}
+
       <section className="savednews__info">
-        <h2 className="savednews__info-title">Saved articles</h2>
+        <p className="savednews__info-title">Saved library</p>
         <p className="savednews__info-count">
           {firstname} you have {count} {articleWord}
         </p>
@@ -154,67 +153,37 @@ export default function SavedNews({
           </p>
         )}
       </section>
+
       <section className="savednews__cards">
-        <ul className="results__grid">
-          {savedArticles.map((a) => (
-            <NewsCard
-              key={a.url}
-              item={a}
-              isLoggedIn={true}
-              currentUser={currentUser}
-              saved={true}
-              onUnsave={() => onUnsaveArticle(a)}
-              isSavedPage={true}
-            />
-          ))}
-        </ul>
-      </section>
-      <section className="savednews__footer">
-        <p className="savednews__footer-supersite">
-          © 2025 Supersite, Powered by News API
-        </p>
-        <div className="savednews__footer-top-row">
-          <nav className="savednews__footer-nav">
-            <NavLink to="/" className="savednews__footer-home">
-              Home
-            </NavLink>
-
-            <a
-              href="https://tripleten.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="savednews__footer-tripleten"
-            >
-              TripleTen
-            </a>
-          </nav>
-
-          <div className="savednews__footer-icons">
-            <a
-              href="https://github.com/Alvarez-J1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={github}
-                className="savednews__footer-github"
-                alt="github"
-              ></img>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/joel-alvarez-software-engineer/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={linkedin}
-                className="savednews__footer-linkedin"
-                alt="linkedIn"
-              ></img>
-            </a>
+        {savedArticles.length > 0 ? (
+          <ul className="results__grid">
+            {savedArticles.map((a) => (
+              <NewsCard
+                key={a.url}
+                item={a}
+                isLoggedIn={true}
+                currentUser={currentUser}
+                saved={true}
+                onUnsave={() => onUnsaveArticle(a)}
+                isSavedPage={true}
+              />
+            ))}
+          </ul>
+        ) : (
+          <div className="savednews__empty">
+            <p className="savednews__empty-eyebrow">No saved articles yet</p>
+            <h2 className="savednews__empty-title">
+              Build a reading list as you explore.
+            </h2>
+            <p className="savednews__empty-text">
+              Save stories from search results and they will appear here with
+              their topics and sources.
+            </p>
           </div>
-        </div>
+        )}
       </section>
+
+      <Footer />
     </>
   );
 }

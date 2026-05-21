@@ -7,17 +7,13 @@ export default function SuccessModal({ isOpen, onClose, onOpenLogin }) {
   return (
     <ModalWithForm
       title="Registration successfully completed!"
+      description="Your profile is ready. Sign in to start saving stories."
       isOpen={isOpen}
       onClose={onClose}
       contentClassName="modal__content--success"
       titleClassName="modal__title--success"
       submitClassName="modal__submit--success"
     >
-      <button
-        onClick={onClose}
-        type="button"
-        className="modal__close modal__close--success"
-      />
       <button
         onClick={onOpenLogin}
         type="button"

@@ -59,6 +59,7 @@ export default function LoginModal({
   return (
     <ModalWithForm
       title="Sign in"
+      description="Continue to your saved stories, topics, and reading history."
       name="login"
       buttonText="Sign in"
       isOpen={isOpen}
@@ -69,19 +70,13 @@ export default function LoginModal({
       titleClassName="modal__title--si"
       submitClassName="modal__submit--si"
     >
-      <button
-        onClick={onClose}
-        type="button"
-        className="modal__close modal__close--si "
-      />
       <label
         htmlFor="loginmodal__email"
         className={`modal__label loginmodal__email ${
           wrongField === "email" ? "modal__label-error" : ""
         }`}
       >
-        {" "}
-        {wrongField === "email" ? "Email" : "Email"}
+        Email
         <input
           type="email"
           className={`modal__input ${
@@ -95,6 +90,8 @@ export default function LoginModal({
           maxLength="999"
           onChange={handleChange}
           value={values.email}
+          aria-invalid={wrongField === "email"}
+          aria-describedby={wrongField === "email" ? "email-error" : undefined}
         />
       </label>
       {wrongField === "email" && (
@@ -124,6 +121,7 @@ export default function LoginModal({
         maxLength="999"
         onChange={handleChange}
         value={values.password}
+        aria-invalid={wrongField === "password"}
       />
       <button
         disabled={!values.email || !values.password}

@@ -1,8 +1,13 @@
 .page {
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .page__frame {
   width: 100%;
   margin: 0;
+}
+
+.page__content {
+  min-height: 100vh;
 }

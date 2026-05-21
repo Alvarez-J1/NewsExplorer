@@ -342,6 +342,7 @@ export default function App() {
                   onUnsaveArticle={handleUnsaveArticle}
                   savedArticles={savedArticles}
                   isLoadingMore={isLoadingMore}
+                  searchQuery={searchQuery}
                 />
               }
             />

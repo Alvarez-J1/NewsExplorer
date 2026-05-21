@@ -1,136 +1,101 @@
 .footer {
-  width: min(1232px, calc(100% - 64px));
+  width: min(var(--content-width), calc(100% - 64px));
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 80px;
-  padding-bottom: 24px;
-  box-sizing: border-box;
+  padding: 56px 0 34px;
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 1.25fr);
+  gap: 48px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.footer__nav {
-  display: flex;
-  flex-direction: row;
+.footer__brand {
+  max-width: 360px;
 }
 
-.footer__top-row {
-  display: flex;
-  flex-direction: row;
+.footer__logo {
+  margin: 0;
+  display: inline-flex;
   align-items: center;
+  gap: 10px;
+  color: var(--color-ink);
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.footer__tagline {
+  margin: 18px 0 0;
+  color: var(--color-muted);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
 .footer__supersite {
-  margin: 0;
-  width: 433px;
-  color: rgba(182, 188, 191, 1);
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: 400;
+  margin: 22px 0 0;
+  color: var(--color-subtle);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-.footer__nav-home {
-  color: rgba(26, 27, 34, 1);
-  font-weight: 400;
-  font-size: 18px;
-  font-family: Roboto;
-  margin: 0;
-  margin-right: 40px;
+.footer__links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.footer__group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer__group-title {
+  margin: 0 0 4px;
+  color: var(--color-ink);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.footer__link {
+  width: fit-content;
+  color: var(--color-muted);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
   text-decoration: none;
+  transition: color 0.18s ease, transform 0.18s ease;
 }
 
-.footer__nav-tripleten {
-  margin: 0;
-  color: rgba(26, 27, 34, 1);
-  font-weight: 400;
-  font-size: 18px;
-  font-family: Roboto;
-  margin-right: 40px;
-  text-decoration: none;
+.footer__link:hover {
+  color: var(--color-ink);
+  transform: translateX(2px);
 }
 
-.footer__github-image {
-  margin: 0;
-  margin-right: 24px;
-}
-
-.footer__linkedin-image {
-  margin: 0;
-}
-
-/* Tablet */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .footer {
-    width: calc(100% - 80px);
-    max-width: 688px;
-    height: auto;
-    padding-top: 96px;
-    padding-bottom: 24px;
-  }
-
-  .footer__supersite {
-    margin: 0;
-    width: 300px;
-    color: rgba(182, 188, 191, 1);
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: 400;
+    width: calc(100% - 48px);
+    grid-template-columns: 1fr;
+    gap: 34px;
   }
 }
 
-/* Mobile */
 @media screen and (max-width: 767px) {
   .footer {
     width: calc(100% - 32px);
-    max-width: 420px;
-    height: auto;
-    flex-direction: column;
-    align-items: stretch;
-    padding-top: 32px;
-    padding-bottom: 24px;
+    padding: 42px 0 28px;
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
-  .footer__nav {
-    flex-direction: column;
-    gap: 24px;
+  .footer__links {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 24px;
   }
 
-  .footer__top-row {
-    order: 1;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .footer__supersite {
-    order: 2;
-    margin-top: 28px;
-    margin-bottom: 0;
-    width: 100%;
-    text-align: center;
-  }
-
-  .footer__nav-home {
-    margin: 0;
-  }
-  .footer__icons {
-    display: flex;
-    gap: 24px;
-    height: 24px;
-  }
-
-  .footer__nav-tripleten {
-    margin: 0;
-    margin-left: 0;
-    margin-right: 0;
-    text-decoration: none;
-    color: rgba(26, 27, 34, 1);
-  }
-
-  .footer__github-image,
-  .footer__linkedin-image {
-    margin: 0;
-    width: 24px;
-    height: 24px;
-  }
 }

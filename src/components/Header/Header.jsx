@@ -46,7 +46,11 @@ export default function Header({
                   Saved articles
                 </NavLink>
 
-                <button className="header__signout-btn" onClick={onLogout}>
+                <button
+                  type="button"
+                  className="header__signout-btn"
+                  onClick={onLogout}
+                >
                   <span className="header__username">
                     {currentUser?.name?.split(" ")[0]}
                   </span>
@@ -66,7 +70,11 @@ export default function Header({
                   Home
                 </NavLink>
 
-                <button className="header__signin-btn" onClick={onLoginClick}>
+                <button
+                  type="button"
+                  className="header__signin-btn"
+                  onClick={onLoginClick}
+                >
                   Sign in
                 </button>
               </nav>
@@ -74,8 +82,13 @@ export default function Header({
           )}
           {/* MOBILE HAMBURGER BUTTON */}
           {!isAnyModalOpen && (
-            <button className="header__menu-btn" onClick={handleOpenMenu}>
-              <img src={menuIcon} alt="Open menu" />
+            <button
+              type="button"
+              className="header__menu-btn"
+              onClick={handleOpenMenu}
+              aria-label="Open menu"
+            >
+              <img src={menuIcon} alt="" />
             </button>
           )}
         </div>
@@ -92,10 +105,12 @@ export default function Header({
               </div>
               {isMobileMenuOpen && (
                 <button
+                  type="button"
                   className="mobile-menu__close-btn"
                   onClick={handleCloseMenu}
+                  aria-label="Close menu"
                 >
-                  <img src={closeIcon} alt="Close" />
+                  <img src={closeIcon} alt="" />
                 </button>
               )}
             </div>

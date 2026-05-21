@@ -20,11 +20,11 @@ export default function SearchForm({ onSearch }) {
 
   return (
     <>
-      <form className="search-form " role="search" onSubmit={submit}>
+      <form className="search-form" role="search" onSubmit={submit}>
         <input
           className="search-form__input"
           type="text"
-          placeholder="Text not entered"
+          placeholder="Search news, topics, or sources"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           aria-label="Search query"

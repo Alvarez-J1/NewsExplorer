@@ -10,6 +10,7 @@ export default function NewsCard({
   onSave,
   onUnsave,
   isSavedPage = false,
+  className = "",
 }) {
   const [isSaved, setIsSaved] = React.useState(saved);
 
@@ -42,15 +43,30 @@ export default function NewsCard({
     }
   };
 
+  const handleCardKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleCardClick();
+    }
+  };
+
   return (
-    <li className="card">
+    <li className={`card ${className}`.trim()}>
       <div className="card__media">
-        <img
-          onClick={handleCardClick}
-          className="card__image"
-          src={item.image}
-          alt={item.title || "Article image"}
-        />
+        {item.image ? (
+          <img
+            onClick={handleCardClick}
+            className="card__image"
+            src={item.image}
+            alt={item.title || "Article image"}
+          />
+        ) : (
+          <div
+            className="card__image card__image--placeholder"
+            onClick={handleCardClick}
+            aria-label="Article image unavailable"
+          />
+        )}
         {isSavedPage && item.keyword && (
           <span className="card__chip">{item.keyword}</span>
         )}
@@ -137,9 +153,15 @@ export default function NewsCard({
         </div>
       </div>
 
-      <div className="card__header" onClick={handleCardClick}>
+      <div
+        className="card__body"
+        onClick={handleCardClick}
+        onKeyDown={handleCardKeyDown}
+        role="link"
+        tabIndex={0}
+      >
         <p className="card__date">{item.date}</p>
-        <h2 className="card__title"> {item.title}</h2>
+        <h2 className="card__title">{item.title}</h2>
         <p className="card__text">{item.text}</p>
         <p className="card__source">{item.source}</p>
       </div>

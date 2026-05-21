@@ -1,151 +1,171 @@
 .card {
-  max-width: 400px;
-  width: 100%;
-  height: 576px;
-  border-radius: 16px;
-  background-color: rgba(255, 255, 255, 1);
+  min-width: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(37, 99, 235, 0.2);
+  box-shadow: var(--shadow-hover);
+}
+
+.card__media {
   position: relative;
-  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1.42 / 1;
+  overflow: hidden;
+  background: #e5e7eb;
 }
 
 .card__image {
   width: 100%;
-  height: 272px;
-  border-radius: 16px;
+  height: 100%;
+  display: block;
   object-fit: cover;
-  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.card__image--placeholder {
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(15, 118, 110, 0.16)),
+    linear-gradient(180deg, #f8fafc, #e2e8f0);
+}
+
+.card:hover .card__image {
+  transform: scale(1.035);
+  filter: saturate(1.04);
+}
+
+.card__body {
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: 22px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.card__body:focus-visible {
+  outline-offset: -6px;
 }
 
 .card__date {
-  color: rgba(182, 188, 191, 1);
-  font-family: Source Sans Pro;
-  font-weight: 400;
-  font-size: 18px;
-  margin-left: 24px;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
+  color: var(--color-subtle);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 .card__title {
-  margin-left: 24px;
-  color: rgba(26, 27, 34, 1);
-  font-family: Roboto Slab;
-  font-weight: 400;
-  font-size: 26px;
-  margin-top: 0;
-  margin-bottom: 16px;
+  margin: 0 0 12px;
+  color: var(--color-ink);
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.18;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .card__text {
-  color: rgba(26, 27, 34, 1);
-  font-family: Roboto;
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 15px;
   font-weight: 400;
-  font-size: 16px;
-  margin-left: 24px;
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 22px;
-  margin-right: 24px;
+  line-height: 1.58;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .card__source {
-  margin-left: 24px;
-  color: rgba(182, 188, 191, 1);
-  font-weight: 700;
-  font-family: Roboto Slab;
-  font-size: 16px;
-  margin-top: 18px;
+  margin: auto 0 0;
+  padding-top: 22px;
+  color: var(--color-muted);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
+.card__action {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
 .card__save {
-  position: absolute;
-  top: 10px;
-  right: 24px;
+  position: relative;
 }
 
-.card__tooltip {
-  position: absolute;
-  top: 8px;
-  right: calc(100% + 19px);
-  transform: translateY(-50%) translateY(-4px);
-  background: rgba(255, 255, 255, 1);
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s, transform 0.15s;
-  width: 182px;
-  height: 40px;
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 12px;
-  color: rgba(0, 0, 0, 1);
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card__save:hover .card__tooltip,
-.card__save:focus-within .card__tooltip {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-50%);
-}
-
-.card__save-btn {
-  width: 40px;
-  height: 40px;
+.card__save-btn,
+.card__trash-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-muted);
   display: inline-flex;
-  position: absolute;
-  top: -13px;
-  right: -26px;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 10px;
-  border: none;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  color: #a0a3ab;
-  transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.2);
+  backdrop-filter: blur(16px);
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
-.card__save-btn:hover {
-  background-color: #f0f2f5;
-  color: #1a1b22;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+.card__save-btn:hover,
+.card__trash-btn:hover {
+  transform: translateY(-1px);
+  background: #ffffff;
+  color: var(--color-ink);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.24);
 }
 
 .card__save-btn[aria-pressed="true"] {
-  color: #2f71e5; /* blue icon when saved */
-  box-shadow: 0 0 0 1px rgba(47, 113, 229, 0.2) inset,
-    0 6px 18px rgba(47, 113, 229, 0.18);
+  color: var(--color-accent);
+  background: #ffffff;
 }
 
 .card__save-icon {
   width: 14px;
   height: 19px;
-  position: absolute;
-  top: 11px;
-  right: 13px;
-  cursor: pointer;
 }
 
-/* Show outline by default; swap to filled when saved */
 .card__save-icon--filled {
   display: none;
 }
+
 .card__save-btn[aria-pressed="true"] .card__save-icon--outline {
   display: none;
 }
+
 .card__save-btn[aria-pressed="true"] .card__save-icon--filled {
   display: block;
 }
@@ -153,229 +173,132 @@
 .bookmark__btn {
   width: 14px;
   height: 19px;
-  position: absolute;
-  top: 11px;
-  right: 13px;
-  cursor: pointer;
 }
 
-.card__media {
-  position: relative;
-  width: 100%;
-  height: 272px;
-  border-radius: 16px;
-  overflow: hidden;
+.card__tooltip,
+.card__tooltip-remove {
+  position: absolute;
+  top: 1px;
+  right: calc(100% + 10px);
+  min-width: 168px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--color-ink);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.card__save:hover .card__tooltip,
+.card__save:focus-within .card__tooltip,
+.card__trash-btn:hover + .card__tooltip-remove,
+.card__trash-btn:focus + .card__tooltip-remove {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .card__chip {
-  width: 87px;
-  height: 40px;
-  border-radius: 10px;
   position: absolute;
-  top: 22px;
-  left: 20px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  background: #fff;
-  color: rgba(0, 0, 0, 1);
-  font-size: 14px;
-  font-weight: 500;
-  font-family: "Roboto";
-}
-
-.card__media {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-}
-.card__action {
-  position: absolute;
-  top: 22px;
-  right: 20px;
-}
-
-.card__trash-btn {
-  width: 40px;
-  height: 40px;
-  border: 0;
-
-  border-radius: 10px;
-  background: #fff;
-  color: rgba(182, 188, 191, 1);
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  max-width: calc(100% - 82px);
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-ink);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  font-family: Inter, Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  backdrop-filter: blur(16px);
 }
 
-.card__trash-btn:hover {
-  background: #f0f2f5;
-}
-
-.card__tooltip-remove {
-  position: absolute;
-  top: -2px;
-  right: 47px;
-  transform: translateY(4px);
-  background: #fff;
-  border-radius: 10px;
-  padding: 0;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  font: 500 12px/1.2 Roboto, sans-serif;
-  color: rgba(0, 0, 0, 1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s, transform 0.15s;
-  width: 159px;
-  height: 40px;
-  margin: 0;
-}
-
-.card__trash-btn:hover + .card__tooltip-remove,
-.card__trash-btn:focus-within + .card__tooltip-remove {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Tablet */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .card {
-    width: 224px;
-    height: 420px;
+    border-radius: 18px;
   }
 
-  .card__save-btn {
-    top: -23px;
-    right: -35px;
-  }
-
-  .card__media {
-    width: 224px;
-    height: 150px;
-  }
-
-  .card__image {
-    width: 224px;
-    height: 150px;
-  }
-
-  .card__date {
-    margin-left: 15px;
-    margin-top: 16px;
+  .card__body {
+    padding: 16px;
   }
 
   .card__title {
-    margin-left: 16px;
-    margin-top: 16px;
-    font-size: 22px;
-    margin-right: 16px;
-    margin-top: 0;
-    margin-bottom: 10px;
-    width: 192px;
-    height: 72px;
-    overflow: hidden;
+    font-size: 18px;
+    -webkit-line-clamp: 3;
   }
 
   .card__text {
-    width: 192px;
-    height: 88px;
-    margin-left: 16px;
-    margin-right: 16px;
+    font-size: 14px;
+    line-height: 1.48;
+    -webkit-line-clamp: 3;
+  }
+
+  .card__date {
+    font-size: 11px;
   }
 
   .card__source {
-    margin-top: 12px;
-    margin-bottom: 16px;
-    margin-left: 16px;
+    padding-top: 16px;
+    font-size: 11px;
   }
 
-  .card__tooltip {
-    top: -2px;
-    right: calc(100% + 19px);
-    width: 150px;
+  .card__action {
+    top: 10px;
+    right: 10px;
   }
 
   .card__chip {
-    width: 83px;
-    top: 7px;
-    left: 6px;
-    font-size: 14px;
-  }
-
-  .card__trash-btn {
-    top: -15px;
-    left: -26px;
-    position: absolute;
+    top: 10px;
+    left: 10px;
+    min-height: 34px;
+    font-size: 12px;
   }
 }
 
-/* Mobile */
 @media screen and (max-width: 767px) {
   .card {
-    max-width: 288px;
-    width: 100%;
-    height: 440px;
+    border-radius: 20px;
   }
 
   .card__media {
-    height: 196px;
-    width: 100%;
+    aspect-ratio: 1.45 / 1;
   }
 
-  .card__image {
-    width: 288px;
-    height: 196px;
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .card__date {
-    margin-left: 16px;
-    margin-bottom: 10px;
+  .card__body {
+    padding: 18px;
   }
 
   .card__title {
-    margin-left: 16px;
     font-size: 22px;
-    margin-right: 16px;
-    margin-bottom: 14px;
-    display: -webkit-box;
     -webkit-line-clamp: 2;
-    width: 256px;
   }
 
   .card__text {
-    margin-left: 16px;
-    margin-right: 16px;
+    font-size: 15px;
+    -webkit-line-clamp: 3;
   }
 
-  .card__source {
-    margin-left: 16px;
-    margin-top: 8px;
-  }
-
-  .card__save {
-    position: absolute;
-    top: 4px;
-    right: 133px;
-  }
-
-  .card__save-btn {
-    right: -139px;
-  }
-
-  .card__tooltip {
-    right: -50px;
-  }
-
-  .card__chip {
-    width: 120px;
-    top: 14px;
-    left: 16px;
+  .card__tooltip,
+  .card__tooltip-remove {
+    display: none;
   }
 }

@@ -122,7 +122,7 @@
   line-height: 1.2;
 }
 
-.modal__label loginmodal__password {
+.modal__label.loginmodal__password {
   margin-top: 5px;
 }
 

@@ -23,22 +23,22 @@ Deployed app: https://news-explorer-ten.vercel.app/
 - **React** + **Vite**
 - **React Router** (SPA navigation)
 - **JavaScript (ES6+)**
+- **HTML**
 - **CSS3 / Flexbox / Responsive layout**
 - **BEM** methodology for CSS class naming
 - **ESLint** (code style & linting)
-- Deployment: **GitHub Pages**
 
 ## Screenshots
 
 ## Desktop View
 
-<img width="1895" height="914" alt="image" src="https://github.com/user-attachments/assets/f602deb7-b0b8-423d-a122-8f60926306f1" />
+<img width="1906" height="916" alt="image" src="https://github.com/user-attachments/assets/5c094dc7-55e9-4a8c-b8be-3ba87291971d" />
 
 ## Mobile View
 
-## <img width="396" height="778" alt="image" src="https://github.com/user-attachments/assets/0904739b-8e9f-4eb4-80c4-34c718c39598" />
+## <img width="404" height="753" alt="image" src="https://github.com/user-attachments/assets/b34db160-5c5a-4559-9c8d-b6755aa97bd5" />
 
-## <img width="392" height="766" alt="image" src="https://github.com/user-attachments/assets/69d6e2ed-bfd3-4800-846b-d25f23a6f306" />
+
 
 ## How to Download the Project
 

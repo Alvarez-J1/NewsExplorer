@@ -1,11 +1,10 @@
 import "./SavedNews.css";
 
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import savedmenuIcon from "../../assets/savednews__menu-icon.svg";
 import blackLogoutImg from "../../assets/black_logout.svg";
-import whiteLogoutImg from "../../assets/white_logout.svg";
 import NewsCard from "../NewsCard/NewsCard";
 import Footer from "../Footer/Footer";
 import savednewscloseIcon from "../../assets/close-mobile.svg";
@@ -28,6 +27,37 @@ export default function SavedNews({
 
   const handleOpenMenu = () => setIsMobileMenuOpen(true);
   const handleCloseMenu = () => setIsMobileMenuOpen(false);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined;
+
+    const scrollY = window.scrollY;
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalBodyPosition = document.body.style.position;
+    const originalBodyTop = document.body.style.top;
+    const originalBodyWidth = document.body.style.width;
+    const originalDocumentOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+    document.documentElement.style.overflow = "hidden";
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setIsMobileMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.body.style.position = originalBodyPosition;
+      document.body.style.top = originalBodyTop;
+      document.body.style.width = originalBodyWidth;
+      document.documentElement.style.overflow = originalDocumentOverflow;
+      window.scrollTo(0, scrollY);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -76,6 +106,8 @@ export default function SavedNews({
               className="savednews__header-menu-btn"
               onClick={handleOpenMenu}
               aria-label="Open menu"
+              aria-controls="savednews-mobile-menu"
+              aria-expanded={isMobileMenuOpen}
             >
               <img src={savedmenuIcon} alt="" />
             </button>
@@ -84,9 +116,19 @@ export default function SavedNews({
       </header>
 
       {isMobileMenuOpen && (
-        <div className="mobile-menu">
-          <div className="mobile-menu__overlay" onClick={handleCloseMenu} />
-          <div className="mobile-menu__panel">
+        <div
+          className="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+        >
+          <button
+            type="button"
+            className="mobile-menu__overlay"
+            onClick={handleCloseMenu}
+            aria-label="Close menu"
+          />
+          <div className="mobile-menu__panel" id="savednews-mobile-menu">
             <div className="mobile-menu__top">
               <div className="mobile-menu__section">
                 <p className="mobile-menu__title">NewsExplorer</p>
@@ -102,8 +144,13 @@ export default function SavedNews({
             </div>
             <nav className="mobile-menu__nav">
               <NavLink
+                end
                 to="/"
-                className="savednews__header-link-mobile"
+                className={({ isActive }) =>
+                  `savednews__header-link-mobile mobile-menu__link ${
+                    isActive ? "mobile-menu__link--active" : ""
+                  }`
+                }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
@@ -111,8 +158,8 @@ export default function SavedNews({
               <NavLink
                 to="/saved-news"
                 className={({ isActive }) =>
-                  `savednews__header-saved-articles-mobile ${
-                    isActive ? "savednews__header-saved-articles--active" : ""
+                  `savednews__header-saved-articles-mobile mobile-menu__link ${
+                    isActive ? "mobile-menu__link--active" : ""
                   }`
                 }
                 style={{ textDecoration: "none" }}
@@ -120,19 +167,22 @@ export default function SavedNews({
               >
                 Saved articles
               </NavLink>
+            </nav>
+
+            <div className="mobile-menu__account" aria-label="Account">
+              <p className="mobile-menu__account-label">Signed in as</p>
+              <p className="mobile-menu__account-name">{firstname}</p>
               <button
                 type="button"
-                className="savednews__mobileheader-signout-btn"
-                onClick={onLogout}
+                className="mobile-menu__signout-action"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  onLogout();
+                }}
               >
-                <span className="savednews__header-username">{firstname}</span>
-                <img
-                  className="savednews__header-logout-icon"
-                  src={whiteLogoutImg}
-                  alt="logout-icon"
-                />
+                Sign out
               </button>
-            </nav>
+            </div>
           </div>
         </div>
       )}

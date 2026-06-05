@@ -48,11 +48,12 @@
 
 @media screen and (max-width: 767px) {
   .results-loading {
-    min-height: 280px;
-    padding: 50px 16px;
+    min-height: 240px;
+    padding: 40px 16px;
   }
 
   .preloader {
-    padding: 30px 20px;
+    padding: 24px 18px;
+    gap: 14px;
   }
 }

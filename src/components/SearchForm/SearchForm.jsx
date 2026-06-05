@@ -1,9 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./SearchForm.css";
 
 export default function SearchForm({ onSearch }) {
   const [q, setQ] = useState("");
   const [searchError, setSearchError] = useState("");
+  const [isVerySmallScreen, setIsVerySmallScreen] = useState(() =>
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(max-width: 345px)").matches
+  );
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") return undefined;
+
+    const mediaQuery = window.matchMedia("(max-width: 345px)");
+    const updatePlaceholder = () => setIsVerySmallScreen(mediaQuery.matches);
+
+    updatePlaceholder();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updatePlaceholder);
+      return () => mediaQuery.removeEventListener("change", updatePlaceholder);
+    }
+
+    mediaQuery.addListener(updatePlaceholder);
+    return () => mediaQuery.removeListener(updatePlaceholder);
+  }, []);
 
   const runSearch = () => {
     const query = q.trim();
@@ -35,7 +57,11 @@ export default function SearchForm({ onSearch }) {
         <input
           className="search-form__input"
           type="text"
-          placeholder="Search news, topics, or sources"
+          placeholder={
+            isVerySmallScreen
+              ? "Search news..."
+              : "Search news, topics, or sources"
+          }
           value={q}
           onChange={(e) => setQ(e.target.value)}
           onKeyDown={handleKeyDown}

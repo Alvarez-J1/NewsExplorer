@@ -81,13 +81,33 @@
   color: var(--color-accent-strong);
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .modal__label.loginmodal__password {
-    margin-top: 28px;
+    margin-top: 26px;
   }
 
   .modal__submit--si {
-    min-height: 56px;
-    margin-top: 28px;
+    margin-top: 26px;
+  }
+
+  .modal__auth-note {
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal__label.loginmodal__password {
+    margin-top: 22px;
+  }
+
+  .modal__submit--si {
+    min-height: 52px;
+    margin-top: 24px;
+  }
+
+  .modal__auth-note {
+    margin-top: 16px;
+    padding: 12px 12px 0;
   }
 }

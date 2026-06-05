@@ -190,13 +190,29 @@
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .modal {
-    padding-top: 78px;
+    padding: 64px 24px 28px;
+  }
+
+  .modal__header {
+    padding: 38px 42px 0;
+  }
+
+  .modal__eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .modal__description {
+    margin-top: 10px;
+  }
+
+  .modal__form {
+    padding: 26px 42px 38px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .modal {
-    padding: 72px 16px 24px;
+    padding: 60px 16px 18px;
     align-items: flex-start;
   }
 
@@ -206,7 +222,11 @@
   }
 
   .modal__header {
-    padding: 34px 22px 0;
+    padding: 28px 22px 0;
+  }
+
+  .modal__eyebrow {
+    margin-bottom: 8px;
   }
 
   .modal__title {
@@ -214,11 +234,13 @@
   }
 
   .modal__description {
+    margin-top: 8px;
     font-size: 14px;
+    line-height: 1.48;
   }
 
   .modal__form {
-    padding: 28px 22px 30px;
+    padding: 22px 22px 26px;
   }
 
   .modal__close {

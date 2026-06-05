@@ -162,6 +162,18 @@
     max-width: 560px;
     font-size: 18px;
   }
+
+  .results-empty,
+  .results-error {
+    margin: 56px auto;
+    padding: 46px 30px;
+  }
+
+  .results-empty__img {
+    width: 74px;
+    height: 74px;
+    margin-bottom: 20px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -209,13 +221,29 @@
   .results-empty,
   .results-error {
     width: calc(100% - 32px);
-    margin: 40px auto;
-    padding: 40px 20px;
+    margin: 32px auto;
+    padding: 32px 18px;
+  }
+
+  .results-empty__img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 18px;
   }
 
   .results-empty__title,
   .results-error__title {
+    margin-bottom: 8px;
     font-size: 26px;
+  }
+
+  .results-empty__text,
+  .results-error__text {
+    line-height: 1.52;
+  }
+
+  .results-error__eyebrow {
+    margin-bottom: 8px;
   }
 }
 

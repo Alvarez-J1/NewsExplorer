@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import menuIcon from "../../assets/menuIcon.svg";
-import logoutImg from "../../assets/white_logout.svg";
 import closeIcon from "../../assets/close-mobile.svg";
 
 export default function Header({
@@ -83,14 +82,7 @@ export default function Header({
                   className="header__signout-btn"
                   onClick={onLogout}
                 >
-                  <span className="header__username">
-                    {firstname}
-                  </span>
-                  <img
-                    className="header__logout-icon"
-                    src={logoutImg}
-                    alt="logout-icon"
-                  />
+                  Sign out
                 </button>
               </nav>
             </>

@@ -51,14 +51,35 @@ cd NewsExplorer
 
 ## How to Install Dependencies
 
+```bash
 npm install
+```
+
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and fill in your values (never commit `.env.local`):
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `VITE_API_URL` | For auth | Backend API base URL with no trailing slash. Local default: `http://localhost:3001` |
+| `VITE_NEWS_API_KEY` | For search | NewsAPI key from [newsapi.org](https://newsapi.org/) |
+| `VITE_USE_MOCK` | No | Set to `true` to use mock search results instead of the News API |
+
+On **Vercel**, add the same variables under Project Settings → Environment Variables, then redeploy. Without `VITE_API_URL`, sign-in and sign-up requests will fail in production.
 
 ## How to Start the App Locally
 
+```bash
 npm run dev
+```
 
-After running the command, open the URL shown in your terminal
-(usually something like http://localhost:5173/).
+After running the command, open the URL shown in your terminal (default: http://localhost:3000/).
+
+For authentication to work locally, also run the backend — see [backend/README.md](backend/README.md).
+
+## Deploying the Backend
+
+The Spring Boot API can be deployed to Render using the root `render.yaml` blueprint and `backend/Dockerfile`. See [backend/README.md](backend/README.md) for setup, environment variables, and deployment steps.
 
 ## Project Structure
 

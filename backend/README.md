@@ -11,7 +11,7 @@ Production-style REST API that powers the NewsExplorer React frontend.
 | Tool | Version |
 |------|---------|
 | Java | 21+ |
-| Maven | 3.9+ (or use the wrapper `./mvnw`) |
+| Maven | 3.9+ |
 | PostgreSQL | 14+ |
 
 ---
@@ -35,6 +35,8 @@ cp .env.example .env
 Edit `.env` with your values:
 
 ```env
+PORT=3001
+
 DB_URL=jdbc:postgresql://localhost:5432/newsexplorer
 DB_USERNAME=postgres
 DB_PASSWORD=your_password
@@ -44,7 +46,7 @@ JWT_SECRET=replace_with_a_256_bit_random_secret
 JWT_EXPIRATION_MS=86400000
 
 # React dev server origin (no trailing slash)
-ALLOWED_ORIGIN=http://localhost:5173
+ALLOWED_ORIGIN=http://localhost:3000
 ```
 
 Export the variables before running (or use a tool like `direnv`):
@@ -59,12 +61,62 @@ export $(grep -v '^#' .env | xargs)
 
 ```bash
 # From the /backend directory
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
 The server starts on **http://localhost:3001** by default.
 
 > To change the port, set the `PORT` environment variable.
+
+---
+
+## Deploy to Render
+
+This repo includes a root `render.yaml` blueprint and `backend/Dockerfile` for deploying the Spring Boot API as a Docker web service with Render PostgreSQL.
+
+### Option A: Deploy from the blueprint
+
+1. Push the repository to GitHub.
+2. In Render, choose **New +** -> **Blueprint**.
+3. Select this repository and let Render read `render.yaml`.
+4. Render will create:
+   - `newsexplorer-backend` Docker web service
+   - `newsexplorer-db` PostgreSQL database
+5. Fill in the manual environment variables listed below.
+6. Deploy the service.
+
+The web service health check path is:
+
+```text
+/health
+```
+
+### Option B: Create the web service manually
+
+1. In Render, create a PostgreSQL database.
+2. Create a new Docker web service from this repository.
+3. Set the Docker context to `./backend`.
+4. Set the Dockerfile path to `./backend/Dockerfile`.
+5. Set the health check path to `/health`.
+6. Add the environment variables below.
+
+### Render environment variables
+
+Set these on the backend web service:
+
+| Variable | Required | Value |
+|----------|----------|-------|
+| `PORT` | No | Render sets this automatically. Leave unset unless Render instructs otherwise. |
+| `DB_URL` | Yes | JDBC URL for the Render database, for example `jdbc:postgresql://<internal-host>:5432/<database-name>` |
+| `DB_USERNAME` | Yes | Render PostgreSQL username |
+| `DB_PASSWORD` | Yes | Render PostgreSQL password |
+| `JWT_SECRET` | Yes | Strong random secret, at least 32 bytes. Example generator: `openssl rand -hex 32` |
+| `JWT_EXPIRATION_MS` | Yes | Token lifetime in milliseconds, for example `86400000` for 24 hours |
+| `ALLOWED_ORIGIN` | Yes | Deployed frontend origin with no trailing slash, for example `https://your-frontend.onrender.com` |
+
+Do not commit `.env` files or real secrets.
+
+Important: `DB_URL` must be a JDBC URL beginning with `jdbc:postgresql://`. Render's displayed external/internal database URLs may use `postgres://`; convert that host/database information into the JDBC format above.
 
 ---
 
@@ -77,7 +129,7 @@ npm install
 npm run dev
 ```
 
-The frontend dev server runs on **http://localhost:5173** and proxies API calls to `http://localhost:3001`.
+The frontend dev server runs on **http://localhost:3000** and calls the API at `http://localhost:3001` (via `VITE_API_URL`).
 
 ---
 

@@ -1,0 +1,31 @@
+databases:
+  - name: newsexplorer-db
+    databaseName: newsexplorer
+    user: newsexplorer
+
+# DB_URL must be a JDBC URL (jdbc:postgresql://...). Render's postgres:// URL
+# must be converted manually when using the blueprint.
+services:
+  - type: web
+    name: newsexplorer-backend
+    runtime: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: DB_USERNAME
+        fromDatabase:
+          name: newsexplorer-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: newsexplorer-db
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION_MS
+        value: 86400000
+      - key: ALLOWED_ORIGIN
+        sync: false

@@ -50,11 +50,26 @@ export function deleteArticle(articleId, token) {
 
 // ── helpers ────────────────────────────────────────────────────────────────
 
-export function processResponse(res) {
+export async function processResponse(res) {
+  const body = await parseResponseBody(res);
+
   if (res.ok) {
-    return res.json();
+    return body;
   }
-  return res.json().then((body) => {
-    return Promise.reject(new Error(body.message || `Error ${res.status}`));
-  });
+
+  throw new Error(body.message || `Error ${res.status}`);
+}
+
+async function parseResponseBody(res) {
+  const text = await res.text();
+
+  if (!text) {
+    return {};
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { message: `Error ${res.status}` };
+  }
 }

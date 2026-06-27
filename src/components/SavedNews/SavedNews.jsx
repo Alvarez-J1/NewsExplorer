@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import savedmenuIcon from "../../assets/savednews__menu-icon.svg";
-import blackLogoutImg from "../../assets/black_logout.svg";
 import NewsCard from "../NewsCard/NewsCard";
 import Footer from "../Footer/Footer";
 import savednewscloseIcon from "../../assets/close-mobile.svg";
@@ -69,7 +68,11 @@ export default function SavedNews({
           <nav className="savednews__header-nav">
             <NavLink
               to="/"
-              className="savednews__header-link savednews__header-link--under"
+              className={({ isActive }) =>
+                `savednews__header-link ${
+                  isActive ? "savednews__header-link--under" : ""
+                }`
+              }
             >
               Home
             </NavLink>
@@ -85,20 +88,13 @@ export default function SavedNews({
             >
               Saved articles
             </NavLink>
-            <NavLink className="savednews__header-username-nav" to="/">
-              <button
-                type="button"
-                className="savednews__header-signout-btn"
-                onClick={onLogout}
-              >
-                <span className="savednews__header-username">{firstname}</span>
-                <img
-                  className="savednews__header-logout-icon"
-                  src={blackLogoutImg}
-                  alt="logout-icon"
-                />
-              </button>
-            </NavLink>
+            <button
+              type="button"
+              className="savednews__header-signout-btn"
+              onClick={onLogout}
+            >
+              Sign out
+            </button>
           </nav>
           {!isAnyModalOpen && (
             <button

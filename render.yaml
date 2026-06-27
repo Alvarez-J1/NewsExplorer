@@ -2,6 +2,7 @@ databases:
   - name: newsexplorer-db
     databaseName: newsexplorer
     user: newsexplorer
+    plan: free
 
 # DB_URL must be a JDBC URL (jdbc:postgresql://...). Render's postgres:// URL
 # must be converted manually when using the blueprint.
@@ -9,6 +10,7 @@ services:
   - type: web
     name: newsexplorer-backend
     runtime: docker
+    plan: free
     dockerContext: ./backend
     dockerfilePath: ./backend/Dockerfile
     healthCheckPath: /health

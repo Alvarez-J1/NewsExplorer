@@ -107,7 +107,8 @@ Set these on the backend web service:
 | Variable | Required | Value |
 |----------|----------|-------|
 | `PORT` | No | Render sets this automatically. Leave unset unless Render instructs otherwise. |
-| `DB_URL` | Yes | JDBC URL for the Render database, for example `jdbc:postgresql://<internal-host>:5432/<database-name>` |
+| `DATABASE_URL` | Blueprint only | Set automatically from Render PostgreSQL. The app converts Render's Postgres URL into a JDBC URL at startup. |
+| `DB_URL` | Manual deploy only | JDBC URL for the Render database, for example `jdbc:postgresql://<internal-host>:5432/<database-name>` |
 | `DB_USERNAME` | Yes | Render PostgreSQL username |
 | `DB_PASSWORD` | Yes | Render PostgreSQL password |
 | `JWT_SECRET` | Yes | Strong random secret, at least 32 bytes. Example generator: `openssl rand -hex 32` |
@@ -116,7 +117,9 @@ Set these on the backend web service:
 
 Do not commit `.env` files or real secrets.
 
-Important: `DB_URL` must be a JDBC URL beginning with `jdbc:postgresql://`. Render's displayed external/internal database URLs may use `postgres://`; convert that host/database information into the JDBC format above.
+When deploying from the blueprint, Render supplies `DATABASE_URL`, `DB_USERNAME`, and `DB_PASSWORD` automatically. You only need to enter `ALLOWED_ORIGIN` when Render asks for manual values.
+
+For manual web service deploys, set `DB_URL` yourself. `DB_URL` must be a JDBC URL beginning with `jdbc:postgresql://`. Render's displayed external/internal database URLs may use `postgres://`; convert that host/database information into the JDBC format above.
 
 ---
 

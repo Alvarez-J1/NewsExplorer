@@ -22,13 +22,29 @@ Deployed app: https://news-explorer-ten.vercel.app/
 
 ## Tech Stack
 
+### Frontend
 - **React** + **Vite**
 - **React Router** (SPA navigation)
 - **JavaScript (ES6+)**
-- **HTML**
-- **CSS3 / Flexbox / Responsive layout**
+- **HTML5**
+- **CSS3 / Flexbox / Responsive Design**
 - **BEM** methodology for CSS class naming
-- **ESLint** (code style & linting)
+
+### Backend
+- **Java 21**
+- **Spring Boot 3**
+- **Spring Web**
+- **Spring Security**
+- **JWT Authentication**
+- **BCrypt** (password hashing)
+- **Spring Data JPA / Hibernate**
+- **PostgreSQL**
+- **Maven**
+
+### Deployment & Tools
+- **Docker**
+- **Render**
+- **ESLint**
 
 ## Screenshots
 
@@ -84,49 +100,87 @@ The Spring Boot API can be deployed to Render using the root `render.yaml` bluep
 ## Project Structure
 
 ```text
-news-explorer-frontend/
+NewsExplorer/
+├── .env.example              # Frontend env template (safe to commit)
+├── .eslintrc.cjs
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── README.md
+├── render.yaml               # Render deployment blueprint (backend + Postgres)
+├── vite.config.js
+│
 ├── public/
+│   ├── favicon.svg
 │   └── vite.svg
-├── src/
-│   ├── assets/
-│   │   ├── icons and SVG assets
-│   │   └── image assets
+│
+├── src/                      # React frontend
+│   ├── main.jsx              # App entry point
+│   ├── index.css             # Global styles
+│   │
+│   ├── assets/               # Images, icons, SVGs
+│   │
 │   ├── components/
 │   │   ├── About/
-│   │   ├── App/
+│   │   ├── App/              # Main app shell + routing
 │   │   ├── Footer/
-│   │   ├── Header/
+│   │   ├── Header/           # Nav + mobile menu
 │   │   ├── LoginModal/
-│   │   ├── Main/
+│   │   ├── Main/             # Home / search page
 │   │   ├── ModalWithForm/
 │   │   ├── Navigation/
 │   │   ├── NewsCard/
 │   │   ├── Preloader/
 │   │   ├── RegisterModal/
-│   │   ├── SavedNews/
+│   │   ├── SavedNews/        # Saved articles page
 │   │   ├── SearchForm/
 │   │   ├── SearchResults/
 │   │   └── SuccessModal/
+│   │
 │   ├── hooks/
 │   │   └── useForm.js
+│   │
 │   ├── utils/
-│   │   ├── adapter.js
-│   │   ├── api.js
-│   │   ├── auth.js
-│   │   ├── constants.js
-│   │   └── newsApi.js
-│   ├── vendor/
-│   │   ├── fonts/
-│   │   └── fonts.css
-│   ├── index.css
-│   └── main.jsx
-├── .eslintrc.cjs
-├── .gitignore
-├── index.html
-├── package-lock.json
-├── package.json
-├── README.md
-└── vite.config.js
+│   │   ├── adapter.js        # Article data formatting
+│   │   ├── api.js            # Saved articles API calls
+│   │   ├── auth.js           # Sign in / sign up / token check
+│   │   ├── constants.js      # API base URL
+│   │   └── newsApi.js        # News search API
+│   │
+│   └── vendor/
+│       ├── fonts.css
+│       └── fonts/            # Roboto, Inter, Roboto Slab
+│
+└── backend/                  # Spring Boot API
+    ├── .dockerignore
+    ├── .env.example          # Backend env template (safe to commit)
+    ├── Dockerfile
+    ├── pom.xml
+    ├── README.md
+    │
+    └── src/main/
+        ├── java/com/newsexplorer/backend/
+        │   ├── NewsExplorerApplication.java
+        │   │
+        │   ├── config/
+        │   │   └── SecurityConfig.java
+        │   │
+        │   ├── controller/
+        │   │   ├── AuthController.java      # /signup, /signin
+        │   │   ├── UserController.java      # /users/me
+        │   │   ├── ArticleController.java   # /articles
+        │   │   └── HealthController.java    # /health
+        │   │
+        │   ├── dto/                         # Request/response models
+        │   ├── entity/                      # User, Article DB models
+        │   ├── exception/                   # Error handling
+        │   ├── repository/                # JPA repositories
+        │   ├── security/                    # JWT auth
+        │   └── service/                     # Business logic
+        │
+        └── resources/
+            └── application.properties       # DB, JWT, CORS config
 ```
 
 ## Author

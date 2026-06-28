@@ -48,7 +48,7 @@
 }
 
 .modal__eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 6px;
   color: var(--color-accent);
   font-family: Inter, Roboto, sans-serif;
   font-size: 12px;
@@ -97,15 +97,17 @@
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
   cursor: pointer;
   transition:
-    transform 0.18s ease,
-    background-color 0.18s ease,
-    border-color 0.18s ease;
+    transform var(--transition-control),
+    background-color var(--transition-control),
+    border-color var(--transition-control),
+    box-shadow var(--transition-control);
 }
 
 .modal__close:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   border-color: rgba(255, 255, 255, 0.32);
   background-color: rgba(30, 41, 59, 0.86);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.26);
 }
 
 .modal__close:active {
@@ -146,22 +148,24 @@
   font-weight: 700;
   outline: none;
   transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    background-color 0.18s ease,
-    transform 0.18s ease;
+    border-color var(--transition-control),
+    box-shadow var(--transition-control),
+    background-color var(--transition-control);
 }
 
 .modal__input:hover {
-  border-color: rgba(15, 23, 42, 0.2);
+  border-color: rgba(37, 99, 235, 0.38);
   background: #ffffff;
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
 }
 
 .modal__input:focus {
-  border-color: rgba(37, 99, 235, 0.72);
+  border-color: var(--color-accent);
   background: #ffffff;
   box-shadow:
-    0 0 0 4px rgba(37, 99, 235, 0.12),
+    0 0 0 4px rgba(37, 99, 235, 0.14),
     0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
@@ -173,6 +177,11 @@
 .input-error {
   border-color: #dc2626;
   background: #fff7f7;
+}
+
+.input-error:hover {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08);
 }
 
 .input-error:focus {
@@ -198,7 +207,7 @@
   }
 
   .modal__eyebrow {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
   .modal__description {
@@ -226,7 +235,7 @@
   }
 
   .modal__eyebrow {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
   .modal__title {

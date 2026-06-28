@@ -114,6 +114,9 @@ Set these on the backend web service:
 | `JWT_SECRET` | Yes | Strong random secret, at least 32 bytes. Example generator: `openssl rand -hex 32` |
 | `JWT_EXPIRATION_MS` | Yes | Token lifetime in milliseconds, for example `86400000` for 24 hours |
 | `ALLOWED_ORIGIN` | Yes | Deployed frontend origin with no trailing slash, for example `https://your-frontend.onrender.com` |
+| `DEMO_EMAIL` | No | Seeded demo account email. Default: `demo@newsexplorer.dev` |
+| `DEMO_PASSWORD` | No | Seeded demo account password used only by the backend seed process |
+| `DEMO_NAME` | No | Seeded demo account display name. Default: `Demo Reader` |
 
 Do not commit `.env` files or real secrets.
 
@@ -146,6 +149,7 @@ All protected routes require `Authorization: Bearer <token>`.
 |--------|------|------|-------------|
 | `POST` | `/signup` | Public | Register a new user |
 | `POST` | `/signin` | Public | Sign in and receive a JWT |
+| `POST` | `/signin/demo` | Public | Sign in as the seeded demo user and receive a JWT |
 
 #### POST /signup
 

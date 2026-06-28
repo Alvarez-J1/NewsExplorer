@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // Public auth endpoints
-                        .requestMatchers(HttpMethod.POST, "/signup", "/signin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/signup", "/signin", "/signin/demo").permitAll()
                         .requestMatchers(HttpMethod.GET, "/health").permitAll()
                         // Everything else requires a valid JWT
                         .anyRequest().authenticated()

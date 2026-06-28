@@ -13,6 +13,16 @@ export const authorize = (email, password) => {
 };
 
 /**
+ * POST /signin/demo
+ * Returns { token } for the seeded demo account.
+ */
+export const authorizeDemo = () => {
+  return fetch(`${BASE_URL}/signin/demo`, {
+    method: "POST",
+  }).then(processAuthResponse);
+};
+
+/**
  * POST /signup
  * The form field is "username"; the backend expects "name".
  * Returns { data: { _id, name, email } }

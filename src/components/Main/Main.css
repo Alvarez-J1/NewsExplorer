@@ -54,7 +54,7 @@
 }
 
 .main__hero-eyebrow {
-  margin: 0 0 18px;
+  margin: 0 0 10px;
   padding: 8px 14px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: var(--radius-pill);
@@ -135,7 +135,7 @@
 }
 
 .results-error__eyebrow {
-  margin: 0 0 10px;
+  margin: 0 0 4px;
   color: #b42318;
   font-family: Inter, Roboto, sans-serif;
   font-size: 13px;
@@ -199,7 +199,7 @@
   }
 
   .main__hero-eyebrow {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     font-size: 12px;
   }
 
@@ -243,7 +243,7 @@
   }
 
   .results-error__eyebrow {
-    margin-bottom: 8px;
+    margin-bottom: 2px;
   }
 }
 

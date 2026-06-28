@@ -19,11 +19,18 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final DemoDataService demoDataService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public AuthService(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService,
+            DemoDataService demoDataService
+    ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.demoDataService = demoDataService;
     }
 
     /**
@@ -57,6 +64,15 @@ public class AuthService {
         }
 
         String token = jwtService.generateToken(user.getEmail());
+        return new AuthResponse(token);
+    }
+
+    /**
+     * Authenticate recruiters into the seeded demo account using the normal JWT flow.
+     */
+    public AuthResponse loginDemo() {
+        User demoUser = demoDataService.ensureDemoAccount();
+        String token = jwtService.generateToken(demoUser.getEmail());
         return new AuthResponse(token);
     }
 }

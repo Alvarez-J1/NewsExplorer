@@ -32,7 +32,7 @@
 }
 
 .about__title {
-  margin: 18px 0 0;
+  margin: 10px 0 0;
   color: var(--color-ink);
   font-family: "Roboto Slab", Georgia, serif;
   font-size: 48px;
@@ -77,7 +77,7 @@
 
 .about__brief-title {
   max-width: 460px;
-  margin: 14px 0 0;
+  margin: 8px 0 0;
   color: #ffffff;
   font-family: "Roboto Slab", Georgia, serif;
   font-size: 30px;
@@ -111,7 +111,7 @@
 }
 
 .about__feature-title {
-  margin: 12px 0 0;
+  margin: 6px 0 0;
   color: var(--color-ink);
   font-family: Inter, Roboto, sans-serif;
   font-size: 17px;
@@ -137,7 +137,7 @@
   }
 
   .about__title {
-    margin-top: 14px;
+    margin-top: 8px;
     font-size: 36px;
   }
 
@@ -152,7 +152,7 @@
   }
 
   .about__brief-title {
-    margin-top: 12px;
+    margin-top: 6px;
   }
 
   .about__brief-text {
@@ -178,7 +178,7 @@
   }
 
   .about__title {
-    margin-top: 12px;
+    margin-top: 6px;
     font-size: 33px;
     line-height: 1.12;
   }
@@ -200,7 +200,7 @@
   }
 
   .about__brief-title {
-    margin-top: 10px;
+    margin-top: 4px;
     font-size: 25px;
   }
 
@@ -219,7 +219,7 @@
   }
 
   .about__feature-title {
-    margin-top: 10px;
+    margin-top: 4px;
   }
 
   .about__feature-text {

@@ -38,4 +38,13 @@ public class AuthController {
     public AuthResponse signin(@Valid @RequestBody SignInRequest request) {
         return authService.login(request);
     }
+
+    /**
+     * POST /signin/demo
+     * Response 200: { "token": "..." }
+     */
+    @PostMapping("/signin/demo")
+    public AuthResponse signinDemo() {
+        return authService.loginDemo();
+    }
 }

@@ -17,6 +17,7 @@
   --color-surface-warm: #fbfaf7;
   --color-accent: #2563eb;
   --color-accent-strong: #1d4ed8;
+  --color-accent-hover: #1e40af;
   --color-accent-soft: #dbeafe;
   --color-green: #0f766e;
   --shadow-soft: 0 18px 50px rgba(15, 23, 42, 0.1);
@@ -27,6 +28,7 @@
   --radius-lg: 24px;
   --radius-pill: 999px;
   --content-width: 1200px;
+  --transition-control: 220ms ease;
 }
 
 html {

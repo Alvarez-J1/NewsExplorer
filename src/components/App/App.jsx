@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { useNavigate } from "react-router-dom";
-import { register, authorize, checkToken } from "../../utils/auth";
+import { register, authorize, authorizeDemo, checkToken } from "../../utils/auth";
+import { deleteArticle, getArticles, saveArticle } from "../../utils/api";
 import { toCardModel } from "../../utils/adapter";
 
 // Components
@@ -28,7 +29,7 @@ export default function App() {
   const [error, setError] = useState("");
   const [visibleCards, setVisibleCards] = useState(3);
   const [, setSearchKeyword] = useState("");
-  const [, setToken] = useState("");
+  const [token, setToken] = useState("");
   const [currentUser, setCurrentUser] = useState({
     email: "",
     username: "",
@@ -171,31 +172,55 @@ export default function App() {
 
   //SAVE/UNSAVE ARTICLES
 
-  useEffect(() => {
-    const raw = localStorage.getItem("savedArticles");
-    if (!raw) return;
-    try {
-      const parsed = JSON.parse(raw);
-      setSavedArticles(Array.isArray(parsed) ? parsed.map(toCardModel) : []);
-    } catch {
-      setSavedArticles([]);
-    }
+  const loadSavedArticles = useCallback(async (jwt) => {
+    const articles = await getArticles(jwt);
+    const normalizedArticles = Array.isArray(articles)
+      ? articles.map(toCardModel)
+      : [];
+    setSavedArticles(normalizedArticles);
+    return normalizedArticles;
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("savedArticles", JSON.stringify(savedArticles));
-  }, [savedArticles]);
-
-  const handleSaveArticle = (rawArticle) => {
+  const handleSaveArticle = async (rawArticle) => {
     const normalized = toCardModel(rawArticle);
-    setSavedArticles((prev) =>
-      prev.some((x) => x.url === normalized.url) ? prev : [...prev, normalized]
-    );
+    if (savedArticles.some((x) => x.url === normalized.url)) return;
+
+    if (!token) {
+      setSavedArticles((prev) => [...prev, normalized]);
+      return;
+    }
+
+    try {
+      const savedArticle = await saveArticle(rawArticle, normalized.keyword, token);
+      const normalizedSavedArticle = toCardModel(savedArticle);
+      setSavedArticles((prev) =>
+        prev.some((x) => x.url === normalizedSavedArticle.url)
+          ? prev
+          : [...prev, normalizedSavedArticle]
+      );
+    } catch (err) {
+      if (err?.message === "Article already saved") return;
+      console.error("Save article failed:", err);
+      throw err;
+    }
   };
 
-  const handleUnsaveArticle = (rawArticle) => {
+  const handleUnsaveArticle = async (rawArticle) => {
     const normalized = toCardModel(rawArticle);
-    setSavedArticles((prev) => prev.filter((x) => x.url !== normalized.url));
+    const savedArticle = savedArticles.find((x) => x.url === normalized.url);
+
+    if (token && savedArticle?.id) {
+      try {
+        await deleteArticle(savedArticle.id, token);
+      } catch (err) {
+        console.error("Remove article failed:", err);
+        throw err;
+      }
+    }
+
+    setSavedArticles((prev) =>
+      prev.filter((x) => x.url !== normalized.url)
+    );
   };
 
   //Auth
@@ -210,6 +235,7 @@ export default function App() {
       setToken(token);
       setCurrentUser(user);
       setIsLoggedIn(true);
+      await loadSavedArticles(token);
       closeActiveModal();
       setIsSuccessModalOpen(true);
       navigate("/");
@@ -218,6 +244,7 @@ export default function App() {
       setToken("");
       setCurrentUser({ email: "", username: "" });
       setIsLoggedIn(false);
+      setSavedArticles([]);
       console.error("Registration error:", err);
       throw err;
     }
@@ -233,6 +260,7 @@ export default function App() {
       setToken(token);
       setCurrentUser(user);
       setIsLoggedIn(true);
+      await loadSavedArticles(token);
       closeActiveModal();
       navigate("/");
     } catch (err) {
@@ -240,7 +268,32 @@ export default function App() {
       setToken("");
       setCurrentUser({ email: "", username: "" });
       setIsLoggedIn(false);
+      setSavedArticles([]);
       console.error("Token validation failed", err);
+      throw err;
+    }
+  };
+
+  const handleDemoLogin = async () => {
+    try {
+      const { token } = await authorizeDemo();
+
+      const { data: user } = await checkToken(token);
+
+      localStorage.setItem("jwt", token);
+      setToken(token);
+      setCurrentUser(user);
+      setIsLoggedIn(true);
+      await loadSavedArticles(token);
+      closeActiveModal();
+      navigate("/saved-news");
+    } catch (err) {
+      localStorage.removeItem("jwt");
+      setToken("");
+      setCurrentUser({ email: "", username: "" });
+      setIsLoggedIn(false);
+      setSavedArticles([]);
+      console.error("Demo login failed", err);
       throw err;
     }
   };
@@ -254,20 +307,24 @@ export default function App() {
         setToken(jwt);
         setCurrentUser(user);
         setIsLoggedIn(true);
+        await loadSavedArticles(jwt);
       } catch {
         localStorage.removeItem("jwt");
         setToken("");
         setIsLoggedIn(false);
         setCurrentUser({ email: "", username: "" });
+        setSavedArticles([]);
       }
     })();
-  }, []);
+  }, [loadSavedArticles]);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
     setToken("");
     setIsLoggedIn(false);
     setCurrentUser({ email: "", username: "" });
+    setSavedArticles([]);
+    navigate("/");
   };
 
   //MODALS
@@ -367,6 +424,7 @@ export default function App() {
         isOpen={activeModal === "login"}
         onClose={closeActiveModal}
         onLogin={handleLogin}
+        onDemoLogin={handleDemoLogin}
         onOpenRegister={openRegisterModal}
       />
       <RegisterModal

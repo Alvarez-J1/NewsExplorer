@@ -9,6 +9,7 @@ export default function LoginModal({
   onOpenRegister,
   buttonText,
   onLogin,
+  onDemoLogin,
 }) {
   const { values, handleChange, setValues } = useForm({
     email: "",
@@ -17,12 +18,14 @@ export default function LoginModal({
 
   const [loginError, setLoginError] = useState("");
   const [wrongField, setWrongField] = useState("");
+  const [isDemoSubmitting, setIsDemoSubmitting] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setValues(() => ({ email: "", password: "" }));
       setLoginError("");
       setWrongField("");
+      setIsDemoSubmitting(false);
     }
   }, [isOpen, setValues]);
 
@@ -53,6 +56,21 @@ export default function LoginModal({
         setWrongField("password");
         setLoginError("Email or password incorrect");
       }
+    }
+  };
+
+  const handleDemoLogin = async () => {
+    setLoginError("");
+    setWrongField("");
+    setIsDemoSubmitting(true);
+
+    try {
+      await onDemoLogin();
+    } catch {
+      setWrongField("demo");
+      setLoginError("Demo access is temporarily unavailable. Please try again.");
+    } finally {
+      setIsDemoSubmitting(false);
     }
   };
 
@@ -124,13 +142,31 @@ export default function LoginModal({
         aria-invalid={wrongField === "password"}
       />
       <button
-        disabled={!values.email || !values.password}
+        disabled={!values.email || !values.password || isDemoSubmitting}
         type="submit"
         className="modal__submit--si"
       >
         {buttonText}
         Sign in
       </button>
+      <div className="loginmodal__demo">
+        <button
+          type="button"
+          className="loginmodal__demo-button"
+          onClick={handleDemoLogin}
+          disabled={isDemoSubmitting}
+        >
+          {isDemoSubmitting ? "Opening demo..." : "View Demo"}
+        </button>
+        <p className="loginmodal__demo-note">
+          Skip sign in and explore the app with preloaded demo data.
+        </p>
+        {wrongField === "demo" && (
+          <span className="modal__error loginmodal__demo-error">
+            {loginError}
+          </span>
+        )}
+      </div>
       <p className="modal__auth-note">
         <span className="modal__auth-or">or </span>
         <button

@@ -159,7 +159,7 @@ export default function LoginModal({
           {isDemoSubmitting ? "Opening demo..." : "View Demo"}
         </button>
         <p className="loginmodal__demo-note">
-          Skip sign in and explore the app with preloaded demo data.
+          Skip sign in and explore the app with a demo account.
         </p>
         {wrongField === "demo" && (
           <span className="modal__error loginmodal__demo-error">

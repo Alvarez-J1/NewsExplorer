@@ -1,6 +1,6 @@
 # NewsExplorer
 
-NewsExplorer is a React application that lets users search for news articles by keyword and save them to their personal account.
+NewsExplorer is a full-stack application that allows users to search for news articles by keyword and browse the latest headlines through a clean, responsive interface. Users can create an account, save articles to their personal collection, and easily manage their saved stories from a dedicated dashboard.
 
 <img width="1906" height="916" alt="image" src="https://github.com/user-attachments/assets/5c094dc7-55e9-4a8c-b8be-3ba87291971d" />
 

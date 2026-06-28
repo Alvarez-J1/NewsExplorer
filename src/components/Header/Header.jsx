@@ -1,5 +1,5 @@
 import "./Header.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import menuIcon from "../../assets/menuIcon.svg";
@@ -13,10 +13,32 @@ export default function Header({
   isAnyModalOpen,
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomeRoute = location.pathname === "/";
   const firstname = currentUser?.name?.split?.(" ")[0] ?? "User";
 
   const handleOpenMenu = () => setIsMobileMenuOpen(true);
   const handleCloseMenu = () => setIsMobileMenuOpen(false);
+  const scrollToPageTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const handleHomeNavigation = (e) => {
+    if (isHomeRoute) {
+      e.preventDefault();
+      scrollToPageTop();
+      return;
+    }
+
+    window.setTimeout(scrollToPageTop, 0);
+  };
+  const handleMobileHomeNavigation = (e) => {
+    if (isHomeRoute) {
+      e.preventDefault();
+    }
+
+    setIsMobileMenuOpen(false);
+    window.setTimeout(scrollToPageTop, 80);
+  };
 
   useEffect(() => {
     if (!isMobileMenuOpen) return undefined;
@@ -53,7 +75,14 @@ export default function Header({
     <>
       <header className="header">
         <div className="header__left">
-          <p className="header__title">NewsExplorer</p>
+          <Link
+            to="/"
+            className="header__title"
+            onClick={handleHomeNavigation}
+            aria-label="NewsExplorer home"
+          >
+            NewsExplorer
+          </Link>
         </div>
 
         <div className="header__right">
@@ -61,9 +90,17 @@ export default function Header({
             // Logged IN state
             <>
               <nav className="header__nav header__nav--logged-in">
-                <NavLink to="/" className="header__link header__link--under">
-                  Home
-                </NavLink>
+                {!isHomeRoute && (
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      `header__link ${isActive ? "header__link--under" : ""}`
+                    }
+                    onClick={handleHomeNavigation}
+                  >
+                    Home
+                  </NavLink>
+                )}
 
                 <NavLink
                   to="/saved-news"
@@ -90,9 +127,17 @@ export default function Header({
             // Logged OUT state
             <>
               <nav className="header__nav header__nav--logged-out">
-                <NavLink to="/" className="header__link header__link--under">
-                  Home
-                </NavLink>
+                {!isHomeRoute && (
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      `header__link ${isActive ? "header__link--under" : ""}`
+                    }
+                    onClick={handleHomeNavigation}
+                  >
+                    Home
+                  </NavLink>
+                )}
 
                 <button
                   type="button"
@@ -137,7 +182,14 @@ export default function Header({
           <div className="mobile-menu__panel" id="main-mobile-menu">
             <div className="mobile-menu__top">
               <div className="mobile-menu__section">
-                <p className="mobile-menu__title">NewsExplorer</p>
+                <Link
+                  to="/"
+                  className="mobile-menu__title"
+                  onClick={handleMobileHomeNavigation}
+                  aria-label="NewsExplorer home"
+                >
+                  NewsExplorer
+                </Link>
               </div>
               {isMobileMenuOpen && (
                 <button
@@ -152,18 +204,20 @@ export default function Header({
             </div>
 
             <nav className="mobile-menu__nav">
-              <NavLink
-                end
-                to="/"
-                className={({ isActive }) =>
-                  `header__link-mobile mobile-menu__link ${
-                    isActive ? "mobile-menu__link--active" : ""
-                  }`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Home
-              </NavLink>
+              {!isHomeRoute && (
+                <NavLink
+                  end
+                  to="/"
+                  className={({ isActive }) =>
+                    `header__link-mobile mobile-menu__link ${
+                      isActive ? "mobile-menu__link--active" : ""
+                    }`
+                  }
+                  onClick={handleMobileHomeNavigation}
+                >
+                  Home
+                </NavLink>
+              )}
 
               {isLoggedIn && (
                 <NavLink

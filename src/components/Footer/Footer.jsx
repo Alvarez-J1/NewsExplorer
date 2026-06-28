@@ -1,12 +1,32 @@
 import "./Footer.css";
 
-import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const location = useLocation();
+  const isHomeRoute = location.pathname === "/";
+  const scrollToPageTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const handleHomeNavigation = (e) => {
+    if (isHomeRoute) {
+      e.preventDefault();
+    }
+
+    window.setTimeout(scrollToPageTop, 0);
+  };
+
   return (
     <footer className="footer">
       <div className="footer__brand">
-        <p className="footer__logo">NewsExplorer</p>
+        <Link
+          to="/"
+          className="footer__logo"
+          onClick={handleHomeNavigation}
+          aria-label="NewsExplorer home"
+        >
+          NewsExplorer
+        </Link>
         <p className="footer__tagline">
           Search, scan, and save the stories worth reading.
         </p>
@@ -18,9 +38,9 @@ export default function Footer() {
       <div className="footer__links" aria-label="Footer navigation">
         <nav className="footer__group" aria-label="Explore">
           <p className="footer__group-title">Explore</p>
-          <NavLink to="/" className="footer__link">
+          <Link to="/" className="footer__link" onClick={handleHomeNavigation}>
             Home
-          </NavLink>
+          </Link>
           <a href="#" className="footer__link">
             Trending
           </a>

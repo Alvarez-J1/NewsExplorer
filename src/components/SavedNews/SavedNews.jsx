@@ -1,6 +1,6 @@
 import "./SavedNews.css";
 
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import savedmenuIcon from "../../assets/savednews__menu-icon.svg";
@@ -26,6 +26,12 @@ export default function SavedNews({
 
   const handleOpenMenu = () => setIsMobileMenuOpen(true);
   const handleCloseMenu = () => setIsMobileMenuOpen(false);
+  const scrollToPageTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const handleHomeNavigation = () => {
+    window.setTimeout(scrollToPageTop, 0);
+  };
 
   useEffect(() => {
     if (!isMobileMenuOpen) return undefined;
@@ -62,7 +68,14 @@ export default function SavedNews({
     <>
       <header className="savednews__header">
         <div className="savednews__header-left">
-          <p className="savednews__header-title">NewsExplorer</p>
+          <Link
+            to="/"
+            className="savednews__header-title"
+            onClick={handleHomeNavigation}
+            aria-label="NewsExplorer home"
+          >
+            NewsExplorer
+          </Link>
         </div>
         <div className="savednews__header-right">
           <nav className="savednews__header-nav">
@@ -73,6 +86,7 @@ export default function SavedNews({
                   isActive ? "savednews__header-link--under" : ""
                 }`
               }
+              onClick={handleHomeNavigation}
             >
               Home
             </NavLink>
@@ -147,7 +161,10 @@ export default function SavedNews({
                     isActive ? "mobile-menu__link--active" : ""
                   }`
                 }
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.setTimeout(scrollToPageTop, 80);
+                }}
               >
                 Home
               </NavLink>

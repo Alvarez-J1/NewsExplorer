@@ -27,6 +27,15 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    opacity 200ms ease;
+}
+
+.header__title:hover {
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .header__right {
@@ -102,6 +111,7 @@
 
 .header .header__link:focus-visible,
 .header .header__saved-articles:focus-visible,
+.header .header__title:focus-visible,
 .header .header__signin-btn:focus-visible,
 .header .header__signout-btn:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.88);
@@ -306,11 +316,24 @@
 
   .mobile-menu__title {
     margin: 0;
+    display: inline-flex;
     color: #ffffff;
     font-family: "Roboto Slab", Georgia, serif;
     font-size: 18px;
     font-weight: 700;
     line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 200ms ease;
+  }
+
+  .mobile-menu__title:hover {
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  .mobile-menu__title:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.88);
+    outline-offset: 3px;
   }
 
   .mobile-menu__close-btn {

@@ -29,8 +29,14 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 200ms ease;
 }
 
+.savednews__header-title:hover {
+  color: var(--color-accent);
+}
 
 .savednews__header-right {
   margin-left: auto;
@@ -89,6 +95,7 @@
 
 .savednews__header .savednews__header-link:focus-visible,
 .savednews__header .savednews__header-saved-articles:focus-visible,
+.savednews__header .savednews__header-title:focus-visible,
 .savednews__header .savednews__header-signout-btn:focus-visible {
   outline: 2px solid rgba(37, 99, 235, 0.58);
   outline-offset: 3px;

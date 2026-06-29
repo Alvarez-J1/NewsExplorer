@@ -97,6 +97,8 @@ For authentication to work locally, also run the backend — see [backend/README
 
 The Spring Boot API can be deployed to Render using the root `render.yaml` blueprint and `backend/Dockerfile`. See [backend/README.md](backend/README.md) for setup, environment variables, and deployment steps.
 
+The backend exposes a lightweight public `/health` endpoint for platform health checks and demo warm-up probes. Render free services can cold-start after idle periods, so recruiter-facing demos are smoother with periodic `/health` monitoring or a backend plan with fewer cold starts.
+
 ## Project Structure
 
 ```text

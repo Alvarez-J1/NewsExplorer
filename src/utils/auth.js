@@ -2,7 +2,7 @@ import { BASE_URL } from "./constants";
 
 /**
  * POST /signin
- * Returns { token }
+ * Returns { token, data }
  */
 export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
@@ -14,12 +14,27 @@ export const authorize = (email, password) => {
 
 /**
  * POST /signin/demo
- * Returns { token } for the seeded demo account.
+ * Returns { token, data } for the seeded demo account.
  */
-export const authorizeDemo = () => {
+export const authorizeDemo = ({ signal } = {}) => {
   return fetch(`${BASE_URL}/signin/demo`, {
     method: "POST",
+    signal,
   }).then(processAuthResponse);
+};
+
+/**
+ * GET /health
+ * Non-blocking backend warm-up probe for hosted demos.
+ */
+export const warmBackend = ({ signal } = {}) => {
+  return fetch(`${BASE_URL}/health`, {
+    method: "GET",
+    cache: "no-store",
+    signal,
+  })
+    .then((res) => res.ok)
+    .catch(() => false);
 };
 
 /**
@@ -39,9 +54,10 @@ export const register = (email, password, username) => {
  * GET /users/me
  * Returns { data: { _id, name, email } }
  */
-export const checkToken = (token) => {
+export const checkToken = (token, { signal } = {}) => {
   return fetch(`${BASE_URL}/users/me`, {
     headers: { Authorization: `Bearer ${token}` },
+    signal,
   }).then(processAuthResponse);
 };
 

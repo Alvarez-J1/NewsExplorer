@@ -12,6 +12,7 @@ export default function SavedNews({
   currentUser,
   onLogout,
   savedArticles = [],
+  isSavedArticlesLoading = false,
   onUnsaveArticle,
   isAnyModalOpen,
 }) {
@@ -217,8 +218,19 @@ export default function SavedNews({
         )}
       </section>
 
-      <section className="savednews__cards">
-        {savedArticles.length > 0 ? (
+      <section className="savednews__cards" aria-busy={isSavedArticlesLoading}>
+        {isSavedArticlesLoading ? (
+          <ul className="savednews__skeleton-grid" aria-label="Loading saved articles">
+            {[0, 1, 2].map((item) => (
+              <li className="savednews__skeleton-card" key={item}>
+                <span className="savednews__skeleton-media" />
+                <span className="savednews__skeleton-line savednews__skeleton-line--wide" />
+                <span className="savednews__skeleton-line" />
+                <span className="savednews__skeleton-line savednews__skeleton-line--short" />
+              </li>
+            ))}
+          </ul>
+        ) : savedArticles.length > 0 ? (
           <ul className="results__grid">
             {savedArticles.map((a) => (
               <NewsCard

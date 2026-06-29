@@ -91,6 +91,12 @@ The web service health check path is:
 /health
 ```
 
+The frontend also calls `/health` as a non-blocking warm-up probe shortly after
+the app loads. If you keep the backend on Render's free plan, the first request
+after an idle period can still cold-start; for portfolio demos, consider an
+external uptime monitor that requests `/health` every few minutes or move the
+web service to a plan with fewer cold starts.
+
 ### Option B: Create the web service manually
 
 1. In Render, create a PostgreSQL database.
@@ -148,8 +154,8 @@ All protected routes require `Authorization: Bearer <token>`.
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
 | `POST` | `/signup` | Public | Register a new user |
-| `POST` | `/signin` | Public | Sign in and receive a JWT |
-| `POST` | `/signin/demo` | Public | Sign in as the seeded demo user and receive a JWT |
+| `POST` | `/signin` | Public | Sign in and receive a JWT plus user payload |
+| `POST` | `/signin/demo` | Public | Sign in as the seeded demo user and receive a JWT plus user payload |
 
 #### POST /signup
 
@@ -168,7 +174,20 @@ All protected routes require `Authorization: Bearer <token>`.
 { "email": "user@example.com", "password": "secret123" }
 
 // Response 200
-{ "token": "<jwt>" }
+{
+  "token": "<jwt>",
+  "data": { "_id": "uuid", "name": "Jane Doe", "email": "user@example.com" }
+}
+```
+
+#### POST /signin/demo
+
+```json
+// Response 200
+{
+  "token": "<jwt>",
+  "data": { "_id": "uuid", "name": "Demo Reader", "email": "demo@newsexplorer.dev" }
+}
 ```
 
 ### Users

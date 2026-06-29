@@ -47,22 +47,29 @@ public class DemoDataService {
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
     public void ensureDemoAccountOnStartup() {
-        ensureDemoAccount();
+        User demoUser = ensureDemoAccount();
+        removeRetiredSeedArticles(demoUser);
     }
 
     @Transactional
     public User ensureDemoAccount() {
-        User demoUser = userRepository.findByEmail(demoEmail)
+        return userRepository.findByEmail(demoEmail)
                 .orElseGet(() -> userRepository.save(new User(
                         demoEmail,
                         passwordEncoder.encode(demoPassword),
                         demoName
                 )));
+    }
 
+    @Transactional(readOnly = true)
+    public User getDemoAccount() {
+        return userRepository.findByEmail(demoEmail)
+                .orElseThrow(() -> new IllegalStateException("Demo account is not configured"));
+    }
+
+    private void removeRetiredSeedArticles(User demoUser) {
         articleRepository.findByOwnerId(demoUser.getId()).stream()
                 .filter(article -> REMOVED_SEEDED_ARTICLE_URLS.contains(article.getUrl()))
                 .forEach(articleRepository::delete);
-
-        return demoUser;
     }
 }

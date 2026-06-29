@@ -32,7 +32,7 @@ public class AuthController {
     /**
      * POST /signin
      * Body: { "email": "...", "password": "..." }
-     * Response 200: { "token": "..." }
+     * Response 200: { "token": "...", "data": { "_id": "...", "name": "...", "email": "..." } }
      */
     @PostMapping("/signin")
     public AuthResponse signin(@Valid @RequestBody SignInRequest request) {
@@ -41,7 +41,7 @@ public class AuthController {
 
     /**
      * POST /signin/demo
-     * Response 200: { "token": "..." }
+     * Response 200: { "token": "...", "data": { "_id": "...", "name": "...", "email": "..." } }
      */
     @PostMapping("/signin/demo")
     public AuthResponse signinDemo() {

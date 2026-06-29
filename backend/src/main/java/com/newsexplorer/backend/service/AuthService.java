@@ -64,15 +64,15 @@ public class AuthService {
         }
 
         String token = jwtService.generateToken(user.getEmail());
-        return new AuthResponse(token);
+        return AuthResponse.from(token, user);
     }
 
     /**
      * Authenticate recruiters into the seeded demo account using the normal JWT flow.
      */
     public AuthResponse loginDemo() {
-        User demoUser = demoDataService.ensureDemoAccount();
+        User demoUser = demoDataService.getDemoAccount();
         String token = jwtService.generateToken(demoUser.getEmail());
-        return new AuthResponse(token);
+        return AuthResponse.from(token, demoUser);
     }
 }

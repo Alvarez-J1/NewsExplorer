@@ -3,6 +3,8 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useEffect, useState } from "react";
 
+const DEMO_LOGIN_TIMEOUT_MS = 8000;
+
 export default function LoginModal({
   isOpen,
   onClose,
@@ -60,16 +62,28 @@ export default function LoginModal({
   };
 
   const handleDemoLogin = async () => {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(
+      () => controller.abort(),
+      DEMO_LOGIN_TIMEOUT_MS
+    );
+
     setLoginError("");
     setWrongField("");
     setIsDemoSubmitting(true);
 
     try {
-      await onDemoLogin();
-    } catch {
+      await onDemoLogin({ signal: controller.signal });
+    } catch (err) {
+      const timedOut = err?.name === "AbortError";
       setWrongField("demo");
-      setLoginError("Demo access is temporarily unavailable. Please try again.");
+      setLoginError(
+        timedOut
+          ? "The demo is taking longer than usual. The server may be waking up, so please try again."
+          : "Demo access is temporarily unavailable. Please try again."
+      );
     } finally {
+      window.clearTimeout(timeoutId);
       setIsDemoSubmitting(false);
     }
   };
@@ -156,7 +170,11 @@ export default function LoginModal({
           onClick={handleDemoLogin}
           disabled={isDemoSubmitting}
         >
-          {isDemoSubmitting ? "Opening demo..." : "View Demo"}
+          {isDemoSubmitting
+            ? "Opening demo..."
+            : wrongField === "demo"
+              ? "Try again"
+              : "View Demo"}
         </button>
         <p className="loginmodal__demo-note">
           Skip sign in and explore the app with a demo account.

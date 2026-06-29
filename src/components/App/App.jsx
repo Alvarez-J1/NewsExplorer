@@ -2,7 +2,13 @@ import { useCallback, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { useNavigate } from "react-router-dom";
-import { register, authorize, authorizeDemo, checkToken } from "../../utils/auth";
+import {
+  register,
+  authorize,
+  authorizeDemo,
+  checkToken,
+  warmBackend,
+} from "../../utils/auth";
 import { deleteArticle, getArticles, saveArticle } from "../../utils/api";
 import { toCardModel } from "../../utils/adapter";
 
@@ -37,6 +43,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [savedArticles, setSavedArticles] = useState([]);
+  const [isSavedArticlesLoading, setIsSavedArticlesLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   //helpers for NewsAPI dates
@@ -112,6 +119,27 @@ export default function App() {
 
   const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 
+  useEffect(() => {
+    const controller = new AbortController();
+    const warm = () => {
+      warmBackend({ signal: controller.signal });
+    };
+
+    if (typeof window.requestIdleCallback === "function") {
+      const idleId = window.requestIdleCallback(warm, { timeout: 2000 });
+      return () => {
+        controller.abort();
+        window.cancelIdleCallback(idleId);
+      };
+    }
+
+    const timeoutId = window.setTimeout(warm, 1200);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeoutId);
+    };
+  }, []);
+
   //SEARCH
   const handleSearch = async (query) => {
     setSearchKeyword(query);
@@ -181,6 +209,19 @@ export default function App() {
     return normalizedArticles;
   }, []);
 
+  const loadSavedArticlesInBackground = useCallback(
+    (jwt) => {
+      setIsSavedArticlesLoading(true);
+      loadSavedArticles(jwt)
+        .catch((err) => {
+          console.error("Saved articles background load failed:", err);
+          setSavedArticles([]);
+        })
+        .finally(() => setIsSavedArticlesLoading(false));
+    },
+    [loadSavedArticles]
+  );
+
   const handleSaveArticle = async (rawArticle) => {
     const normalized = toCardModel(rawArticle);
     if (savedArticles.some((x) => x.url === normalized.url)) return;
@@ -227,9 +268,9 @@ export default function App() {
   const handleRegistration = async ({ email, password, username }) => {
     try {
       await register(email, password, username);
-      const { token } = await authorize(email, password);
+      const { token, data } = await authorize(email, password);
 
-      const { data: user } = await checkToken(token);
+      const user = data ?? (await checkToken(token)).data;
 
       localStorage.setItem("jwt", token);
       setToken(token);
@@ -252,9 +293,9 @@ export default function App() {
 
   const handleLogin = async ({ email, password }) => {
     try {
-      const { token } = await authorize(email, password);
+      const { token, data } = await authorize(email, password);
 
-      const { data: user } = await checkToken(token);
+      const user = data ?? (await checkToken(token)).data;
 
       localStorage.setItem("jwt", token);
       setToken(token);
@@ -274,25 +315,27 @@ export default function App() {
     }
   };
 
-  const handleDemoLogin = async () => {
+  const handleDemoLogin = async ({ signal } = {}) => {
     try {
-      const { token } = await authorizeDemo();
+      const { token, data } = await authorizeDemo({ signal });
 
-      const { data: user } = await checkToken(token);
+      const user = data ?? (await checkToken(token, { signal })).data;
 
       localStorage.setItem("jwt", token);
       setToken(token);
       setCurrentUser(user);
       setIsLoggedIn(true);
-      await loadSavedArticles(token);
+      setSavedArticles([]);
       closeActiveModal();
       navigate("/saved-news");
+      loadSavedArticlesInBackground(token);
     } catch (err) {
       localStorage.removeItem("jwt");
       setToken("");
       setCurrentUser({ email: "", username: "" });
       setIsLoggedIn(false);
       setSavedArticles([]);
+      setIsSavedArticlesLoading(false);
       console.error("Demo login failed", err);
       throw err;
     }
@@ -303,6 +346,7 @@ export default function App() {
     if (!jwt) return;
     (async () => {
       try {
+        setIsSavedArticlesLoading(true);
         const { data: user } = await checkToken(jwt);
         setToken(jwt);
         setCurrentUser(user);
@@ -314,6 +358,8 @@ export default function App() {
         setIsLoggedIn(false);
         setCurrentUser({ email: "", username: "" });
         setSavedArticles([]);
+      } finally {
+        setIsSavedArticlesLoading(false);
       }
     })();
   }, [loadSavedArticles]);
@@ -324,6 +370,7 @@ export default function App() {
     setIsLoggedIn(false);
     setCurrentUser({ email: "", username: "" });
     setSavedArticles([]);
+    setIsSavedArticlesLoading(false);
     navigate("/");
   };
 
@@ -411,6 +458,7 @@ export default function App() {
                   currentUser={currentUser}
                   onLogout={handleLogout}
                   savedArticles={savedArticles}
+                  isSavedArticlesLoading={isSavedArticlesLoading}
                   onUnsaveArticle={handleUnsaveArticle}
                   isAnyModalOpen={isAnyModalOpen}
                   isLoggedIn={isLoggedIn}

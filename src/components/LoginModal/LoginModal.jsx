@@ -3,6 +3,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useEffect, useState } from "react";
 
+const DEMO_WAKEUP_INFO_MS = 6000;
 const DEMO_LOGIN_TIMEOUT_MS = 8000;
 
 export default function LoginModal({
@@ -21,6 +22,7 @@ export default function LoginModal({
   const [loginError, setLoginError] = useState("");
   const [wrongField, setWrongField] = useState("");
   const [isDemoSubmitting, setIsDemoSubmitting] = useState(false);
+  const [showDemoWakeupInfo, setShowDemoWakeupInfo] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -28,6 +30,7 @@ export default function LoginModal({
       setLoginError("");
       setWrongField("");
       setIsDemoSubmitting(false);
+      setShowDemoWakeupInfo(false);
     }
   }, [isOpen, setValues]);
 
@@ -63,6 +66,10 @@ export default function LoginModal({
 
   const handleDemoLogin = async () => {
     const controller = new AbortController();
+    const wakeupInfoId = window.setTimeout(
+      () => setShowDemoWakeupInfo(true),
+      DEMO_WAKEUP_INFO_MS
+    );
     const timeoutId = window.setTimeout(
       () => controller.abort(),
       DEMO_LOGIN_TIMEOUT_MS
@@ -70,19 +77,25 @@ export default function LoginModal({
 
     setLoginError("");
     setWrongField("");
+    setShowDemoWakeupInfo(false);
     setIsDemoSubmitting(true);
 
     try {
       await onDemoLogin({ signal: controller.signal });
+      setShowDemoWakeupInfo(false);
     } catch (err) {
       const timedOut = err?.name === "AbortError";
       setWrongField("demo");
+      if (timedOut) {
+        setShowDemoWakeupInfo(true);
+      }
       setLoginError(
         timedOut
-          ? "The demo is taking longer than usual. The server may be waking up, so please try again."
+          ? "Demo access is still warming up. Please try again."
           : "Demo access is temporarily unavailable. Please try again."
       );
     } finally {
+      window.clearTimeout(wakeupInfoId);
       window.clearTimeout(timeoutId);
       setIsDemoSubmitting(false);
     }
@@ -179,6 +192,22 @@ export default function LoginModal({
         <p className="loginmodal__demo-note">
           Skip sign in and explore the app with a demo account.
         </p>
+        {showDemoWakeupInfo && (
+          <div className="loginmodal__demo-info" role="status" aria-live="polite">
+            <span className="loginmodal__demo-info-icon" aria-hidden="true">
+              i
+            </span>
+            <div className="loginmodal__demo-info-copy">
+              <p className="loginmodal__demo-info-title">
+                Demo server is hosted on the free tier.
+              </p>
+              <p className="loginmodal__demo-info-text">
+                The first request may take 30-60 seconds while the server wakes
+                up after inactivity. Please click &quot;Try again&quot; if needed.
+              </p>
+            </div>
+          </div>
+        )}
         {wrongField === "demo" && (
           <span className="modal__error loginmodal__demo-error">
             {loginError}

@@ -51,7 +51,7 @@ export default function LoginModal({
       const status =
         err?.code === "INVALID_CREDENTIALS"
           ? 401
-          : err?.status ?? err?.response?.status ?? Number(err?.message);
+          : (err?.status ?? err?.response?.status ?? Number(err?.message));
 
       if (status === 401) {
         setWrongField("password");
@@ -66,7 +66,7 @@ export default function LoginModal({
   const handleDemoLogin = async () => {
     const wakeupInfoId = window.setTimeout(
       () => setShowDemoWakeupInfo(true),
-      DEMO_WAKEUP_INFO_MS
+      DEMO_WAKEUP_INFO_MS,
     );
 
     setLoginError("");
@@ -173,13 +173,17 @@ export default function LoginModal({
           Skip sign in and explore the app with a demo account.
         </p>
         {showDemoWakeupInfo && (
-          <div className="loginmodal__demo-info" role="status" aria-live="polite">
+          <div
+            className="loginmodal__demo-info"
+            role="status"
+            aria-live="polite"
+          >
             <span className="loginmodal__demo-info-icon" aria-hidden="true">
               i
             </span>
             <div className="loginmodal__demo-info-copy">
               <p className="loginmodal__demo-info-title">
-                Demo server is hosted on the free tier.
+                The backend is hosted on Render's free tier.
               </p>
               <p className="loginmodal__demo-info-text">
                 The first request may take 30-60 seconds while the server wakes

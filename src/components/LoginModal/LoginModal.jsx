@@ -4,7 +4,6 @@ import { useForm } from "../../hooks/useForm";
 import { useEffect, useState } from "react";
 
 const DEMO_WAKEUP_INFO_MS = 6000;
-const DEMO_LOGIN_TIMEOUT_MS = 8000;
 
 export default function LoginModal({
   isOpen,
@@ -65,14 +64,9 @@ export default function LoginModal({
   };
 
   const handleDemoLogin = async () => {
-    const controller = new AbortController();
     const wakeupInfoId = window.setTimeout(
       () => setShowDemoWakeupInfo(true),
       DEMO_WAKEUP_INFO_MS
-    );
-    const timeoutId = window.setTimeout(
-      () => controller.abort(),
-      DEMO_LOGIN_TIMEOUT_MS
     );
 
     setLoginError("");
@@ -81,22 +75,12 @@ export default function LoginModal({
     setIsDemoSubmitting(true);
 
     try {
-      await onDemoLogin({ signal: controller.signal });
+      await onDemoLogin();
       setShowDemoWakeupInfo(false);
-    } catch (err) {
-      const timedOut = err?.name === "AbortError";
-      setWrongField("demo");
-      if (timedOut) {
-        setShowDemoWakeupInfo(true);
-      }
-      setLoginError(
-        timedOut
-          ? "Demo access is still warming up. Please try again."
-          : "Demo access is temporarily unavailable. Please try again."
-      );
+    } catch {
+      setShowDemoWakeupInfo(true);
     } finally {
       window.clearTimeout(wakeupInfoId);
-      window.clearTimeout(timeoutId);
       setIsDemoSubmitting(false);
     }
   };
@@ -183,11 +167,7 @@ export default function LoginModal({
           onClick={handleDemoLogin}
           disabled={isDemoSubmitting}
         >
-          {isDemoSubmitting
-            ? "Opening demo..."
-            : wrongField === "demo"
-              ? "Try again"
-              : "View Demo"}
+          {isDemoSubmitting ? "Opening demo..." : "View Demo"}
         </button>
         <p className="loginmodal__demo-note">
           Skip sign in and explore the app with a demo account.
@@ -203,15 +183,11 @@ export default function LoginModal({
               </p>
               <p className="loginmodal__demo-info-text">
                 The first request may take 30-60 seconds while the server wakes
-                up after inactivity. Please click &quot;Try again&quot; if needed.
+                up after inactivity. The app will open automatically when it is
+                ready.
               </p>
             </div>
           </div>
-        )}
-        {wrongField === "demo" && (
-          <span className="modal__error loginmodal__demo-error">
-            {loginError}
-          </span>
         )}
       </div>
       <p className="modal__auth-note">

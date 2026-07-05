@@ -1,7 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
-import { useNavigate } from "react-router-dom";
 import {
   register,
   authorize,
@@ -41,6 +40,7 @@ export default function App() {
     username: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [savedArticles, setSavedArticles] = useState([]);
   const [isSavedArticlesLoading, setIsSavedArticlesLoading] = useState(false);
@@ -276,6 +276,7 @@ export default function App() {
       setToken(token);
       setCurrentUser(user);
       setIsLoggedIn(true);
+      setIsAuthChecking(false);
       await loadSavedArticles(token);
       closeActiveModal();
       setIsSuccessModalOpen(true);
@@ -285,6 +286,7 @@ export default function App() {
       setToken("");
       setCurrentUser({ email: "", username: "" });
       setIsLoggedIn(false);
+      setIsAuthChecking(false);
       setSavedArticles([]);
       console.error("Registration error:", err);
       throw err;
@@ -301,6 +303,7 @@ export default function App() {
       setToken(token);
       setCurrentUser(user);
       setIsLoggedIn(true);
+      setIsAuthChecking(false);
       await loadSavedArticles(token);
       closeActiveModal();
       navigate("/");
@@ -309,6 +312,7 @@ export default function App() {
       setToken("");
       setCurrentUser({ email: "", username: "" });
       setIsLoggedIn(false);
+      setIsAuthChecking(false);
       setSavedArticles([]);
       console.error("Token validation failed", err);
       throw err;
@@ -325,6 +329,7 @@ export default function App() {
       setToken(token);
       setCurrentUser(user);
       setIsLoggedIn(true);
+      setIsAuthChecking(false);
       setSavedArticles([]);
       closeActiveModal();
       navigate("/saved-news");
@@ -334,6 +339,7 @@ export default function App() {
       setToken("");
       setCurrentUser({ email: "", username: "" });
       setIsLoggedIn(false);
+      setIsAuthChecking(false);
       setSavedArticles([]);
       setIsSavedArticlesLoading(false);
       console.error("Demo login failed", err);
@@ -343,7 +349,10 @@ export default function App() {
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    if (!jwt) return;
+    if (!jwt) {
+      setIsAuthChecking(false);
+      return;
+    }
     (async () => {
       try {
         setIsSavedArticlesLoading(true);
@@ -360,6 +369,7 @@ export default function App() {
         setSavedArticles([]);
       } finally {
         setIsSavedArticlesLoading(false);
+        setIsAuthChecking(false);
       }
     })();
   }, [loadSavedArticles]);
@@ -368,10 +378,11 @@ export default function App() {
     localStorage.removeItem("jwt");
     setToken("");
     setIsLoggedIn(false);
+    setIsAuthChecking(false);
     setCurrentUser({ email: "", username: "" });
     setSavedArticles([]);
     setIsSavedArticlesLoading(false);
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   //MODALS
@@ -454,15 +465,19 @@ export default function App() {
             <Route
               path="/saved-news"
               element={
-                <SavedNews
-                  currentUser={currentUser}
-                  onLogout={handleLogout}
-                  savedArticles={savedArticles}
-                  isSavedArticlesLoading={isSavedArticlesLoading}
-                  onUnsaveArticle={handleUnsaveArticle}
-                  isAnyModalOpen={isAnyModalOpen}
-                  isLoggedIn={isLoggedIn}
-                />
+                isAuthChecking ? null : isLoggedIn ? (
+                  <SavedNews
+                    currentUser={currentUser}
+                    onLogout={handleLogout}
+                    savedArticles={savedArticles}
+                    isSavedArticlesLoading={isSavedArticlesLoading}
+                    onUnsaveArticle={handleUnsaveArticle}
+                    isAnyModalOpen={isAnyModalOpen}
+                    isLoggedIn={isLoggedIn}
+                  />
+                ) : (
+                  <Navigate to="/" replace />
+                )
               }
             />
           </Routes>

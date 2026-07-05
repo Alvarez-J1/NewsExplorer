@@ -175,11 +175,6 @@
   line-height: 1.45;
 }
 
-.loginmodal__demo-error {
-  display: block;
-  margin-top: 8px;
-}
-
 .modal__auth-note {
   margin: 20px 0 0;
   padding: 14px 16px 0;

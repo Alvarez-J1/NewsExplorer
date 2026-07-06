@@ -48,7 +48,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Public auth endpoints
                         .requestMatchers(HttpMethod.POST, "/signup", "/signin", "/signin/demo").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/health", "/health/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/health", "/health/", "/api/health", "/api/health/").permitAll()
+                        .requestMatchers(HttpMethod.HEAD, "/api/health", "/api/health/").permitAll()
                         // Everything else requires a valid JWT
                         .anyRequest().authenticated()
                 )
@@ -62,7 +63,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(allowedOrigin));
-        config.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT", "OPTIONS"));
+        config.setAllowedMethods(List.of("GET", "HEAD", "POST", "DELETE", "PUT", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 

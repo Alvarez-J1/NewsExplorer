@@ -6,7 +6,6 @@ import {
   authorize,
   authorizeDemo,
   checkToken,
-  warmBackend,
 } from "../../utils/auth";
 import { deleteArticle, getArticles, saveArticle } from "../../utils/api";
 import { toCardModel } from "../../utils/adapter";
@@ -118,27 +117,6 @@ export default function App() {
   ];
 
   const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const warm = () => {
-      warmBackend({ signal: controller.signal });
-    };
-
-    if (typeof window.requestIdleCallback === "function") {
-      const idleId = window.requestIdleCallback(warm, { timeout: 2000 });
-      return () => {
-        controller.abort();
-        window.cancelIdleCallback(idleId);
-      };
-    }
-
-    const timeoutId = window.setTimeout(warm, 1200);
-    return () => {
-      controller.abort();
-      window.clearTimeout(timeoutId);
-    };
-  }, []);
 
   //SEARCH
   const handleSearch = async (query) => {

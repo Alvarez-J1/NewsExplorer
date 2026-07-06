@@ -24,20 +24,6 @@ export const authorizeDemo = ({ signal } = {}) => {
 };
 
 /**
- * GET /health
- * Non-blocking backend warm-up probe for hosted demos.
- */
-export const warmBackend = ({ signal } = {}) => {
-  return fetch(`${BASE_URL}/health`, {
-    method: "GET",
-    cache: "no-store",
-    signal,
-  })
-    .then((res) => res.ok)
-    .catch(() => false);
-};
-
-/**
  * POST /signup
  * The form field is "username"; the backend expects "name".
  * Returns { data: { _id, name, email } }

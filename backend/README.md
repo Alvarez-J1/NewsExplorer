@@ -91,11 +91,10 @@ The web service health check path is:
 /health
 ```
 
-The frontend also calls `/health` as a non-blocking warm-up probe shortly after
-the app loads. If you keep the backend on Render's free plan, the first request
-after an idle period can still cold-start; for portfolio demos, consider an
-external uptime monitor that requests `/health` every few minutes or move the
-web service to a plan with fewer cold starts.
+If you keep the backend on Render's free plan, the first request after an idle
+period can still cold-start; for portfolio demos, consider an external uptime
+monitor that requests `/health` every few minutes or move the web service to a
+plan with fewer cold starts.
 
 ### Option B: Create the web service manually
 

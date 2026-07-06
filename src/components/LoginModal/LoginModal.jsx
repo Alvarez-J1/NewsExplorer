@@ -183,7 +183,7 @@ export default function LoginModal({
             </span>
             <div className="loginmodal__demo-info-copy">
               <p className="loginmodal__demo-info-title">
-                The backend is hosted on Render's free tier.
+                The backend is hosted on Render&apos;s free tier.
               </p>
               <p className="loginmodal__demo-info-text">
                 The first request may take 30-60 seconds while the server wakes

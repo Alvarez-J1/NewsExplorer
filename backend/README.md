@@ -64,13 +64,20 @@ export $(grep -v '^#' .env | xargs)
 mvn spring-boot:run
 ```
 
-The server starts on **http://localhost:3001** by default.
+With the example `.env`, the server starts on **http://localhost:3001**.
+Without `PORT`, the application falls back to **8080**, which matches container platforms such as Northflank.
 
 > To change the port, set the `PORT` environment variable.
 
 ---
 
+## Deploy to Northflank
+
+For Northflank deployment, see [`../NORTHFLANK_DEPLOYMENT.md`](../NORTHFLANK_DEPLOYMENT.md).
+
 ## Deploy to Render
+
+The Render instructions remain here because the existing PostgreSQL database is still hosted on Render.
 
 This repo includes a root `render.yaml` blueprint and `backend/Dockerfile` for deploying the Spring Boot API as a Docker web service with Render PostgreSQL.
 

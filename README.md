@@ -53,10 +53,6 @@ Deployed app: https://news-explorer-ten.vercel.app/
 
 <img width="1906" height="916" alt="image" src="https://github.com/user-attachments/assets/5c094dc7-55e9-4a8c-b8be-3ba87291971d" />
 
-## Mobile View
-
-## <img width="404" height="753" alt="image" src="https://github.com/user-attachments/assets/b34db160-5c5a-4559-9c8d-b6755aa97bd5" />
-
 ## How to Download the Project
 
 Clone the repository to your computer:

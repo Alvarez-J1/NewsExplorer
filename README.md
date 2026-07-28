@@ -92,9 +92,9 @@ For authentication to work locally, also run the backend — see [backend/README
 
 ## Deploying the Backend
 
-The Spring Boot API can be deployed to Northflank using `backend/Dockerfile`. See [NORTHFLANK_DEPLOYMENT.md](NORTHFLANK_DEPLOYMENT.md) for the current deployment settings.
+The Spring Boot API can be deployed with `backend/Dockerfile`. For production, set `DATABASE_URL` to the full Neon/PostgreSQL connection string; the backend converts it to JDBC and extracts credentials at startup.
 
-The older Render blueprint in `render.yaml` is still useful if you need to recreate the Render backend or inspect the existing PostgreSQL setup.
+The older Render blueprint in `render.yaml` is still useful if you need to recreate the original Render backend or inspect the legacy PostgreSQL setup.
 
 The backend exposes a lightweight public `/api/health` endpoint for platform health checks and external uptime monitors. Render free services can cold-start after idle periods, so recruiter-facing demos are smoother with periodic `/api/health` monitoring or a backend plan with fewer cold starts.
 

@@ -1,6 +1,6 @@
 # NewsExplorer Northflank Deployment
 
-This guide prepares the Spring Boot backend in `backend/` for Northflank's free Developer Sandbox tier while keeping the existing Render PostgreSQL database.
+This guide prepares the Spring Boot backend in `backend/` for Northflank's free Developer Sandbox tier while using Neon or another hosted PostgreSQL database.
 
 Do not commit real database credentials, JWT secrets, or full production connection strings.
 
@@ -15,7 +15,7 @@ Do not commit real database credentials, JWT secrets, or full production connect
 | Docker build context | `backend/` |
 | Main application class | `com.newsexplorer.backend.NewsExplorerApplication` |
 | Database | PostgreSQL through Spring Data JPA and the PostgreSQL JDBC driver |
-| Database env vars | `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` |
+| Database env vars | Prefer `DATABASE_URL`; or use `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` for manual JDBC config |
 | CORS env var | `ALLOWED_ORIGIN` |
 | JWT env vars | `JWT_SECRET`, `JWT_EXPIRATION_MS` |
 | Health endpoint | `GET /api/health`, also `GET /health` |
@@ -26,13 +26,19 @@ Spring Boot binds its embedded server to all interfaces by default because this 
 ## Verified Runtime Behavior
 
 - `backend/src/main/resources/application.properties` reads `PORT`, `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `JWT_SECRET`, `JWT_EXPIRATION_MS`, and `ALLOWED_ORIGIN` from environment variables.
-- `DB_URL` accepts this JDBC format:
+- At startup, `NewsExplorerApplication` also accepts a full `DATABASE_URL` such as Neon’s Postgres URL, converts it to JDBC, extracts credentials, and normalizes `channel_binding` to pgJDBC’s `channelBinding` option.
+- `DATABASE_URL` accepts this hosted Postgres format:
+
+```text
+postgresql://USER:PASSWORD@HOST/neondb?sslmode=require&channel_binding=require
+```
+
+- `DB_URL` accepts this manual JDBC format:
 
 ```text
 jdbc:postgresql://HOST:5432/newsexplorer
 ```
 
-- Because Northflank runs outside Render's private network, use the Render PostgreSQL external hostname and port. Do not use the Render internal hostname.
 - `SecurityConfig` permits `GET /api/health` without authentication.
 - CORS uses exactly one configured origin and `allowCredentials=true`; do not use `*` for `ALLOWED_ORIGIN`.
 - The Dockerfile is already a Java 21 multi-stage build: Maven builds the JAR, and the runtime image runs only `/app/app.jar`.
@@ -67,9 +73,10 @@ Northflank can detect ports exposed by the Dockerfile, but still verify that the
 | Name | Required | Expected format | Where the value comes from | Sensitive |
 | --- | --- | --- | --- | --- |
 | `ALLOWED_ORIGIN` | Yes | Frontend origin with no trailing slash, for example `https://news-explorer-ten.vercel.app` | Vercel frontend deployment URL | No |
-| `DB_URL` | Yes | `jdbc:postgresql://HOST:5432/newsexplorer` | Render PostgreSQL external hostname and database name | Treat as sensitive if it includes credentials; otherwise no |
-| `DB_USERNAME` | Yes | Plain PostgreSQL username | Render PostgreSQL dashboard | Yes |
-| `DB_PASSWORD` | Yes | Plain PostgreSQL password | Render PostgreSQL dashboard | Yes |
+| `DATABASE_URL` | Recommended | `postgresql://USER:PASSWORD@HOST/neondb?sslmode=require&channel_binding=require` | Neon dashboard or your Postgres provider | Yes |
+| `DB_URL` | Only if not using `DATABASE_URL` | `jdbc:postgresql://HOST:5432/newsexplorer` | Manual JDBC config | Treat as sensitive if it includes credentials; otherwise no |
+| `DB_USERNAME` | Only with `DB_URL` | Plain PostgreSQL username | Postgres provider dashboard | Yes |
+| `DB_PASSWORD` | Only with `DB_URL` | Plain PostgreSQL password | Postgres provider dashboard | Yes |
 | `JWT_SECRET` | Yes | Strong random value, at least 32 bytes; example generator: `openssl rand -hex 32` | Generate locally or in a password manager | Yes |
 | `JWT_EXPIRATION_MS` | Yes | Integer milliseconds, for example `86400000` | Choose based on desired session lifetime | No |
 | `JAVA_TOOL_OPTIONS` | Recommended | `-XX:MaxRAMPercentage=70.0 -XX:InitialRAMPercentage=20.0 -XX:+UseSerialGC` | Enter manually in Northflank runtime variables | No |
@@ -83,7 +90,7 @@ Optional demo-account variables already supported by the app:
 | `DEMO_PASSWORD` | No | Strong password | Choose if overriding the default demo user | Yes |
 | `DEMO_NAME` | No | Text | Choose if overriding the default demo user | No |
 
-Do not set `DATABASE_URL` on Northflank unless you intentionally want to use the legacy Render-style URL conversion. Prefer `DB_URL`.
+Prefer `DATABASE_URL` for Neon. Use `DB_URL`/`DB_USERNAME`/`DB_PASSWORD` only when you want to provide a JDBC URL manually.
 
 ## Northflank Dashboard Steps
 

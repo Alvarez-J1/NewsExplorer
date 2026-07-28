@@ -77,9 +77,9 @@ For Northflank deployment, see [`../NORTHFLANK_DEPLOYMENT.md`](../NORTHFLANK_DEP
 
 ## Deploy to Render
 
-The Render instructions remain here because the existing PostgreSQL database is still hosted on Render.
+The backend can still run on Render while the database runs on Neon or another hosted PostgreSQL provider.
 
-This repo includes a root `render.yaml` blueprint and `backend/Dockerfile` for deploying the Spring Boot API as a Docker web service with Render PostgreSQL.
+This repo includes a root `render.yaml` blueprint and `backend/Dockerfile`. The blueprint is useful for recreating the original Render-backed setup, but for Neon use a manually configured `DATABASE_URL` on the Render web service.
 
 ### Option A: Deploy from the blueprint
 
@@ -89,8 +89,9 @@ This repo includes a root `render.yaml` blueprint and `backend/Dockerfile` for d
 4. Render will create:
    - `newsexplorer-backend` Docker web service
    - `newsexplorer-db` PostgreSQL database
-5. Fill in the manual environment variables listed below.
-6. Deploy the service.
+5. If using Neon instead of Render PostgreSQL, replace the database env vars on the web service with the Neon `DATABASE_URL`.
+6. Fill in the manual environment variables listed below.
+7. Deploy the service.
 
 The web service health check path is:
 
@@ -105,7 +106,7 @@ plan with fewer cold starts.
 
 ### Option B: Create the web service manually
 
-1. In Render, create a PostgreSQL database.
+1. Create or choose a PostgreSQL database. Neon works well here; copy its pooled or direct connection URL.
 2. Create a new Docker web service from this repository.
 3. Set the Docker context to `./backend`.
 4. Set the Dockerfile path to `./backend/Dockerfile`.
@@ -119,10 +120,10 @@ Set these on the backend web service:
 | Variable | Required | Value |
 |----------|----------|-------|
 | `PORT` | No | Render sets this automatically. Leave unset unless Render instructs otherwise. |
-| `DATABASE_URL` | Blueprint only | Set automatically from Render PostgreSQL. The app converts Render's Postgres URL into a JDBC URL at startup. |
-| `DB_URL` | Manual deploy only | JDBC URL for the Render database, for example `jdbc:postgresql://<internal-host>:5432/<database-name>` |
-| `DB_USERNAME` | Yes | Render PostgreSQL username |
-| `DB_PASSWORD` | Yes | Render PostgreSQL password |
+| `DATABASE_URL` | Recommended for Neon | Full Postgres URL, for example `postgresql://USER:PASSWORD@HOST/neondb?sslmode=require&channel_binding=require`. The app converts it to JDBC and extracts credentials at startup. |
+| `DB_URL` | Local/manual JDBC only | JDBC URL, for example `jdbc:postgresql://localhost:5432/newsexplorer`. Leave unset in production when using `DATABASE_URL`. |
+| `DB_USERNAME` | Only with `DB_URL` | PostgreSQL username. Not needed when `DATABASE_URL` includes credentials. |
+| `DB_PASSWORD` | Only with `DB_URL` | PostgreSQL password. Not needed when `DATABASE_URL` includes credentials. |
 | `JWT_SECRET` | Yes | Strong random secret, at least 32 bytes. Example generator: `openssl rand -hex 32` |
 | `JWT_EXPIRATION_MS` | Yes | Token lifetime in milliseconds, for example `86400000` for 24 hours |
 | `ALLOWED_ORIGIN` | Yes | Deployed frontend origin with no trailing slash, for example `https://your-frontend.onrender.com` |
@@ -132,9 +133,9 @@ Set these on the backend web service:
 
 Do not commit `.env` files or real secrets.
 
-When deploying from the blueprint, Render supplies `DATABASE_URL`, `DB_USERNAME`, and `DB_PASSWORD` automatically. You only need to enter `ALLOWED_ORIGIN` when Render asks for manual values.
+When using Neon, set `DATABASE_URL` to the full Neon connection string and remove stale `DB_USERNAME` / `DB_PASSWORD` values from the old Render database if the dashboard lets you. The app also extracts credentials from `DATABASE_URL` at startup, which protects deployments that still have old credential variables hanging around.
 
-For manual web service deploys, set `DB_URL` yourself. `DB_URL` must be a JDBC URL beginning with `jdbc:postgresql://`. Render's displayed external/internal database URLs may use `postgres://`; convert that host/database information into the JDBC format above.
+For local manual web service deploys, you can set `DB_URL` yourself. `DB_URL` must be a JDBC URL beginning with `jdbc:postgresql://`.
 
 ---
 

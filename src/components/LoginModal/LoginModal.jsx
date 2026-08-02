@@ -4,6 +4,7 @@ import { useForm } from "../../hooks/useForm";
 import { useEffect, useState } from "react";
 
 const DEMO_WAKEUP_INFO_MS = 6000;
+const LOGIN_EMAIL_ERROR_ID = "login-email-error";
 
 export default function LoginModal({
   isOpen,
@@ -120,11 +121,13 @@ export default function LoginModal({
           onChange={handleChange}
           value={values.email}
           aria-invalid={wrongField === "email"}
-          aria-describedby={wrongField === "email" ? "email-error" : undefined}
+          aria-describedby={
+            wrongField === "email" ? LOGIN_EMAIL_ERROR_ID : undefined
+          }
         />
       </label>
       {wrongField === "email" && (
-        <span id="email-error" className="modal__error">
+        <span id={LOGIN_EMAIL_ERROR_ID} className="modal__error">
           {loginError}
         </span>
       )}

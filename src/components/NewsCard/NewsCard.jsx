@@ -51,6 +51,7 @@ export default function NewsCard({
   };
 
   const articleTitle = item.title || "Untitled article";
+  const removeTooltipId = React.useId();
   const saveButtonLabel = !isLoggedIn
     ? `Sign in to save ${articleTitle}`
     : isSaved
@@ -86,6 +87,8 @@ export default function NewsCard({
                 type="button"
                 className="card__trash-btn"
                 title="Remove from saved"
+                aria-label={`Remove ${articleTitle} from saved articles`}
+                aria-describedby={removeTooltipId}
                 onClick={() => onUnsave?.(item)}
               >
                 <svg
@@ -97,6 +100,8 @@ export default function NewsCard({
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
                 >
                   <path d="M3 6H21" />
 
@@ -108,7 +113,11 @@ export default function NewsCard({
                   <path d="M14 11V17" />
                 </svg>
               </button>
-              <div className="card__tooltip-remove" role="tooltip">
+              <div
+                className="card__tooltip-remove"
+                id={removeTooltipId}
+                role="tooltip"
+              >
                 Remove from saved
               </div>
             </>

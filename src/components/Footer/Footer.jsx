@@ -41,22 +41,22 @@ export default function Footer() {
           <Link to="/" className="footer__link" onClick={handleHomeNavigation}>
             Home
           </Link>
-          <a href="#" className="footer__link">
+          <span className="footer__link footer__link--inactive">
             Trending
-          </a>
-          <a href="#" className="footer__link">
+          </span>
+          <span className="footer__link footer__link--inactive">
             Categories
-          </a>
+          </span>
         </nav>
 
         <nav className="footer__group" aria-label="Platform">
           <p className="footer__group-title">Platform</p>
-          <a href="#" className="footer__link">
+          <span className="footer__link footer__link--inactive">
             About
-          </a>
-          <a href="#" className="footer__link">
+          </span>
+          <span className="footer__link footer__link--inactive">
             Contact
-          </a>
+          </span>
           <a
             href="https://newsapi.org/"
             target="_blank"
@@ -69,12 +69,12 @@ export default function Footer() {
 
         <nav className="footer__group" aria-label="Legal">
           <p className="footer__group-title">Legal</p>
-          <a href="#" className="footer__link">
+          <span className="footer__link footer__link--inactive">
             Privacy
-          </a>
-          <a href="#" className="footer__link">
+          </span>
+          <span className="footer__link footer__link--inactive">
             Terms
-          </a>
+          </span>
         </nav>
       </div>
 

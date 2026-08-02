@@ -86,6 +86,11 @@
   transform: translateX(2px);
 }
 
+.footer__link--inactive:hover {
+  color: var(--color-muted);
+  transform: none;
+}
+
 .footer__logo:focus-visible,
 .footer__link:focus-visible {
   outline: 2px solid rgba(37, 99, 235, 0.58);

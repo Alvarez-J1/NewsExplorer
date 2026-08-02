@@ -77,7 +77,12 @@ export default function Main({
         )}
         {!isLoading && hasSearched && !error && results.length === 0 && (
           <section className="results-empty">
-            <img src={notFound} className="results-empty__img" />
+            <img
+              src={notFound}
+              className="results-empty__img"
+              alt=""
+              aria-hidden="true"
+            />
             <h2 className="results-empty__title">Nothing found</h2>
             <p className="results-empty__text">
               Sorry, but nothing matched your search terms.

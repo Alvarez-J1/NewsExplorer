@@ -166,6 +166,7 @@ export default function NewsCard({
         onKeyDown={handleCardKeyDown}
         role="link"
         tabIndex={0}
+        aria-label={`Open article: ${articleTitle}`}
       >
         <p className="card__date">{item.date}</p>
         <h2 className="card__title">{item.title}</h2>

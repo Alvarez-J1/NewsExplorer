@@ -160,8 +160,7 @@ export default function LoginModal({
         type="submit"
         className="modal__submit--si"
       >
-        {buttonText}
-        Sign in
+        {buttonText || "Sign in"}
       </button>
       <div className="loginmodal__demo">
         <button

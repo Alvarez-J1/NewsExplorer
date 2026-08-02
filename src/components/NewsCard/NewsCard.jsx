@@ -62,20 +62,26 @@ export default function NewsCard({
   return (
     <li className={`card ${className}`.trim()}>
       <div className="card__media">
-        {item.image ? (
-          <img
-            onClick={handleCardClick}
-            className="card__image"
-            src={item.image}
-            alt={item.title || "Article image"}
-          />
-        ) : (
-          <div
-            className="card__image card__image--placeholder"
-            onClick={handleCardClick}
-            aria-label="Article image unavailable"
-          />
-        )}
+        <button
+          type="button"
+          className="card__image-button"
+          onClick={handleCardClick}
+          aria-label={`Open article: ${articleTitle}`}
+        >
+          {item.image ? (
+            <img
+              className="card__image"
+              src={item.image}
+              alt=""
+              aria-hidden="true"
+            />
+          ) : (
+            <span
+              className="card__image card__image--placeholder"
+              aria-hidden="true"
+            />
+          )}
+        </button>
         {isSavedPage && item.keyword && (
           <span className="card__chip">{item.keyword}</span>
         )}

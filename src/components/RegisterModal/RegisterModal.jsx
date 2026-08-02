@@ -3,6 +3,8 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useEffect, useState } from "react";
 
+const REGISTER_EMAIL_ERROR_ID = "register-email-error";
+
 export default function RegisterModal({
   onClose,
   isOpen,
@@ -84,7 +86,9 @@ export default function RegisterModal({
           onChange={handleChange}
           value={values.email}
           aria-invalid={wrongField === "email"}
-          aria-describedby={wrongField === "email" ? "email-error" : undefined}
+          aria-describedby={
+            wrongField === "email" ? REGISTER_EMAIL_ERROR_ID : undefined
+          }
         />
       </label>
       <label
@@ -126,7 +130,7 @@ export default function RegisterModal({
         />
       </label>
       {wrongField === "email" && (
-        <span id="email-error" className="modal__error">
+        <span id={REGISTER_EMAIL_ERROR_ID} className="modal__error">
           {signupError}
         </span>
       )}

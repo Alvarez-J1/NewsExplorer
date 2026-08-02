@@ -1,12 +1,13 @@
 import "./Footer.css";
 
 import { Link, useLocation } from "react-router-dom";
+import { getPreferredScrollBehavior } from "../../utils/motion";
 
 export default function Footer() {
   const location = useLocation();
   const isHomeRoute = location.pathname === "/";
   const scrollToPageTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: getPreferredScrollBehavior() });
   };
   const handleHomeNavigation = (e) => {
     if (isHomeRoute) {

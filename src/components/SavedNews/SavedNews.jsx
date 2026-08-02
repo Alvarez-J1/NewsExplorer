@@ -7,6 +7,7 @@ import savedmenuIcon from "../../assets/savednews__menu-icon.svg";
 import NewsCard from "../NewsCard/NewsCard";
 import Footer from "../Footer/Footer";
 import savednewscloseIcon from "../../assets/close-mobile.svg";
+import { getPreferredScrollBehavior } from "../../utils/motion";
 
 export default function SavedNews({
   currentUser,
@@ -28,7 +29,7 @@ export default function SavedNews({
   const handleOpenMenu = () => setIsMobileMenuOpen(true);
   const handleCloseMenu = () => setIsMobileMenuOpen(false);
   const scrollToPageTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: getPreferredScrollBehavior() });
   };
   const handleHomeNavigation = () => {
     window.setTimeout(scrollToPageTop, 0);

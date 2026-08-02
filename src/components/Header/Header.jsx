@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import menuIcon from "../../assets/menuIcon.svg";
 import closeIcon from "../../assets/close-mobile.svg";
+import { getPreferredScrollBehavior } from "../../utils/motion";
 
 export default function Header({
   onLoginClick,
@@ -20,7 +21,7 @@ export default function Header({
   const handleOpenMenu = () => setIsMobileMenuOpen(true);
   const handleCloseMenu = () => setIsMobileMenuOpen(false);
   const scrollToPageTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: getPreferredScrollBehavior() });
   };
   const handleHomeNavigation = (e) => {
     if (isHomeRoute) {

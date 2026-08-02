@@ -45,6 +45,7 @@ export default function ModalWithForm({
       aria-modal="true"
       aria-labelledby={titleId}
       aria-describedby={description ? descriptionId : undefined}
+      aria-hidden={!isOpen}
     >
       <div className={`modal__content ${contentClassName}`}>
         <button

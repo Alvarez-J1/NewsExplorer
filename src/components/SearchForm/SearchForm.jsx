@@ -4,6 +4,7 @@ import "./SearchForm.css";
 export default function SearchForm({ onSearch }) {
   const [q, setQ] = useState("");
   const [searchError, setSearchError] = useState("");
+  const searchErrorId = "search-form-error";
   const [isVerySmallScreen, setIsVerySmallScreen] = useState(() =>
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
@@ -66,6 +67,8 @@ export default function SearchForm({ onSearch }) {
           onChange={(e) => setQ(e.target.value)}
           onKeyDown={handleKeyDown}
           aria-label="Search query"
+          aria-invalid={Boolean(searchError)}
+          aria-describedby={searchError ? searchErrorId : undefined}
         />
         <button
           className="search-form__submit-btn"
@@ -91,7 +94,11 @@ export default function SearchForm({ onSearch }) {
         </button>
       </form>
 
-      {searchError && <span className="search__error">{searchError}</span>}
+      {searchError && (
+        <span id={searchErrorId} className="search__error" role="alert">
+          {searchError}
+        </span>
+      )}
 
       {/* <button className="search-form__show-more-btn" type="button">
         Show more

@@ -62,6 +62,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="footer__link"
+            aria-label="News API website (opens in a new tab)"
           >
             News API
           </a>

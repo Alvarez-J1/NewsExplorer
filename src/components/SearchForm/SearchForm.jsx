@@ -100,9 +100,6 @@ export default function SearchForm({ onSearch }) {
         </span>
       )}
 
-      {/* <button className="search-form__show-more-btn" type="button">
-        Show more
-      </button> */}
     </>
   );
 }

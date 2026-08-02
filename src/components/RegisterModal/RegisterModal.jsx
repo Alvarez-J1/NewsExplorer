@@ -139,8 +139,7 @@ export default function RegisterModal({
         type="submit"
         className="modal__submit--sp"
       >
-        {buttonText}
-        Sign up
+        {buttonText || "Sign up"}
       </button>
       <p className="modal__auth-note--sp">
         <span className="modal__auth-or--sp">or </span>

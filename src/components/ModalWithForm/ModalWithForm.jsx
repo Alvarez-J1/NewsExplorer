@@ -1,5 +1,5 @@
 import "./ModalWithForm.css";
-import { useEffect, useId } from "react";
+import { useEffect, useId, useRef } from "react";
 
 export default function ModalWithForm({
   children,
@@ -14,6 +14,7 @@ export default function ModalWithForm({
 }) {
   const titleId = useId();
   const descriptionId = useId();
+  const contentRef = useRef(null);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -37,6 +38,19 @@ export default function ModalWithForm({
     };
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    if (!isOpen || !contentRef.current) return;
+
+    const firstFormControl = contentRef.current.querySelector(
+      "input:not([disabled]), textarea:not([disabled]), select:not([disabled])"
+    );
+    const fallbackControl = contentRef.current.querySelector(
+      "button:not([disabled]), [href], [tabindex]:not([tabindex='-1'])"
+    );
+
+    (firstFormControl ?? fallbackControl)?.focus();
+  }, [isOpen]);
+
   return (
     <div
       className={`modal ${isOpen ? "modal_opened" : ""} ${className}`}
@@ -47,7 +61,7 @@ export default function ModalWithForm({
       aria-describedby={description ? descriptionId : undefined}
       aria-hidden={!isOpen}
     >
-      <div className={`modal__content ${contentClassName}`}>
+      <div className={`modal__content ${contentClassName}`} ref={contentRef}>
         <button
           onClick={onClose}
           type="button"

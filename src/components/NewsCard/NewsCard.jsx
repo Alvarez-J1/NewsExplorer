@@ -51,6 +51,7 @@ export default function NewsCard({
   };
 
   const articleTitle = item.title || "Untitled article";
+  const saveTooltipId = React.useId();
   const removeTooltipId = React.useId();
   const saveButtonLabel = !isLoggedIn
     ? `Sign in to save ${articleTitle}`
@@ -130,6 +131,7 @@ export default function NewsCard({
                   className="card__save-btn"
                   aria-label={saveButtonLabel}
                   aria-pressed={isSaved}
+                  aria-describedby={!isLoggedIn ? saveTooltipId : undefined}
                   onClick={handleSaveToggle}
                   title={isSaved ? "Saved" : "Save"}
                 >
@@ -159,7 +161,11 @@ export default function NewsCard({
                   </svg>
                 </button>
                 {!isLoggedIn && (
-                  <div className="card__tooltip" role="tooltip">
+                  <div
+                    className="card__tooltip"
+                    id={saveTooltipId}
+                    role="tooltip"
+                  >
                     Sign in to save articles
                   </div>
                 )}

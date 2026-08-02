@@ -50,6 +50,13 @@ export default function NewsCard({
     }
   };
 
+  const articleTitle = item.title || "Untitled article";
+  const saveButtonLabel = !isLoggedIn
+    ? `Sign in to save ${articleTitle}`
+    : isSaved
+    ? `Remove ${articleTitle} from saved articles`
+    : `Save ${articleTitle}`;
+
   return (
     <li className={`card ${className}`.trim()}>
       <div className="card__media">
@@ -112,7 +119,7 @@ export default function NewsCard({
                 <button
                   type="button"
                   className="card__save-btn"
-                  aria-label={isLoggedIn ? "Save" : "Sign in to save"}
+                  aria-label={saveButtonLabel}
                   aria-pressed={isSaved}
                   onClick={handleSaveToggle}
                   title={isSaved ? "Saved" : "Save"}

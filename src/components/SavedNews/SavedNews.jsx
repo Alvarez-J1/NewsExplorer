@@ -1,7 +1,7 @@
 import "./SavedNews.css";
 
 import { Link, NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import savedmenuIcon from "../../assets/savednews__menu-icon.svg";
 import NewsCard from "../NewsCard/NewsCard";
@@ -25,6 +25,7 @@ export default function SavedNews({
   const [k1, k2, ...rest] = uniq;
   const extra = rest.length;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const closeMenuButtonRef = useRef(null);
 
   const handleOpenMenu = () => setIsMobileMenuOpen(true);
   const handleCloseMenu = () => setIsMobileMenuOpen(false);
@@ -55,6 +56,8 @@ export default function SavedNews({
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    closeMenuButtonRef.current?.focus();
+
     return () => {
       document.body.style.overflow = originalBodyOverflow;
       document.body.style.position = originalBodyPosition;
@@ -153,6 +156,7 @@ export default function SavedNews({
               <button
                 type="button"
                 className="mobile-menu__close-btn"
+                ref={closeMenuButtonRef}
                 onClick={handleCloseMenu}
                 aria-label="Close menu"
               >

@@ -32,7 +32,6 @@ export default function App() {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState("");
   const [visibleCards, setVisibleCards] = useState(3);
-  const [, setSearchKeyword] = useState("");
   const [token, setToken] = useState("");
   const [currentUser, setCurrentUser] = useState({
     email: "",
@@ -120,7 +119,6 @@ export default function App() {
 
   //SEARCH
   const handleSearch = async (query) => {
-    setSearchKeyword(query);
     setSearchQuery(query);
     setIsloading(true);
     setHasSearched(true);

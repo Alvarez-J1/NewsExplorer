@@ -393,9 +393,7 @@ export default function App() {
               path="/"
               element={
                 <Main
-                  onLogin={handleLogin}
                   onLoginClick={openLoginModal}
-                  onRegisterClick={openRegisterModal}
                   onSearch={handleSearch}
                   results={results}
                   hasSearched={hasSearched}
@@ -421,7 +419,6 @@ export default function App() {
                 <Main
                   onSearch={handleSearch}
                   onLoginClick={openLoginModal}
-                  onRegisterClick={openRegisterModal}
                   results={results}
                   hasSearched={hasSearched}
                   isLoading={isLoading}

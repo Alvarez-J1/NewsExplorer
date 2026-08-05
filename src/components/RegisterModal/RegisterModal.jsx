@@ -111,9 +111,7 @@ export default function RegisterModal({
       </label>
       <label
         htmlFor="registermodal__name"
-        className={`modal__label registermodal__username ${
-          wrongField === "email" ? "modal__label-error" : ""
-        }`}
+        className="modal__label registermodal__username"
       >
         Name
         <input

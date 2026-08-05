@@ -247,7 +247,6 @@ export default function SavedNews({
                 key={a.url}
                 item={a}
                 isLoggedIn={true}
-                currentUser={currentUser}
                 saved={true}
                 onUnsave={() => onUnsaveArticle(a)}
                 isSavedPage={true}

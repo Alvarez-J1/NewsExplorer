@@ -448,7 +448,6 @@ export default function App() {
                     isSavedArticlesLoading={isSavedArticlesLoading}
                     onUnsaveArticle={handleUnsaveArticle}
                     isAnyModalOpen={isAnyModalOpen}
-                    isLoggedIn={isLoggedIn}
                   />
                 ) : (
                   <Navigate to="/" replace />

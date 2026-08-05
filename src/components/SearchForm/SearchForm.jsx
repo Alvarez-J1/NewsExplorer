@@ -12,7 +12,12 @@ export default function SearchForm({ onSearch }) {
   );
 
   useEffect(() => {
-    if (typeof window.matchMedia !== "function") return undefined;
+    if (
+      typeof window === "undefined" ||
+      typeof window.matchMedia !== "function"
+    ) {
+      return undefined;
+    }
 
     const mediaQuery = window.matchMedia("(max-width: 345px)");
     const updatePlaceholder = () => setIsVerySmallScreen(mediaQuery.matches);

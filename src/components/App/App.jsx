@@ -77,7 +77,7 @@ export default function App() {
       const data = await response.json();
 
       if (response.ok) {
-        return data.articles;
+        return Array.isArray(data.articles) ? data.articles : [];
       } else {
         throw new Error(data.message || "Something went wrong");
       }

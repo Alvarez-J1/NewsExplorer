@@ -66,7 +66,6 @@ export default function Main({
             visibleCards={visibleCards}
             onShowMore={onShowMore}
             isLoggedIn={isLoggedIn}
-            currentUser={currentUser}
             openLoginModal={onLoginClick}
             savedArticles={savedArticles}
             onSaveArticle={onSaveArticle}

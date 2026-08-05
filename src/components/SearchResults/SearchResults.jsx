@@ -6,7 +6,6 @@ export default function SearchResults({
   visibleCards = 3,
   onShowMore,
   isLoggedIn,
-  currentUser,
   openLoginModal,
   onSaveArticle,
   onUnsaveArticle,
@@ -34,7 +33,6 @@ export default function SearchResults({
             key={a.url || a.id || i}
             item={a}
             isLoggedIn={isLoggedIn}
-            currentUser={currentUser}
             onRequireLogin={openLoginModal}
             onSave={() => onSaveArticle({ ...a, keyword: searchQuery })}
             onUnsave={() => onUnsaveArticle(a)}

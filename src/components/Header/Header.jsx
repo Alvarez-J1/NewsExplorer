@@ -90,7 +90,10 @@ export default function Header({
           {isLoggedIn ? (
             // Logged IN state
             <>
-              <nav className="header__nav header__nav--logged-in">
+              <nav
+                className="header__nav header__nav--logged-in"
+                aria-label="Primary navigation"
+              >
                 {!isHomeRoute && (
                   <NavLink
                     to="/"
@@ -127,7 +130,10 @@ export default function Header({
           ) : (
             // Logged OUT state
             <>
-              <nav className="header__nav header__nav--logged-out">
+              <nav
+                className="header__nav header__nav--logged-out"
+                aria-label="Primary navigation"
+              >
                 {!isHomeRoute && (
                   <NavLink
                     to="/"

@@ -80,7 +80,10 @@ export default function SavedNews({
           </Link>
         </div>
         <div className="savednews__header-right">
-          <nav className="savednews__header-nav">
+          <nav
+            className="savednews__header-nav"
+            aria-label="Saved articles navigation"
+          >
             <NavLink
               to="/"
               className={({ isActive }) =>

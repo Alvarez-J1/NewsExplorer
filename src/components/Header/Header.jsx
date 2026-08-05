@@ -169,7 +169,7 @@ export default function Header({
               aria-controls="main-mobile-menu"
               aria-expanded={isMobileMenuOpen}
             >
-              <img src={menuIcon} alt="" />
+              <img src={menuIcon} alt="" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -210,7 +210,7 @@ export default function Header({
                   onClick={handleCloseMenu}
                   aria-label="Close menu"
                 >
-                  <img src={closeIcon} alt="" />
+                  <img src={closeIcon} alt="" aria-hidden="true" />
                 </button>
               )}
             </div>

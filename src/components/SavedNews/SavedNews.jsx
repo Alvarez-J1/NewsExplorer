@@ -127,7 +127,7 @@ export default function SavedNews({
               aria-controls="savednews-mobile-menu"
               aria-expanded={isMobileMenuOpen}
             >
-              <img src={savedmenuIcon} alt="" />
+              <img src={savedmenuIcon} alt="" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -160,7 +160,7 @@ export default function SavedNews({
                 onClick={handleCloseMenu}
                 aria-label="Close menu"
               >
-                <img src={savednewscloseIcon} alt="" />
+                <img src={savednewscloseIcon} alt="" aria-hidden="true" />
               </button>
             </div>
             <nav className="mobile-menu__nav">

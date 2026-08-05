@@ -135,7 +135,7 @@ export default function SavedNews({
           className="mobile-menu"
           role="dialog"
           aria-modal="true"
-          aria-label="Navigation menu"
+          aria-labelledby="savednews-mobile-menu-title"
         >
           <button
             type="button"
@@ -146,7 +146,9 @@ export default function SavedNews({
           <div className="mobile-menu__panel" id="savednews-mobile-menu">
             <div className="mobile-menu__top">
               <div className="mobile-menu__section">
-                <p className="mobile-menu__title">NewsExplorer</p>
+                <p className="mobile-menu__title" id="savednews-mobile-menu-title">
+                  NewsExplorer
+                </p>
               </div>
               <button
                 type="button"

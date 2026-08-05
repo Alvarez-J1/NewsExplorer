@@ -1,6 +1,6 @@
 import "./Header.css";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import menuIcon from "../../assets/menuIcon.svg";
 import closeIcon from "../../assets/close-mobile.svg";
@@ -14,6 +14,7 @@ export default function Header({
   isAnyModalOpen,
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const closeMenuButtonRef = useRef(null);
   const location = useLocation();
   const isHomeRoute = location.pathname === "/";
   const firstname = currentUser?.name?.split?.(" ")[0] ?? "User";
@@ -61,6 +62,8 @@ export default function Header({
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    closeMenuButtonRef.current?.focus();
+
     return () => {
       document.body.style.overflow = originalBodyOverflow;
       document.body.style.position = originalBodyPosition;
@@ -203,6 +206,7 @@ export default function Header({
                 <button
                   type="button"
                   className="mobile-menu__close-btn"
+                  ref={closeMenuButtonRef}
                   onClick={handleCloseMenu}
                   aria-label="Close menu"
                 >

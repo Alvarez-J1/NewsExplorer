@@ -63,14 +63,11 @@ export default function RegisterModal({
     <ModalWithForm
       title="Sign up"
       description="Create a reading profile to save stories and organize your coverage."
-      buttonText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       titleClassName="modal__title--sp"
       contentClassName="modal__content--sp"
-      submitClassName="modal__submit--signup"
-      disabled={!values.email || !values.password || !values.username}
     >
       <label htmlFor="email" className="modal__label registermodal__email">
         Email

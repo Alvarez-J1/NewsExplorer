@@ -80,15 +80,11 @@ export default function LoginModal({
     <ModalWithForm
       title="Sign in"
       description="Continue to your saved stories, topics, and reading history."
-      name="login"
-      buttonText="Sign in"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      type="submit"
       contentClassName="modal__content--si"
       titleClassName="modal__title--si"
-      submitClassName="modal__submit--si"
     >
       <label
         htmlFor="loginmodal__email"

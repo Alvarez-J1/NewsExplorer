@@ -178,7 +178,7 @@ export default function Header({
           className="mobile-menu"
           role="dialog"
           aria-modal="true"
-          aria-label="Navigation menu"
+          aria-labelledby="main-mobile-menu-title"
         >
           <button
             type="button"
@@ -191,6 +191,7 @@ export default function Header({
               <div className="mobile-menu__section">
                 <Link
                   to="/"
+                  id="main-mobile-menu-title"
                   className="mobile-menu__title"
                   onClick={handleMobileHomeNavigation}
                   aria-label="NewsExplorer home"

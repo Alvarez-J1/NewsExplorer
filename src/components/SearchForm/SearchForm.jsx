@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import "./SearchForm.css";
 
 export default function SearchForm({ onSearch }) {
   const [q, setQ] = useState("");
   const [searchError, setSearchError] = useState("");
-  const searchErrorId = "search-form-error";
+  const searchErrorId = useId();
   const [isVerySmallScreen, setIsVerySmallScreen] = useState(() =>
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&

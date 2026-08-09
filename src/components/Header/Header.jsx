@@ -215,7 +215,7 @@ export default function Header({
               )}
             </div>
 
-            <nav className="mobile-menu__nav">
+            <nav className="mobile-menu__nav" aria-label="Mobile navigation">
               {!isHomeRoute && (
                 <NavLink
                   end

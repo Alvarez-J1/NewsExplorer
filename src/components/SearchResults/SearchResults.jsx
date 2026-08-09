@@ -18,10 +18,12 @@ export default function SearchResults({
   const allShown = visibleCards >= items.length;
 
   return (
-    <section className="results">
+    <section className="results" aria-labelledby="search-results-title">
       <div className="results__header">
         <p className="results__eyebrow">Latest coverage</p>
-        <h2 className="results__title">Search results</h2>
+        <h2 className="results__title" id="search-results-title">
+          Search results
+        </h2>
         <p className="results__summary">
           {items.length} {items.length === 1 ? "article" : "articles"} matched
           your search.

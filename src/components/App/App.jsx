@@ -22,6 +22,8 @@ import dogImg from "../../assets/dog.jpg";
 import lakeImg from "../../assets/Lake.jpg";
 import alkImg from "../../assets/alk.jpg";
 
+const NEWS_SEARCH_PAGE_SIZE = "100";
+
 export default function App() {
   //state
   const navigate = useNavigate();
@@ -69,7 +71,7 @@ export default function App() {
       apiKey: apiKey,
       from: getDateSevenDaysAgo(),
       to: getCurrentDate(),
-      pageSize: "100",
+      pageSize: NEWS_SEARCH_PAGE_SIZE,
     });
 
     try {

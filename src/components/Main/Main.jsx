@@ -94,9 +94,15 @@ export default function Main({
           </section>
         )}
         {!isLoading && hasSearched && error && (
-          <section className="results-error">
+          <section
+            className="results-error"
+            role="alert"
+            aria-labelledby="results-error-title"
+          >
             <p className="results-error__eyebrow">Request failed</p>
-            <h2 className="results-error__title">Error</h2>
+            <h2 className="results-error__title" id="results-error-title">
+              Error
+            </h2>
             <p className="results-error__text">{error}</p>
           </section>
         )}

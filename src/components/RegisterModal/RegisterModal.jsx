@@ -125,7 +125,11 @@ export default function RegisterModal({
         />
       </label>
       {wrongField === "email" && (
-        <span id={REGISTER_EMAIL_ERROR_ID} className="modal__error">
+        <span
+          id={REGISTER_EMAIL_ERROR_ID}
+          className="modal__error"
+          role="alert"
+        >
           {signupError}
         </span>
       )}

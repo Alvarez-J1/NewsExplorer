@@ -1,6 +1,14 @@
 import NewsCard from "../NewsCard/NewsCard";
 import "./SearchResults.css";
 
+const getSearchArticleKey = (article, index) =>
+  article.id ??
+  article._id ??
+  article.url ??
+  [article.title, article.source, article.publishedAt, index]
+    .filter(Boolean)
+    .join("-");
+
 export default function SearchResults({
   items = [],
   visibleCards = 3,
@@ -37,7 +45,7 @@ export default function SearchResults({
       <ul className="results__grid">
         {visible.map((a, i) => (
           <NewsCard
-            key={a.url || a.id || i}
+            key={getSearchArticleKey(a, i)}
             item={a}
             isLoggedIn={isLoggedIn}
             onRequireLogin={openLoginModal}

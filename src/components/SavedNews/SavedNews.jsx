@@ -171,7 +171,10 @@ export default function SavedNews({
                 <img src={savednewscloseIcon} alt="" aria-hidden="true" />
               </button>
             </div>
-            <nav className="mobile-menu__nav">
+            <nav
+              className="mobile-menu__nav"
+              aria-label="Saved articles mobile navigation"
+            >
               <NavLink
                 end
                 to="/"

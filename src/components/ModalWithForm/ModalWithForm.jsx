@@ -15,6 +15,7 @@ export default function ModalWithForm({
   const titleId = useId();
   const descriptionId = useId();
   const contentRef = useRef(null);
+  const previouslyFocusedElementRef = useRef(null);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -41,6 +42,12 @@ export default function ModalWithForm({
   useEffect(() => {
     if (!isOpen || !contentRef.current) return;
 
+    const activeElement = document.activeElement;
+    previouslyFocusedElementRef.current =
+      activeElement && typeof activeElement.focus === "function"
+        ? activeElement
+        : null;
+
     const firstFormControl = contentRef.current.querySelector(
       "input:not([disabled]), textarea:not([disabled]), select:not([disabled])"
     );
@@ -49,6 +56,14 @@ export default function ModalWithForm({
     );
 
     (firstFormControl ?? fallbackControl)?.focus();
+
+    return () => {
+      const previousElement = previouslyFocusedElementRef.current;
+
+      if (previousElement && document.contains(previousElement)) {
+        previousElement.focus();
+      }
+    };
   }, [isOpen]);
 
   return (

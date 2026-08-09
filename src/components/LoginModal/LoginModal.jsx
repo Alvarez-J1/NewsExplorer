@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const DEMO_WAKEUP_INFO_MS = 6000;
 const LOGIN_EMAIL_ERROR_ID = "login-email-error";
+const DEMO_LOGIN_NOTE_ID = "demo-login-note";
 
 export default function LoginModal({
   isOpen,
@@ -158,10 +159,11 @@ export default function LoginModal({
           className="loginmodal__demo-button"
           onClick={handleDemoLogin}
           disabled={isDemoSubmitting}
+          aria-describedby={DEMO_LOGIN_NOTE_ID}
         >
           {isDemoSubmitting ? "Opening demo..." : "View Demo"}
         </button>
-        <p className="loginmodal__demo-note">
+        <p className="loginmodal__demo-note" id={DEMO_LOGIN_NOTE_ID}>
           Skip sign in and explore the app with a demo account.
         </p>
         {showDemoWakeupInfo && (

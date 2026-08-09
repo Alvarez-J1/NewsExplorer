@@ -43,19 +43,9 @@ export default function RegisterModal({
       await onRegister(values);
       setWrongField(null);
       setSignupError("");
-    } catch (err) {
-      const status =
-        err?.code === "INVALID_CREDENTIALS"
-          ? 401
-          : err?.status ?? err?.response?.status ?? Number(err?.message);
-
-      if (status === 401) {
-        setWrongField("password");
-        setSignupError("Email or password incorrect");
-      } else {
-        setWrongField("password");
-        setSignupError("Email or password incorrect");
-      }
+    } catch {
+      setWrongField("password");
+      setSignupError("Email or password incorrect");
     }
   };
 

@@ -113,7 +113,11 @@ export default function LoginModal({
         />
       </label>
       {wrongField === "email" && (
-        <span id={LOGIN_EMAIL_ERROR_ID} className="modal__error">
+        <span
+          id={LOGIN_EMAIL_ERROR_ID}
+          className="modal__error"
+          role="alert"
+        >
           {loginError}
         </span>
       )}

@@ -9,6 +9,14 @@ import Footer from "../Footer/Footer";
 import savednewscloseIcon from "../../assets/close-mobile.svg";
 import { getPreferredScrollBehavior } from "../../utils/motion";
 
+const getSavedArticleKey = (article, index) =>
+  article.id ??
+  article._id ??
+  article.url ??
+  [article.title, article.source, article.publishedAt, index]
+    .filter(Boolean)
+    .join("-");
+
 export default function SavedNews({
   currentUser,
   onLogout,
@@ -242,9 +250,9 @@ export default function SavedNews({
           </ul>
         ) : savedArticles.length > 0 ? (
           <ul className="results__grid">
-            {savedArticles.map((a) => (
+            {savedArticles.map((a, index) => (
               <NewsCard
-                key={a.url}
+                key={getSavedArticleKey(a, index)}
                 item={a}
                 isLoggedIn={true}
                 saved={true}

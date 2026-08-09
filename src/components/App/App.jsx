@@ -28,7 +28,7 @@ export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [results, setResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState("");
   const [visibleCards, setVisibleCards] = useState(3);
@@ -120,7 +120,7 @@ export default function App() {
   //SEARCH
   const handleSearch = async (query) => {
     setSearchQuery(query);
-    setIsloading(true);
+    setIsLoading(true);
     setHasSearched(true);
     setError("");
     setVisibleCards(3);
@@ -160,7 +160,7 @@ export default function App() {
         "Sorry, something went wrong during the request. Please try again later."
       );
     } finally {
-      setIsloading(false);
+      setIsLoading(false);
     }
   };
 

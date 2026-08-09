@@ -24,7 +24,7 @@ export default function SearchResults({
         <h2 className="results__title" id="search-results-title">
           Search results
         </h2>
-        <p className="results__summary">
+        <p className="results__summary" aria-live="polite" aria-atomic="true">
           {items.length} {items.length === 1 ? "article" : "articles"} matched
           your search.
         </p>

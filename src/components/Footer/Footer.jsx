@@ -36,7 +36,7 @@ export default function Footer() {
         </p>
       </div>
 
-      <div className="footer__links" aria-label="Footer navigation">
+      <div className="footer__links">
         <nav className="footer__group" aria-label="Explore">
           <p className="footer__group-title">Explore</p>
           <Link to="/" className="footer__link" onClick={handleHomeNavigation}>

@@ -23,6 +23,8 @@ import lakeImg from "../../assets/Lake.jpg";
 import alkImg from "../../assets/alk.jpg";
 
 const NEWS_SEARCH_PAGE_SIZE = "100";
+const INITIAL_VISIBLE_CARDS = 3;
+const VISIBLE_CARD_INCREMENT = 3;
 
 export default function App() {
   //state
@@ -33,7 +35,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState("");
-  const [visibleCards, setVisibleCards] = useState(3);
+  const [visibleCards, setVisibleCards] = useState(INITIAL_VISIBLE_CARDS);
   const [token, setToken] = useState("");
   const [currentUser, setCurrentUser] = useState({
     email: "",
@@ -125,7 +127,7 @@ export default function App() {
     setIsLoading(true);
     setHasSearched(true);
     setError("");
-    setVisibleCards(3);
+    setVisibleCards(INITIAL_VISIBLE_CARDS);
 
     try {
       if (USE_MOCK) {
@@ -169,7 +171,9 @@ export default function App() {
   const handleShowMore = () => {
     setIsLoadingMore(true);
 
-    setVisibleCards((prev) => Math.min(prev + 3, results.length));
+    setVisibleCards((prev) =>
+      Math.min(prev + VISIBLE_CARD_INCREMENT, results.length)
+    );
 
     setTimeout(() => {
       setIsLoadingMore(false);

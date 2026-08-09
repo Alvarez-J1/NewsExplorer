@@ -12,7 +12,6 @@ export default function SuccessModal({ isOpen, onClose, onOpenLogin }) {
       onClose={onClose}
       contentClassName="modal__content--success"
       titleClassName="modal__title--success"
-      submitClassName="modal__submit--success"
     >
       <button
         onClick={onOpenLogin}

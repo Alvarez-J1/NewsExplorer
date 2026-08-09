@@ -16,6 +16,11 @@ export default function SearchResults({
   const visible = items.slice(0, visibleCards);
 
   const allShown = visibleCards >= items.length;
+  const showMoreLabel = isLoadingMore
+    ? "Loading more search results"
+    : allShown
+    ? "All search results shown"
+    : "Show more search results";
 
   return (
     <section className="results" aria-labelledby="search-results-title">
@@ -49,6 +54,7 @@ export default function SearchResults({
           type="button"
           onClick={onShowMore}
           disabled={allShown || isLoadingMore}
+          aria-label={showMoreLabel}
         >
           {isLoadingMore
             ? "Loading..."

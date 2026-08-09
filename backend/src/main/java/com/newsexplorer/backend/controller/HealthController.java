@@ -20,7 +20,7 @@ public class HealthController {
                 .body(Map.of("status", "ok"));
     }
 
-    @RequestMapping(value = "/api/health", method = RequestMethod.HEAD)
+    @RequestMapping(value = {"/health", "/api/health"}, method = RequestMethod.HEAD)
     public ResponseEntity<Void> healthHead() {
         return ResponseEntity
                 .ok()

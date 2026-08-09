@@ -47,4 +47,11 @@ class HealthControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(""));
     }
+
+    @Test
+    void headRootHealthReturnsOkWithoutBody() throws Exception {
+        mockMvc.perform(head("/health"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(""));
+    }
 }

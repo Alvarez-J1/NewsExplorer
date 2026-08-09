@@ -49,7 +49,7 @@ public class SecurityConfig {
                         // Public auth endpoints
                         .requestMatchers(HttpMethod.POST, "/signup", "/signin", "/signin/demo").permitAll()
                         .requestMatchers(HttpMethod.GET, "/health", "/health/", "/api/health", "/api/health/").permitAll()
-                        .requestMatchers(HttpMethod.HEAD, "/api/health", "/api/health/").permitAll()
+                        .requestMatchers(HttpMethod.HEAD, "/health", "/health/", "/api/health", "/api/health/").permitAll()
                         // Everything else requires a valid JWT
                         .anyRequest().authenticated()
                 )

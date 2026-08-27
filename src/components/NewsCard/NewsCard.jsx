@@ -192,7 +192,7 @@ export default function NewsCard({
         aria-label={`Open article: ${articleTitle}`}
       >
         <p className="card__date">{item.date}</p>
-        <h2 className="card__title">{item.title}</h2>
+        <h2 className="card__title">{articleTitle}</h2>
         <p className="card__text">{item.text}</p>
         <p className="card__source">{item.source}</p>
       </div>

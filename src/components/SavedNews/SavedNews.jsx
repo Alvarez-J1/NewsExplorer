@@ -239,7 +239,11 @@ export default function SavedNews({
         )}
       </section>
 
-      <section className="savednews__cards" aria-busy={isSavedArticlesLoading}>
+      <section
+        className="savednews__cards"
+        aria-label="Saved articles"
+        aria-busy={isSavedArticlesLoading}
+      >
         {isSavedArticlesLoading ? (
           <ul className="savednews__skeleton-grid" aria-label="Loading saved articles">
             {[0, 1, 2].map((item) => (

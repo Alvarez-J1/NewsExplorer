@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @Service
@@ -55,7 +56,7 @@ public class ArticleService {
         if (request.publishedAt() != null && !request.publishedAt().isBlank()) {
             try {
                 article.setPublishedAt(Instant.parse(request.publishedAt()));
-            } catch (Exception e) {
+            } catch (DateTimeParseException ignored) {
                 // If the date string can't be parsed as ISO-8601, store null
                 article.setPublishedAt(null);
             }

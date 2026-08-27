@@ -147,6 +147,7 @@ export default function NewsCard({
                     height="19"
                     viewBox="0 0 14 19"
                     aria-hidden="true"
+                    focusable="false"
                   >
                     <path
                       d="M2 1.5h10v16l-5-3-5 3z"
@@ -162,6 +163,7 @@ export default function NewsCard({
                     height="19"
                     viewBox="0 0 14 19"
                     aria-hidden="true"
+                    focusable="false"
                   >
                     <path d="M2 1.5h10v16l-5-3-5 3z" fill="currentColor" />
                   </svg>

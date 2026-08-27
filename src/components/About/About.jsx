@@ -32,10 +32,12 @@ export default function About() {
           </p>
         </div>
 
-        <div className="about__panel" aria-label="NewsExplorer product features">
+        <section className="about__panel" aria-labelledby="about-features-title">
           <div className="about__brief">
             <span className="about__brief-tag">Today&apos;s brief</span>
-            <h3 className="about__brief-title">Curated stories, cleaner context.</h3>
+            <h3 className="about__brief-title" id="about-features-title">
+              Curated stories, cleaner context.
+            </h3>
             <p className="about__brief-text">
             Browse readable editorial cards with trusted sources, concise summaries, and quick save actions built for fast scanning.
             </p>
@@ -50,7 +52,7 @@ export default function About() {
               </article>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </section>
   );

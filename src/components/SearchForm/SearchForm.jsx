@@ -63,6 +63,7 @@ export default function SearchForm({ onSearch }) {
         <input
           className="search-form__input"
           type="text"
+          name="q"
           placeholder={
             isVerySmallScreen
               ? "Search news..."

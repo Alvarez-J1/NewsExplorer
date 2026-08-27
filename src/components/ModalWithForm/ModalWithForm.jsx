@@ -1,6 +1,15 @@
 import "./ModalWithForm.css";
 import { useEffect, useId, useRef } from "react";
 
+const FOCUSABLE_MODAL_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "textarea:not([disabled])",
+  "select:not([disabled])",
+  "[tabindex]:not([tabindex='-1'])",
+].join(", ");
+
 export default function ModalWithForm({
   children,
   title,
@@ -52,10 +61,35 @@ export default function ModalWithForm({
       "input:not([disabled]), textarea:not([disabled]), select:not([disabled])"
     );
     const fallbackControl = contentRef.current.querySelector(
-      "button:not([disabled]), [href], [tabindex]:not([tabindex='-1'])"
+      FOCUSABLE_MODAL_SELECTOR
     );
 
+    const handleTabKey = (e) => {
+      if (e.key !== "Tab" || !contentRef.current) return;
+
+      const focusableElements = Array.from(
+        contentRef.current.querySelectorAll(FOCUSABLE_MODAL_SELECTOR)
+      );
+
+      if (focusableElements.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    };
+
     (firstFormControl ?? fallbackControl)?.focus();
+    document.addEventListener("keydown", handleTabKey);
 
     return () => {
       const previousElement = previouslyFocusedElementRef.current;
@@ -63,6 +97,8 @@ export default function ModalWithForm({
       if (previousElement && document.contains(previousElement)) {
         previousElement.focus();
       }
+
+      document.removeEventListener("keydown", handleTabKey);
     };
   }, [isOpen]);
 

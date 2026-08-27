@@ -47,4 +47,12 @@ class NewsExplorerApplicationTest {
         assertThat(settings.username()).isEqualTo("reader");
         assertThat(settings.password()).isEqualTo("s3cr+t");
     }
+
+    @Test
+    void ignoresMalformedDatabaseUrl() {
+        NewsExplorerApplication.DatabaseUrlSettings settings =
+                NewsExplorerApplication.parseDatabaseUrl("postgresql://%zz");
+
+        assertThat(settings).isNull();
+    }
 }

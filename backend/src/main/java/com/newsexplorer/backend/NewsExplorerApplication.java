@@ -55,7 +55,13 @@ public class NewsExplorerApplication {
             return null;
         }
 
-        URI uri = URI.create(databaseUrl.replaceFirst("^postgres://", "postgresql://"));
+        URI uri;
+        try {
+            uri = URI.create(databaseUrl.replaceFirst("^postgres://", "postgresql://"));
+        } catch (IllegalArgumentException ignored) {
+            return null;
+        }
+
         String host = uri.getHost();
         String rawPath = uri.getRawPath();
 

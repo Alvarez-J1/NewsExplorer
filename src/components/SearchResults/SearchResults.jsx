@@ -24,6 +24,7 @@ export default function SearchResults({
   const visible = items.slice(0, visibleCards);
 
   const allShown = visibleCards >= items.length;
+  const resultsListLabel = `Showing ${visible.length} of ${items.length} search results`;
   const showMoreLabel = isLoadingMore
     ? "Loading more search results"
     : allShown
@@ -46,7 +47,7 @@ export default function SearchResults({
           your search.
         </p>
       </div>
-      <ul className="results__grid">
+      <ul className="results__grid" aria-label={resultsListLabel}>
         {visible.map((a, i) => (
           <NewsCard
             key={getSearchArticleKey(a, i)}

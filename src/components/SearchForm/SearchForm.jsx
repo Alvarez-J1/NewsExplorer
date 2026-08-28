@@ -63,7 +63,12 @@ export default function SearchForm({ onSearch }) {
 
   return (
     <>
-      <form className="search-form" role="search" onSubmit={submit}>
+      <form
+        className="search-form"
+        role="search"
+        aria-label="News search"
+        onSubmit={submit}
+      >
         <input
           className="search-form__input"
           type="text"

@@ -17,6 +17,8 @@ const getSavedArticleKey = (article, index) =>
     .filter(Boolean)
     .join("-");
 
+const SAVED_ARTICLE_SKELETON_KEYS = [0, 1, 2];
+
 export default function SavedNews({
   currentUser,
   onLogout,
@@ -248,7 +250,7 @@ export default function SavedNews({
       >
         {isSavedArticlesLoading ? (
           <ul className="savednews__skeleton-grid" aria-label="Loading saved articles">
-            {[0, 1, 2].map((item) => (
+            {SAVED_ARTICLE_SKELETON_KEYS.map((item) => (
               <li
                 className="savednews__skeleton-card"
                 key={item}

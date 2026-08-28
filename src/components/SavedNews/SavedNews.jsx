@@ -222,8 +222,10 @@ export default function SavedNews({
         </div>
       )}
 
-      <section className="savednews__info">
-        <p className="savednews__info-title">Saved library</p>
+      <section className="savednews__info" aria-labelledby="saved-library-title">
+        <p className="savednews__info-title" id="saved-library-title">
+          Saved library
+        </p>
         <p className="savednews__info-count">
           {firstname} you have {count} {articleWord}
         </p>

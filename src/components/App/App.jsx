@@ -25,6 +25,10 @@ import alkImg from "../../assets/alk.jpg";
 const NEWS_SEARCH_PAGE_SIZE = "100";
 const INITIAL_VISIBLE_CARDS = 3;
 const VISIBLE_CARD_INCREMENT = 3;
+const EMPTY_USER = {
+  email: "",
+  name: "",
+};
 
 export default function App() {
   //state
@@ -37,10 +41,7 @@ export default function App() {
   const [error, setError] = useState("");
   const [visibleCards, setVisibleCards] = useState(INITIAL_VISIBLE_CARDS);
   const [token, setToken] = useState("");
-  const [currentUser, setCurrentUser] = useState({
-    email: "",
-    name: "",
-  });
+  const [currentUser, setCurrentUser] = useState(EMPTY_USER);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
@@ -266,7 +267,7 @@ export default function App() {
     } catch (err) {
       localStorage.removeItem("jwt");
       setToken("");
-      setCurrentUser({ email: "", username: "" });
+      setCurrentUser(EMPTY_USER);
       setIsLoggedIn(false);
       setIsAuthChecking(false);
       setSavedArticles([]);
@@ -292,7 +293,7 @@ export default function App() {
     } catch (err) {
       localStorage.removeItem("jwt");
       setToken("");
-      setCurrentUser({ email: "", username: "" });
+      setCurrentUser(EMPTY_USER);
       setIsLoggedIn(false);
       setIsAuthChecking(false);
       setSavedArticles([]);
@@ -319,7 +320,7 @@ export default function App() {
     } catch (err) {
       localStorage.removeItem("jwt");
       setToken("");
-      setCurrentUser({ email: "", username: "" });
+      setCurrentUser(EMPTY_USER);
       setIsLoggedIn(false);
       setIsAuthChecking(false);
       setSavedArticles([]);
@@ -347,7 +348,7 @@ export default function App() {
         localStorage.removeItem("jwt");
         setToken("");
         setIsLoggedIn(false);
-        setCurrentUser({ email: "", username: "" });
+        setCurrentUser(EMPTY_USER);
         setSavedArticles([]);
       } finally {
         setIsSavedArticlesLoading(false);
@@ -361,7 +362,7 @@ export default function App() {
     setToken("");
     setIsLoggedIn(false);
     setIsAuthChecking(false);
-    setCurrentUser({ email: "", username: "" });
+    setCurrentUser(EMPTY_USER);
     setSavedArticles([]);
     setIsSavedArticlesLoading(false);
     navigate("/", { replace: true });

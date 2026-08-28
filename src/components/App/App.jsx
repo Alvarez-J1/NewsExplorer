@@ -39,7 +39,7 @@ export default function App() {
   const [token, setToken] = useState("");
   const [currentUser, setCurrentUser] = useState({
     email: "",
-    username: "",
+    name: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAuthChecking, setIsAuthChecking] = useState(true);

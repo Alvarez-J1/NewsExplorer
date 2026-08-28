@@ -32,6 +32,17 @@ const EMPTY_USER = {
   name: "",
 };
 
+const getCurrentDate = () => {
+  const today = new Date();
+  return today.toISOString().split("T")[0];
+};
+
+const getDateSevenDaysAgo = () => {
+  const today = new Date();
+  const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+  return sevenDaysAgo.toISOString().split("T")[0];
+};
+
 export default function App() {
   //state
   const navigate = useNavigate();
@@ -50,18 +61,6 @@ export default function App() {
   const [savedArticles, setSavedArticles] = useState([]);
   const [isSavedArticlesLoading, setIsSavedArticlesLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
-  //helpers for NewsAPI dates
-  const getCurrentDate = () => {
-    const today = new Date();
-    return today.toISOString().split("T")[0];
-  };
-
-  const getDateSevenDaysAgo = () => {
-    const today = new Date();
-    const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-    return sevenDaysAgo.toISOString().split("T")[0];
-  };
 
   //NewsAPI search
   const searchNews = async (query) => {

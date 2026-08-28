@@ -31,6 +31,11 @@ const EMPTY_USER = {
   email: "",
   name: "",
 };
+const ARTICLE_DATE_FORMAT_OPTIONS = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
 
 const getCurrentDate = () => {
   const today = new Date();
@@ -41,6 +46,16 @@ const getDateSevenDaysAgo = () => {
   const today = new Date();
   const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
   return sevenDaysAgo.toISOString().split("T")[0];
+};
+
+const formatArticleDate = (publishedAt) => {
+  const publishedDate = new Date(publishedAt);
+
+  if (Number.isNaN(publishedDate.getTime())) {
+    return "";
+  }
+
+  return publishedDate.toLocaleDateString(undefined, ARTICLE_DATE_FORMAT_OPTIONS);
 };
 
 export default function App() {
@@ -146,11 +161,7 @@ export default function App() {
             id: `${a.url}-${i}`,
             title: a.title ?? "Untitled",
             source: a.source?.name ?? "Unknown source",
-            date: new Date(a.publishedAt).toLocaleDateString(undefined, {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            }),
+            date: formatArticleDate(a.publishedAt),
             image: a.urlToImage || "",
             text: a.description || a.content || "",
             url: a.url,

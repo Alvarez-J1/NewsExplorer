@@ -23,6 +23,8 @@ import lakeImg from "../../assets/Lake.jpg";
 import alkImg from "../../assets/alk.jpg";
 
 const NEWS_SEARCH_PAGE_SIZE = "100";
+const PRODUCTION_NEWS_API_URL = "https://nomoreparties.co/news/v2/everything";
+const DEVELOPMENT_NEWS_API_URL = "https://newsapi.org/v2/everything";
 const INITIAL_VISIBLE_CARDS = 3;
 const VISIBLE_CARD_INCREMENT = 3;
 const EMPTY_USER = {
@@ -66,8 +68,8 @@ export default function App() {
     const apiKey = import.meta.env.VITE_NEWS_API_KEY;
     const newsApiBaseUrl =
       import.meta.env.MODE === "production"
-        ? "https://nomoreparties.co/news/v2/everything"
-        : "https://newsapi.org/v2/everything";
+        ? PRODUCTION_NEWS_API_URL
+        : DEVELOPMENT_NEWS_API_URL;
 
     const params = new URLSearchParams({
       q: query,

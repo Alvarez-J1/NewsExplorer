@@ -31,7 +31,11 @@ export default function SearchResults({
     : "Show more search results";
 
   return (
-    <section className="results" aria-labelledby="search-results-title">
+    <section
+      className="results"
+      aria-labelledby="search-results-title"
+      aria-busy={isLoadingMore}
+    >
       <div className="results__header">
         <p className="results__eyebrow">Latest coverage</p>
         <h2 className="results__title" id="search-results-title">

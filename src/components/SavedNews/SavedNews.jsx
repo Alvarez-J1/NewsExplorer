@@ -133,7 +133,7 @@ export default function SavedNews({
               type="button"
               className="savednews__header-menu-btn"
               onClick={handleOpenMenu}
-              aria-label="Open menu"
+              aria-label="Open saved articles menu"
               aria-controls="savednews-mobile-menu"
               aria-expanded={isMobileMenuOpen}
             >

@@ -14,6 +14,7 @@ export default function Header({
   isAnyModalOpen,
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
   const closeMenuButtonRef = useRef(null);
   const location = useLocation();
   const isHomeRoute = location.pathname === "/";
@@ -51,6 +52,7 @@ export default function Header({
     const originalBodyTop = document.body.style.top;
     const originalBodyWidth = document.body.style.width;
     const originalDocumentOverflow = document.documentElement.style.overflow;
+    const menuButton = menuButtonRef.current;
     document.body.style.overflow = "hidden";
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
@@ -72,6 +74,7 @@ export default function Header({
       document.documentElement.style.overflow = originalDocumentOverflow;
       window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", handleKeyDown);
+      menuButton?.focus();
     };
   }, [isMobileMenuOpen]);
 
@@ -164,6 +167,7 @@ export default function Header({
             <button
               type="button"
               className="header__menu-btn"
+              ref={menuButtonRef}
               onClick={handleOpenMenu}
               aria-label="Open navigation menu"
               aria-controls="main-mobile-menu"

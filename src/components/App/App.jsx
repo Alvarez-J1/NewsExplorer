@@ -87,7 +87,7 @@ export default function App() {
 
     const params = new URLSearchParams({
       q: query,
-      apiKey: apiKey,
+      apiKey,
       from: getDateSevenDaysAgo(),
       to: getCurrentDate(),
       pageSize: NEWS_SEARCH_PAGE_SIZE,

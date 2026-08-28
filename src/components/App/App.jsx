@@ -387,7 +387,7 @@ export default function App() {
     setIsSuccessModalOpen(false);
   };
 
-  const isAnyModalOpen = activeModal || isSuccessModalOpen;
+  const isAnyModalOpen = Boolean(activeModal || isSuccessModalOpen);
 
   return (
     <div className="page">

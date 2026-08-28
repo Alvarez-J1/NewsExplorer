@@ -165,7 +165,7 @@ export default function Header({
               type="button"
               className="header__menu-btn"
               onClick={handleOpenMenu}
-              aria-label="Open menu"
+              aria-label="Open navigation menu"
               aria-controls="main-mobile-menu"
               aria-expanded={isMobileMenuOpen}
             >

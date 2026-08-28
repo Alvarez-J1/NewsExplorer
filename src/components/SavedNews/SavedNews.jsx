@@ -249,7 +249,11 @@ export default function SavedNews({
         {isSavedArticlesLoading ? (
           <ul className="savednews__skeleton-grid" aria-label="Loading saved articles">
             {[0, 1, 2].map((item) => (
-              <li className="savednews__skeleton-card" key={item}>
+              <li
+                className="savednews__skeleton-card"
+                key={item}
+                aria-hidden="true"
+              >
                 <span className="savednews__skeleton-media" />
                 <span className="savednews__skeleton-line savednews__skeleton-line--wide" />
                 <span className="savednews__skeleton-line" />

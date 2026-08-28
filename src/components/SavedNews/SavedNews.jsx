@@ -35,6 +35,7 @@ export default function SavedNews({
   const [k1, k2, ...rest] = uniq;
   const extra = rest.length;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
   const closeMenuButtonRef = useRef(null);
 
   const handleOpenMenu = () => setIsMobileMenuOpen(true);
@@ -55,6 +56,7 @@ export default function SavedNews({
     const originalBodyTop = document.body.style.top;
     const originalBodyWidth = document.body.style.width;
     const originalDocumentOverflow = document.documentElement.style.overflow;
+    const menuButton = menuButtonRef.current;
     document.body.style.overflow = "hidden";
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
@@ -76,6 +78,7 @@ export default function SavedNews({
       document.documentElement.style.overflow = originalDocumentOverflow;
       window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", handleKeyDown);
+      menuButton?.focus();
     };
   }, [isMobileMenuOpen]);
 
@@ -132,6 +135,7 @@ export default function SavedNews({
             <button
               type="button"
               className="savednews__header-menu-btn"
+              ref={menuButtonRef}
               onClick={handleOpenMenu}
               aria-label="Open saved articles menu"
               aria-controls="savednews-mobile-menu"

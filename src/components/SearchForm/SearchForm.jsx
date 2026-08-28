@@ -1,6 +1,10 @@
 import { useEffect, useId, useState } from "react";
 import "./SearchForm.css";
 
+const VERY_SMALL_SCREEN_QUERY = "(max-width: 345px)";
+const DEFAULT_SEARCH_PLACEHOLDER = "Search news, topics, or sources";
+const COMPACT_SEARCH_PLACEHOLDER = "Search news...";
+
 export default function SearchForm({ onSearch }) {
   const [q, setQ] = useState("");
   const [searchError, setSearchError] = useState("");
@@ -8,7 +12,7 @@ export default function SearchForm({ onSearch }) {
   const [isVerySmallScreen, setIsVerySmallScreen] = useState(() =>
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
-    window.matchMedia("(max-width: 345px)").matches
+    window.matchMedia(VERY_SMALL_SCREEN_QUERY).matches
   );
 
   useEffect(() => {
@@ -19,7 +23,7 @@ export default function SearchForm({ onSearch }) {
       return undefined;
     }
 
-    const mediaQuery = window.matchMedia("(max-width: 345px)");
+    const mediaQuery = window.matchMedia(VERY_SMALL_SCREEN_QUERY);
     const updatePlaceholder = () => setIsVerySmallScreen(mediaQuery.matches);
 
     updatePlaceholder();
@@ -66,8 +70,8 @@ export default function SearchForm({ onSearch }) {
           name="q"
           placeholder={
             isVerySmallScreen
-              ? "Search news..."
-              : "Search news, topics, or sources"
+              ? COMPACT_SEARCH_PLACEHOLDER
+              : DEFAULT_SEARCH_PLACEHOLDER
           }
           value={q}
           onChange={(e) => setQ(e.target.value)}

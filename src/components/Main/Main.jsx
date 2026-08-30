@@ -48,8 +48,8 @@ export default function Main({
             isAnyModalOpen={isAnyModalOpen}
           />
           <main className="main">
-            <section className="main__hero">
-              <h1 className="main__hero-title">
+            <section className="main__hero" aria-labelledby="main-hero-title">
+              <h1 className="main__hero-title" id="main-hero-title">
                 Track the stories shaping the world.
               </h1>
               <p className="main__hero-subtitle">

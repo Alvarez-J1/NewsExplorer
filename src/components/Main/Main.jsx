@@ -107,10 +107,10 @@ export default function Main({
           </section>
         )}
 
-        <section className="about__separator">
+        <div className="about__separator">
           <About />
           <Footer />
-        </section>
+        </div>
       </div>
     </>
   );

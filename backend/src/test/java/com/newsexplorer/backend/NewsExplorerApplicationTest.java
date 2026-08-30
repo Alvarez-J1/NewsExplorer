@@ -55,4 +55,12 @@ class NewsExplorerApplicationTest {
 
         assertThat(settings).isNull();
     }
+
+    @Test
+    void ignoresBlankDatabaseUrl() {
+        NewsExplorerApplication.DatabaseUrlSettings settings =
+                NewsExplorerApplication.parseDatabaseUrl("   ");
+
+        assertThat(settings).isNull();
+    }
 }

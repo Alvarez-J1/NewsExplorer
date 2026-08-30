@@ -1,10 +1,17 @@
-export const toCardModel = (a) => ({
-  id: a._id ?? a.id ?? a.url, // stable identity
-  url: a.url,
-  title: a.title ?? "Untitled",
-  text: a.description ?? a.text ?? "",
-  image: a.urlToImage ?? a.image ?? "",
-  date: a.publishedAt ?? a.date ?? new Date().toISOString(),
-  source: typeof a.source === "string" ? a.source : a.source?.name ?? "Unknown",
-  keyword: a.keyword ?? "",
-});
+export const toCardModel = (article) => {
+  const safeArticle = article ?? {};
+
+  return {
+    id: safeArticle._id ?? safeArticle.id ?? safeArticle.url, // stable identity
+    url: safeArticle.url,
+    title: safeArticle.title ?? "Untitled",
+    text: safeArticle.description ?? safeArticle.text ?? "",
+    image: safeArticle.urlToImage ?? safeArticle.image ?? "",
+    date: safeArticle.publishedAt ?? safeArticle.date ?? new Date().toISOString(),
+    source:
+      typeof safeArticle.source === "string"
+        ? safeArticle.source
+        : safeArticle.source?.name ?? "Unknown",
+    keyword: safeArticle.keyword ?? "",
+  };
+};

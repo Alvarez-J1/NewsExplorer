@@ -51,6 +51,7 @@ export default function NewsCard({
   };
 
   const articleTitle = item.title || "Untitled article";
+  const articleSource = item.source || "Unknown source";
   const saveTooltipId = React.useId();
   const removeTooltipId = React.useId();
   const saveButtonLabel = !isLoggedIn
@@ -194,7 +195,7 @@ export default function NewsCard({
         <p className="card__date">{item.date}</p>
         <h2 className="card__title">{articleTitle}</h2>
         <p className="card__text">{item.text}</p>
-        <p className="card__source">{item.source}</p>
+        <p className="card__source">{articleSource}</p>
       </div>
     </li>
   );

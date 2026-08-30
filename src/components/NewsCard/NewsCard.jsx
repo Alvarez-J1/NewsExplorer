@@ -51,6 +51,7 @@ export default function NewsCard({
   };
 
   const articleTitle = item.title || "Untitled article";
+  const articleDate = item.date || "Date unavailable";
   const articleSource = item.source || "Unknown source";
   const saveTooltipId = React.useId();
   const removeTooltipId = React.useId();
@@ -192,7 +193,7 @@ export default function NewsCard({
         tabIndex={0}
         aria-label={`Open article: ${articleTitle}`}
       >
-        <p className="card__date">{item.date}</p>
+        <p className="card__date">{articleDate}</p>
         <h2 className="card__title">{articleTitle}</h2>
         <p className="card__text">{item.text}</p>
         <p className="card__source">{articleSource}</p>

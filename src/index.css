@@ -37,6 +37,10 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-control: 0ms linear;
+  }
+
   html {
     scroll-behavior: auto;
   }

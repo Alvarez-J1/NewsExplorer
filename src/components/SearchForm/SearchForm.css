@@ -230,3 +230,22 @@
     white-space: nowrap;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .search-form__submit-btn {
+    transition: none;
+  }
+
+  .search-form__submit-btn:hover,
+  .search-form__submit-btn:active {
+    transform: none;
+  }
+}
+
+@media screen and (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  .search-form__submit-btn,
+  .search-form__submit-btn:hover,
+  .search-form__submit-btn:active {
+    transform: translateY(-50%);
+  }
+}

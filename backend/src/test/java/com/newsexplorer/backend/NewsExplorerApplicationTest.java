@@ -63,4 +63,12 @@ class NewsExplorerApplicationTest {
 
         assertThat(settings).isNull();
     }
+
+    @Test
+    void ignoresUnsupportedDatabaseUrlScheme() {
+        NewsExplorerApplication.DatabaseUrlSettings settings =
+                NewsExplorerApplication.parseDatabaseUrl("mysql://localhost/newsexplorer");
+
+        assertThat(settings).isNull();
+    }
 }

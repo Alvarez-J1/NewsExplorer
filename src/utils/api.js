@@ -42,7 +42,7 @@ export function saveArticle(article, keyword, token) {
  * Removes a saved article by its server-side id.
  */
 export function deleteArticle(articleId, token) {
-  return fetch(`${BASE_URL}/articles/${articleId}`, {
+  return fetch(`${BASE_URL}/articles/${encodeURIComponent(articleId)}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   }).then(processResponse);

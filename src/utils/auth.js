@@ -1,5 +1,7 @@
 import { BASE_URL } from "./constants";
 
+const JSON_HEADERS = { "Content-Type": "application/json" };
+
 /**
  * POST /signin
  * Returns { token, data }
@@ -7,7 +9,7 @@ import { BASE_URL } from "./constants";
 export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: JSON_HEADERS,
     body: JSON.stringify({ email, password }),
   }).then(processAuthResponse);
 };
@@ -31,7 +33,7 @@ export const authorizeDemo = ({ signal } = {}) => {
 export const register = (email, password, username) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: JSON_HEADERS,
     body: JSON.stringify({ email, password, name: username }),
   }).then(processAuthResponse);
 };

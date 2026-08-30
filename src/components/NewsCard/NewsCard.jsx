@@ -76,6 +76,8 @@ export default function NewsCard({
               className="card__image"
               src={item.image}
               alt=""
+              loading="lazy"
+              decoding="async"
               aria-hidden="true"
             />
           ) : (

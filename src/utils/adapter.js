@@ -11,7 +11,7 @@ export const toCardModel = (article) => {
     source:
       typeof safeArticle.source === "string"
         ? safeArticle.source
-        : safeArticle.source?.name ?? "Unknown",
+        : safeArticle.source?.name ?? "Unknown source",
     keyword: safeArticle.keyword ?? "",
   };
 };

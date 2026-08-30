@@ -95,72 +95,68 @@ export default function Header({
         <div className="header__right">
           {isLoggedIn ? (
             // Logged IN state
-            <>
-              <nav
-                className="header__nav header__nav--logged-in"
-                aria-label="Primary navigation"
-              >
-                {!isHomeRoute && (
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `header__link ${isActive ? "header__link--under" : ""}`
-                    }
-                    onClick={handleHomeNavigation}
-                  >
-                    Home
-                  </NavLink>
-                )}
-
+            <nav
+              className="header__nav header__nav--logged-in"
+              aria-label="Primary navigation"
+            >
+              {!isHomeRoute && (
                 <NavLink
-                  to="/saved-news"
+                  to="/"
                   className={({ isActive }) =>
-                    `header__saved-articles ${
-                      isActive ? "header__saved-articles--active" : ""
-                    }`
+                    `header__link ${isActive ? "header__link--under" : ""}`
                   }
-                  style={{ textDecoration: "none" }}
+                  onClick={handleHomeNavigation}
                 >
-                  Saved articles
+                  Home
                 </NavLink>
+              )}
 
-                <button
-                  type="button"
-                  className="header__signout-btn"
-                  onClick={onLogout}
-                >
-                  Sign out
-                </button>
-              </nav>
-            </>
+              <NavLink
+                to="/saved-news"
+                className={({ isActive }) =>
+                  `header__saved-articles ${
+                    isActive ? "header__saved-articles--active" : ""
+                  }`
+                }
+                style={{ textDecoration: "none" }}
+              >
+                Saved articles
+              </NavLink>
+
+              <button
+                type="button"
+                className="header__signout-btn"
+                onClick={onLogout}
+              >
+                Sign out
+              </button>
+            </nav>
           ) : (
             // Logged OUT state
-            <>
-              <nav
-                className="header__nav header__nav--logged-out"
-                aria-label="Primary navigation"
-              >
-                {!isHomeRoute && (
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `header__link ${isActive ? "header__link--under" : ""}`
-                    }
-                    onClick={handleHomeNavigation}
-                  >
-                    Home
-                  </NavLink>
-                )}
-
-                <button
-                  type="button"
-                  className="header__signin-btn"
-                  onClick={onLoginClick}
+            <nav
+              className="header__nav header__nav--logged-out"
+              aria-label="Primary navigation"
+            >
+              {!isHomeRoute && (
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `header__link ${isActive ? "header__link--under" : ""}`
+                  }
+                  onClick={handleHomeNavigation}
                 >
-                  Sign in
-                </button>
-              </nav>
-            </>
+                  Home
+                </NavLink>
+              )}
+
+              <button
+                type="button"
+                className="header__signin-btn"
+                onClick={onLoginClick}
+              >
+                Sign in
+              </button>
+            </nav>
           )}
           {/* MOBILE HAMBURGER BUTTON */}
           {!isAnyModalOpen && (

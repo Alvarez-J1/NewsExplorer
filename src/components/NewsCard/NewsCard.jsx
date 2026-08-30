@@ -60,6 +60,7 @@ export default function NewsCard({
     : isSaved
     ? `Remove ${articleTitle} from saved articles`
     : `Save ${articleTitle}`;
+  const saveButtonTitle = !isLoggedIn ? "Sign in to save" : isSaved ? "Saved" : "Save";
 
   return (
     <li className={`card ${className}`.trim()}>
@@ -141,7 +142,7 @@ export default function NewsCard({
                   aria-pressed={isSaved}
                   aria-describedby={!isLoggedIn ? saveTooltipId : undefined}
                   onClick={handleSaveToggle}
-                  title={isSaved ? "Saved" : "Save"}
+                  title={saveButtonTitle}
                 >
                   <svg
                     className="card__save-icon card__save-icon--outline"

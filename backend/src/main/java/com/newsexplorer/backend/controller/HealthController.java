@@ -12,11 +12,13 @@ import java.util.Map;
 @RestController
 public class HealthController {
 
+    private static final CacheControl NO_STORE = CacheControl.noStore();
+
     @GetMapping({"/health", "/api/health"})
     public ResponseEntity<Map<String, String>> health() {
         return ResponseEntity
                 .ok()
-                .cacheControl(CacheControl.noStore())
+                .cacheControl(NO_STORE)
                 .body(Map.of("status", "ok"));
     }
 
@@ -24,7 +26,7 @@ public class HealthController {
     public ResponseEntity<Void> healthHead() {
         return ResponseEntity
                 .ok()
-                .cacheControl(CacheControl.noStore())
+                .cacheControl(NO_STORE)
                 .build();
     }
 }

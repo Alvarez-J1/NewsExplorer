@@ -71,4 +71,15 @@ class NewsExplorerApplicationTest {
 
         assertThat(settings).isNull();
     }
+
+    @Test
+    void convertsDatabaseUrlWithUsernameOnly() {
+        NewsExplorerApplication.DatabaseUrlSettings settings =
+                NewsExplorerApplication.parseDatabaseUrl("postgresql://reader@localhost/newsexplorer");
+
+        assertThat(settings).isNotNull();
+        assertThat(settings.jdbcUrl()).isEqualTo("jdbc:postgresql://localhost/newsexplorer");
+        assertThat(settings.username()).isEqualTo("reader");
+        assertThat(settings.password()).isNull();
+    }
 }

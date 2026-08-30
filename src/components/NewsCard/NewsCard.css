@@ -328,3 +328,21 @@
     display: none;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card__image,
+  .card__save-btn,
+  .card__trash-btn,
+  .card__tooltip,
+  .card__tooltip-remove {
+    transition: none;
+  }
+
+  .card:hover,
+  .card:hover .card__image,
+  .card__save-btn:hover,
+  .card__trash-btn:hover {
+    transform: none;
+  }
+}
